@@ -18,15 +18,21 @@ const generateRandomToken = () => {
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required']
+        required: [true, 'Name is required'],
+        trim: true
     },
     email: {
         type: String,
         required: [true, 'Email is required'],
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+        unique: true,
+        lowercase: true,
+        trim: true
     },
     password: {
         type: String,
+        minlength: [5, 'minlength five characters'],
+        maxlength: [15, 'maxlength fifteen characters'],
         required: [true, 'Password is required']
     },
     social: {
@@ -54,10 +60,32 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    cart: {
+        type: [mongoose.Schema.Types.ObjectId]
+    },
+    bougthProducts: {
+        type: [mongoose.Schema.Types.ObjectId]
+    },
 
     // here starts producer properties:
     
     companyName: {
+        type: String,
+        required: [true, 'Company name is required']
+    },
+    compAddress: {
+        type: String,
+        required: [true, 'Company address is required']
+    },
+    compMail: {
+        type: String,
+        required: [true, 'Company mail is required']
+    },
+    compPhone: {
+        type: String,
+        required: [true, 'Company phone is required']
+    },
+    compLink: {
         type: String
     },
     bio: {
@@ -76,6 +104,8 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+
+    
 })
 
 const User = mongoose.model('User', userSchema);
