@@ -1,0 +1,40 @@
+{
+  "name": "labuenavida",
+  "version": "1.0.0",
+  "description": "Web tool to connect local producers with costumers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -e hbs,js,css app.js",
+    "seeds": "node ./bin/seeds"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labuenavidaap/labuenavida.git"
+  },
+  "author": "Miguel Valle & Fernando Marín",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/labuenavidaap/labuenavida/issues"
+  },
+  "homepage": "https://github.com/labuenavidaap/labuenavida#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "hbs": "^4.1.1",
+    "mongoose": "^5.10.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "nodemailer": "^6.4.11",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-slack": "0.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
