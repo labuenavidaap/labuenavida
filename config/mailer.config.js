@@ -1,7 +1,7 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer')
 
-const host = process.env.PORT || 'https://localhost:3000/';
-const user = process.env.NM_USER;
+const host = process.env.PORT || 'https://localhost:3000/'
+const user = process.env.NM_USER
 
 const transport = nodemailer.createTransport(
     {
@@ -29,4 +29,4 @@ module.exports.sendValidationEmail = ({ id, email, activationToken, name }) => {
     })
         .then(console.log)
         .catch(console.error)
-};
+}

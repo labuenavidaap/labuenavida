@@ -12,17 +12,17 @@ module.exports.isAuthenticated = (req, res, next) => {
         res.redirect('/login')
       }
     })
-    .catch(next);
+    .catch(next)
 }
 
 module.exports.isNotAuthenticated = (req, res, next) => {
   User.findById(req.session.userId)
     .then((user) => {
       if (user) {
-        res.redirect("/");
+        res.redirect('/')
       } else {
-        next();
+        next()
       }
     })
-    .catch(next);
+    .catch(next)
 };

@@ -1,18 +1,18 @@
-const Product = require("./product.model")
-const Comment = require("./comment.model")
-const Rate = require("./rate.model")
-const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
+const Product = require('./product.model')
+const Comment = require('./comment.model')
+const Rate = require('./rate.model')
+const bcrypt = require('bcrypt')
+const mongoose = require('mongoose')
 
 // const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const generateRandomToken = () => {
-  const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  let token = '';
+  const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  let token = ''
   for (let i = 0; i < 25; i++) {
-    token += characters[Math.floor(Math.random() * characters.length)];
+    token += characters[Math.floor(Math.random() * characters.length)]
   }
-  return token;
+  return token
 }
 
 const userSchema = new mongoose.Schema({
@@ -108,5 +108,5 @@ const userSchema = new mongoose.Schema({
     
 })
 
-const User = mongoose.model('User', userSchema);
-module.exports = User;
+const User = mongoose.model('User', userSchema)
+module.exports = User

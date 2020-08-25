@@ -1,7 +1,7 @@
 const hbs = require('hbs')
 const path = require('path')
 
-hbs.registerPartials(path.join(__dirname, '../views'));
+hbs.registerPartials(path.join(__dirname, '../views'))
 
 hbs.registerHelper('date', (date) => {
   const format = (s) => (s < 10) ? '0' + s : s
