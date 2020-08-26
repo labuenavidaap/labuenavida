@@ -5,7 +5,7 @@ const Cart = require('./cart.model')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
-// const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const generateRandomToken = () => {
   const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema(
         email: {
             type: String,
             required: [true, 'Email is required'],
-            match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+            match: [EMAIL_PATTERN, 'Please fill a valid email address'],
             unique: true,
             lowercase: true,
             trim: true
@@ -74,20 +74,16 @@ const userSchema = new mongoose.Schema(
         // here starts producer properties:
         
         companyName: {
-            type: String,
-            required: [true, 'Company name is required']
+            type: String
         },
         compAddress: {
-            type: String,
-            required: [true, 'Company address is required']
+            type: String
         },
         compMail: {
-            type: String,
-            required: [true, 'Company mail is required']
+            type: String
         },
         compPhone: {
-            type: String,
-            required: [true, 'Company phone is required']
+            type: String
         },
         compLink: {
             type: String
