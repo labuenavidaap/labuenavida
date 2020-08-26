@@ -37,10 +37,6 @@ const productSchema = new mongoose.Schema(
             required: true,
             min: 0
         },
-        measurementUnits: {
-            type: String,
-            enum: ['Bottle', 'Gr', 'Kg', 'Liter', 'Units']
-        },
         quantity: {
             type: Number,
             required: true

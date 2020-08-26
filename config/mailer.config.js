@@ -30,3 +30,21 @@ module.exports.sendValidationEmail = ({ id, email, activationToken, name }) => {
         .then(console.log)
         .catch(console.error)
 }
+
+module.exports.confirmOrderEmail = ({ id, email, name, boughtCart }) => {
+    transport.sendMail({
+        to: email,
+        from: 'La Buena Vida team',
+        subject: 'Thanks for buying in La Buena Vida',
+        html: `
+        <div style='text-align:center; background-color:rgb(232,232,232)'>
+        <h1>Project Management Tool Confirmation Email!</h1>
+        <h2>Hello ${username}</h2>
+        <p> Thanks to join our community! Please confirm your account clicking on the following link:</p>
+        <a href="https://project-management-tool-miguel.herokuapp.com/activate/${token}"> Please click the link to confirm your account </a>
+        <h3>Enjoy 😎</h3>
+        </div>
+        `
+    })
+}
+

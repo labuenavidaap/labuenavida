@@ -1,6 +1,6 @@
 const User = require('../models/user.model')
 
-module.exports.isAuthenticated = (req, res, next) => {
+module.exports.authenticated = (req, res, next) => {
   User.findById(req.session.userId)
     .then(user => {
       if (user) {
@@ -15,7 +15,7 @@ module.exports.isAuthenticated = (req, res, next) => {
     .catch(next)
 }
 
-module.exports.isNotAuthenticated = (req, res, next) => {
+module.exports.noAuthenticated = (req, res, next) => {
   User.findById(req.session.userId)
     .then((user) => {
       if (user) {

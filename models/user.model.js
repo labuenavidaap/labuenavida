@@ -1,6 +1,7 @@
 const Product = require('./product.model')
 const Comment = require('./comment.model')
 const Rate = require('./rate.model')
+const Cart = require('./cart.model')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
@@ -57,11 +58,11 @@ const userSchema = new mongoose.Schema(
                 default: generateRandomToken
             }
         },
-        cart: {
-            type: [mongoose.Schema.Types.ObjectId],
-            ref: 'Product'
-        },
         bougthProducts: {
+            type: [mongoose.Schema.Types.ObjectId],
+            ref: 'Cart'
+        },
+        wishList: {
             type: [mongoose.Schema.Types.ObjectId],
             ref: 'Product'
         },
