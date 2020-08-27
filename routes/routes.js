@@ -44,7 +44,7 @@ router.get('/', (req, res) => res.redirect('/home'))
 
 // USER ROUTES
 
-// router.get('/login', sessionMiddleware.noAuthenticated, userController.renderLogin)
+router.get('/login', sessionMiddleware.noAuthenticated, userController.renderLogin)
 // router.post('/login', sessionMiddleware.noAuthenticated, userController.Login)
 // router.get('/auth/google', session.noAuthenticated, usersController.doSocialLoginGoogle)
 // router.get('/auth/google/callback', session.notAuthenticated, usersController.googleCallback)
