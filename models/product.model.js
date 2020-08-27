@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema(
             type: String,
             required: [true, 'Description of product is required'],
         },
-        img: {
+        image: {
             type: [String],
             default: 'https://res.cloudinary.com/difhe4gl3/image/upload/v1598377563/laBuenaVida/web-img/Anagrama_tgfgfa.png'
         },
