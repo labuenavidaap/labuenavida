@@ -7,7 +7,7 @@ const userController = require('../controllers/user.controller')
 const commentController = require('../controllers/comment.controller')
 const cartController = require('../controllers/cart.controller')
 const rateController = require('../controllers/rate.controller')
-const upload = require('../config/multer.config')
+const upload = require('../config/multer.config.js')
 
 
 // routes
@@ -22,7 +22,7 @@ router.get('/products/:id/edit', sessionMiddleware.authenticated, productMiddlew
 router.post('/product/:id/edit', sessionMiddleware.authenticated, productMiddleware.productOwner, upload.single('image'), productController.editProduct)
 router.get('/new-product', productController.renderCreateForm)
 router.post('/new-product', sessionMiddleware.authenticated, upload.single('image'), productController.createProduct)
-// router.post('/new-comment/:id', sessionMiddleware.authenticated, commentController.newComment)
+router.post('/new-comment/:id', sessionMiddleware.authenticated, upload.single('photo'), commentController.newComment)
 // router.post('/products/:id/rate', sessionMiddleware.authenticated, rateController)
 router.post('/delete/:id', sessionMiddleware.authenticated, productMiddleware.productOwner, productController.deleteProduct)
 
