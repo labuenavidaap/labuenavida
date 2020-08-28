@@ -37,7 +37,7 @@ module.exports.renderAll = (req, res, next) => {
 module.exports.renderProduct= (req, res, next) => {
 
   Product.findById(req.params.id)
-  .populate('user')
+  .populate('producer')
   .populate({
     path: 'comments',
     options: {
