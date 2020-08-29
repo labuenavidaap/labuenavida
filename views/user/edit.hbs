@@ -1,1 +1,211 @@
-<h1>Edit view</h1>
+<h1 class="text-center">Edit user view</h1>
+<article class="container">
+    <div class="row">
+        {{#if user.producer}}
+        <div class="col-2">
+            <img src="{{user.logo}}" class="w-100 rounded-circle" />
+        </div>
+
+        {{/if}}
+
+        <div class="col">
+            <form action="/users/{{user._id}}/edit" method="POST">
+                {{#if user.producer}}
+                <div class="form-group">
+                    <label for="logo">Logo</label>
+                    <input type="file" class="mb-3 form-control-file {{#if error.avatar }}is-invalid{{/if}}" id="logo"
+                        name="logo" disabled>
+                    <button type="button" data-enable="logo" class="btn btn-outline-primary btn-sm">Change
+                        Logo</button>
+
+                    {{#if error.logo}}
+                    <div class="invalid-feedback">
+                        {{error.logo.message}}
+                    </div>
+                    {{/if}}
+                </div>
+                {{/if}}
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input name="name" type="text" value="{{user.name}}"
+                        class="form-control {{#if error.name }}is-invalid{{/if}}" id="name" required>
+
+                    {{#if error.name}}
+                    <div class="invalid-feedback">
+                        {{error.name.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" value="{{user.email}}"
+                        class="form-control {{#if error.email }}is-invalid{{/if}}" id="email" name="email"
+                        placeholder="Enter name" required>
+
+                    {{#if error.email}}
+                    <div class="invalid-feedback">
+                        {{error.email.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="mb-3 form-control {{#if error.password }}is-invalid{{/if}}"
+                        id="password" name="password" disabled>
+                    <button type="button" data-enable="password" class="btn btn-outline-primary btn-sm">Change
+                        password</button>
+
+                    {{#if error.password}}
+                    <div class="invalid-feedback">
+                        {{error.password.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">Phone</label>
+                    <input type="tel" class="form-control {{#if error.phone }}is-invalid{{/if}}" name="phone"
+                        id="bio">{{user.phone}}</input>
+
+                    {{#if error.phone}}
+                    <div class="invalid-feedback">
+                        {{error.phone.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">Address</label>
+                    <input type="text" class="form-control {{#if error.address }}is-invalid{{/if}}" name="address"
+                        id="address">{{user.address}}</input>
+
+                    {{#if error.address}}
+                    <div class="invalid-feedback">
+                        {{error.address.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                {{#if user.producer}}
+
+                <div class="form-group">
+                    <label for="Cname">Company Name</label>
+                    <input type="text" class="form-control {{#if error.companyName }}is-invalid{{/if}}"
+                        name="companyName" id="cName">{{user.companyName}}</input>
+
+                    {{#if error.companyName}}
+                    <div class="invalid-feedback">
+                        {{error.companyName.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="Caddress">Company Address</label>
+                    <input type="text" class="form-control {{#if error.companyName }}is-invalid{{/if}}"
+                        name="compAddress" id="cName">{{user.compAddress}}</input>
+
+                    {{#if error.compAddress}}
+                    <div class="invalid-feedback">
+                        {{error.compAddress.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="Cmail">Company Email</label>
+                    <input type="email" class="form-control {{#if error.compMail }}is-invalid{{/if}}" name="compMail"
+                        id="cName">{{user.compMail}}</input>
+
+                    {{#if error.compMail}}
+                    <div class="invalid-feedback">
+                        {{error.compMail.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="CPhone">Company Phone</label>
+                    <input type="tel" class="form-control {{#if error.compPhone }}is-invalid{{/if}}" name="compPhone"
+                        id="cPhone">{{user.compPhone}}</input>
+
+                    {{#if error.compPhone}}
+                    <div class="invalid-feedback">
+                        {{error.compPhone.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="CLink">Company URL</label>
+                    <input type="text" class="form-control {{#if error.compLink }}is-invalid{{/if}}" name="compLink"
+                        id="cPhone">{{user.compLink}}</input>
+
+                    {{#if error.compLink}}
+                    <div class="invalid-feedback">
+                        {{error.compLink.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="CBio">Company Bio</label>
+                    <textarea rows="5" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" name="bio"
+                        id="cPhone">{{user.bio}}</textarea>
+
+                    {{#if error.bio}}
+                    <div class="invalid-feedback">
+                        {{error.bio.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="certificates">Company Certificates</label>
+                    <input type="text" class="form-control {{#if error.certificates }}is-invalid{{/if}}"
+                        name="certificates" id="cPhone">{{user.certificates}}</input>
+                    <ul>
+                        {{#each user.certificates as |cert|}}
+                        <li>{{cert}}</li>
+                        {{/each}}
+                    </ul>
+
+
+                    {{#if error.certificates}}
+                    <div class="invalid-feedback">
+                        {{error.certificates.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="form-group">
+                    <label for="pictures">Company Pictures</label>
+                    <input type="file" class="form-control {{#if error.compPhone }}is-invalid{{/if}}" name="pictures"
+                        id="pictures">{{user.pictures}}</input>
+
+                    <button type="button" data-enable="pictures" class="btn btn-outline-primary btn-sm">Change
+                        picture</button>
+
+                    <ul>
+                        {{#each user.pictures as |img|}}
+                        <li><img src="{{img}}" alt=""></li>
+                        {{/each}}
+                    </ul>
+
+                    {{#if error.pictures}}
+                    <div class="invalid-feedback">
+                        {{error.pictures.message}}
+                    </div>
+                    {{/if}}
+                </div>
+
+
+                {{/if}}
+
+                <button type="submit" class="btn btn-primary">Update profile</button>
+            </form>
+        </div>
+    </div>
+</article>

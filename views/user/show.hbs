@@ -1,4 +1,4 @@
-<h1>Show User View</h1>
+<h1 class="text-center">Show User View</h1>
 
 <article class="container">
     <div class="row card py-5" style="margin-top: 9px;">
@@ -14,17 +14,41 @@
 
             {{#if user.producer}}
             <p>Type : PRODUCER</p>
+            <img src="{{user.logo}}" alt="{{user.companyName}}">
             {{else}}
             <p>Type : CLIENT</p>
             {{/if}}
 
             <p><strong>Email:</strong> {{user.email}}</p>
+            <p><strong>Address:</strong> {{user.address}}</p>
+            <p><strong>Phone:</strong> {{user.phone}}</p>
 
-            {{!-- {{#if user.staff}}
-            <p><strong><i class="fa fa-star mr-1"></i>STAFF</strong></p>
-            {{/if}} --}}
+            {{#if user.producer}}
+            <p><strong>Company Name:</strong> {{user.companyName}}</p>
+            <p><strong>Comapny Bio:</strong> {{user.bio}}</p>
 
+            <p><strong>Company Address:</strong> {{user.compAddress}}</p>
+            <p><strong>Company email:</strong> {{user.compMail}}</p>
+            <p><strong>Company phone:</strong> {{user.compPhone}}</p>
+            <p><strong>Company url:</strong> {{user.compLink}}</p>
+            <p><strong>Company Politics:</strong> {{user.politic}}</p>
+            <p><strong>Company Certificates:</strong>/<p>
+                <ul>
+                    {{#each user.certificates as |cert|}}
+                    <li>{{cert}}</li>
+                    {{/each}}
+                </ul>
             
+            <p>Pictures of the Company:</p>
+            {{#each user.pictures  as |img|}}
+            <img src="{{img}}" alt="">
+            {{/each}}
+
+
+
+            {{/if}}
+
+
             <div>
                 <a class="btn button-1" href="/users/{{currentUser._id}}/edit">
                     <i class="fa fa-edit mr-2"></i>
@@ -38,20 +62,20 @@
                     </button>
                 </form>
             </div>
-            
+
         </div>
     </div>
     {{#if user.producer}}
-         <div class="row">
-            {{#each user.products as |product|}}
-            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-                {{product.name}}
-            </div>
-            {{/each}}
+    <div class="row">
+        {{#each user.products as |product|}}
+        <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
+            {{product.name}}
         </div>
+        {{/each}}
+    </div>
     {{else}}
     <div>
-        
+
         <h2 class="my-4 text-center">Bougth Products</h2>
 
         <div class="row">
@@ -63,7 +87,7 @@
         </div>
 
         <hr />
-        
+
     </div>
     <div>
         <h2 class="my-4 text-center">Wishlist</h2>
@@ -79,5 +103,5 @@
 
     {{/if}}
 
-    
+
 </article>

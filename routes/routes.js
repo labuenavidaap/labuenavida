@@ -54,7 +54,9 @@ router.get('/user/signup', sessionMiddleware.noAuthenticated, userController.ren
 router.post('/signup', sessionMiddleware.noAuthenticated /*fileUploader.single('avatar')*/, userController.create)
 router.get('/users/:id/activate/:token',sessionMiddleware.noAuthenticated, userController.activateUser)
 router.get('/users/:id', sessionMiddleware.authenticated, userController.showProfile)
-router.get('/user/:id/edit', sessionMiddleware.authenticated, userController.updateProfile)
+router.get('/users/:id/edit', sessionMiddleware.authenticated, userController.editUser)
+router.post('/users/:id/edit', sessionMiddleware.authenticated,upload.single('logo'), upload.single('picture'), userController.updateProfile)
+
 // router.post('/users/:id/delete', session.isAuthenticated, usersController.delete);
 
 

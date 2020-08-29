@@ -91,7 +91,7 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
           })
         }
       })
-      .catch(next(e))
+      .catch(e => next(e))
   }
 
 // Controller to logout user
@@ -193,14 +193,24 @@ module.exports.showProfile = (req, res, next) => {
     .catch(e => next(e))
 };
 
+// Controller to edit user
+
+module.exports.editUser = (req, res, next) => {
+  User.findById(req.params.id)
+    .then(user => {
+      res.render('user/edit', { user })
+    })
+    .catch(next)
+}
+
 // Controller to update user
 
 module.exports.updateProfile = (req, res, next) => {
   const body = req.body
-  User.findOneAndUpdate( { _id: req.params.id}, body, { runValidators: true, new: true })
+  User.findOneAndUpdate( { _id: req.params.id }, body, { runValidators: true, new: true })
     .then(user => {
       if (user) {
-        res.render(`user/edit`, { user })
+        res.render('user/edit', { user })
       } else {
         res.redirect('/home')
       }
