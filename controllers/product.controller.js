@@ -1,15 +1,10 @@
 const Product = require('../models/product.model')
 const User = require('../models/user.model')
 const Comment = require('../models/comment.model')
-const rate = require('../models/rate.model')
+const Rate = require('../models/rate.model')
 
 module.exports.renderHome = (req, res, next) => {
-    if (req.currentUser) {
-        res.render('products/home', req.currentUser)
-    } else {
-        res.render('products/home')
-    }
-    
+  res.render('products/home', {currentUser: req.currentUser})    
 }
 
 module.exports.renderAll = (req, res, next) => {
@@ -22,15 +17,14 @@ module.exports.renderAll = (req, res, next) => {
       { ['title']: new RegExp(req.query.search, "i") },
     ]
   }
-
+  console.log(req.currentUser);
   Product.find(criteria)
     .sort({createdAt: -1})
     .populate('user')
     .populate('comments')
     .populate('rates')
     .then(products => {
-      console.log(products);
-      res.render('products/all-products', { products, current: req.currentUser })
+      res.render('products/all-products', { products, currentUser: req.currentUser })
     })
     .catch(next)
 }
@@ -51,7 +45,7 @@ module.exports.renderProduct= (req, res, next) => {
   .then(product => {
     res.render('products/product', {
       product,
-      current: req.currentUser
+      currentUser: req.currentUser
     })
   })
   .catch(next)
@@ -60,7 +54,7 @@ module.exports.renderProduct= (req, res, next) => {
 module.exports.renderEditForm = (req, res, next) => {
   Product.findById(req.params.id)
   .then(product => {
-    res.render('products/product-edit', {product, current: req.currentUser})
+    res.render('products/product-edit', {product, currentUser: req.currentUser})
   }) 
 }
 
@@ -73,7 +67,8 @@ module.exports.editProduct = (req, res, next) => {
 }
 
 module.exports.renderCreateForm = (req, res, next) => {
-  res.render('products/new-product')
+  console.log(req.currentUser);
+  res.render('products/new-product', {currentUser: req.currentUser})
 }
 
 module.exports.createProduct = (req, res) => {

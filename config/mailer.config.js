@@ -23,7 +23,7 @@ module.exports.sendValidationEmail = ({ id, email, activationToken, name }) => {
         <h1>La Buena Vida Confirmation Email!</h1>
         <h2>Hello ${name}</h2>
         <p> Thanks to join our community! Please confirm your account clicking on the following link:</p>
-        <a href="http://localhost:3000/activate/${activationToken}"> Please click the link to confirm your account </a>
+        <a href="http://localhost:3000/users/${id}/activate/${activationToken}" target="_blank"> Please click the link to confirm your account </a>
         <h3>Enjoy 😎</h3>
         </div>`
     })

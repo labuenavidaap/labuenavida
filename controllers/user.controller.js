@@ -139,14 +139,14 @@ module.exports.renderSignup = (req, res, next) => {
 
 module.exports.activateUser = (req, res, next) => {
   console.log('Entra')
-  User.findOne({ 'activation.token': req.params.token })
+  User.findOne({ _id: req.params.id, 'activation.token': req.params.token })
     .then(user => {
       if (user) {
         user.activation.active = true;
-     
+        console.log('Here!')
         user.save()
           .then(() => {
-            console.log('Here!')
+            console.log('guarda!')
             res.render('user/login', {
               message: 'Your account has been activated, log in below!'
             })

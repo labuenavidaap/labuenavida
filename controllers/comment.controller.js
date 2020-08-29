@@ -1,3 +1,5 @@
+const Comment = require('../models/comment.model')
+
 module.exports.newComment = (req, res) => {
     const commentData = req.body
     commentData.user = req.currentUser._id

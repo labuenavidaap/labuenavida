@@ -25,4 +25,19 @@ module.exports.noAuthenticated = (req, res, next) => {
       }
     })
     .catch(next)
-};
+}
+
+module.exports.couldBeAuthenticated = (req, res, next) => {
+  User.findById(req.session.userId)
+    .then(user => {
+      if (user) {
+        req.currentUser = user
+        res.locals.currentUser = user
+
+        next()
+      } else {
+        next()
+      }
+    })
+    .catch(next)
+}
