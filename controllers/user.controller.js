@@ -47,7 +47,7 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
   // Controller from user from google
 
   module.exports.userFromGoogle = (req, res, next) => {
-    console.log(req.currentUser)
+    console.log(req.currentUser, 'current user')
     res.render('user/user-from-google', { currentUser: req.currentUser })
     
   }
@@ -206,7 +206,7 @@ module.exports.updateProfile = (req, res, next) => {
   User.findOneAndUpdate( { _id: req.params.id}, body, { runValidators: true, new: true })
     .then(user => {
       if (user) {
-        res.redirect(`/users/${user._id}`)
+        res.render(`user/edit`, { user })
       } else {
         res.redirect('/home')
       }
