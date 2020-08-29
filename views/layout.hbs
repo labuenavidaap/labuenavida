@@ -11,8 +11,19 @@
 </head>
 
 <body>
+    <div class="navbar fixed-top navbar-light bg-light d-flex justify-content-between mb-3">
+        <a class="navbar-brand mr-9" href="/" style="width:70%!important"><b>La Buena Vida</b></a>
+        {{#if currentUser }}
+        {{>profile}}
+        {{/if}}
+    </div>
+    <div class="mt-3 mb-3" style="margin-top:100px!important">
+        {{{body}}}
+    </div>
+    
+    {{>footer}}
 
-    {{{body}}}
+
     {{!-- <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v8.0&appId=729802397582879&autoLogAppEvents=1"

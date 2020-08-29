@@ -1,0 +1,62 @@
+<section id="products" class="container">
+    <div class="card w-20 m-3">
+        <div class="m-3 card-body d-flex flex-column align-items-center">
+            <p class="card-subtitle mb-2 text-muted">{{product.createdAt}}</p>
+
+            <h3 class="card-text">
+                {{product.name}}
+            </h3>
+
+            <p class="card-text">
+                {{product.producer.companyName}}</b>
+            </p>
+            <p class="card-text">
+                {{product.description}}</b>
+            </p>
+            <p class="card-text">
+                Price: {{product.price}}
+            </p>
+            <p class="card-text">
+                Stock: {{product.stock}}
+            </p>
+            
+            {{#each product.image}}
+            <img class="rounded-sm w-20 mb-1" src="{{this}}" style="width: 450px!important;"/>
+            {{/each}}
+            <div>
+                <button class="btn btn-sm mb-2 btn-outline-danger" id="{{this.id}}" onclick="wishlist(event)">
+                    <i class="fa fa-heart">Wishlist</i>
+                </button>
+                <button class="btn btn-sm mb-2 btn-outline-danger" id="{{this.id}}" onclick="cart(event)">
+                    <i class="fa fa-heart">Carro</i>
+                </button>
+            </div>
+        </div>
+
+        <div id="form" class="w-100 ">
+            <h5>Add a new comment:</h5>
+            <form action="/new-comment/{{product.id}}" method="POST">
+                <input type="text" id="input-content" name="text" placeholder="Your text" class="w-100">
+
+                <button type="submit" class="btn btn-primary mt-3 mb-4">Add comment</button>
+
+                {{#if errorMessage}}
+                <p class="error">{{errorMessage}}</p>
+                {{/if}}
+            </form>
+        </div>
+        <div>
+            {{#each product.comments as |com|}}
+            <div class="card m-3 p-2 w-100">
+                <div>
+                    <b>{{com.user.username}}</b>
+                </div>
+                <div>
+                    {{com.text}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+</section>
