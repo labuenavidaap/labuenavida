@@ -1,7 +1,9 @@
-<p class="mt-2">
-  Username: <a href="/users/{{currentUser.id}}">{{currentUser.name}}</a>
-</p>
+{{#unless user.producer}}
+    <a href="/become-producer" class="btn btn-outline-dark">Sell your products</a>
+{{/unless}}
 
-<form action="/logout" method="post">
-  <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+<a href="/users/{{currentUser.id}}" class="btn btn-outline-primary">View profile</a>
+
+<form action="/logout" method="post" class="btn btn-outline-danger btn-sm">
+  <button type="submit" class="">Logout</button>
 </form>
