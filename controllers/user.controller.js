@@ -29,11 +29,27 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
         next(error)
       } else {
         req.session.userId = user.id
-        res.redirect("/home")
+        User.findById(req.session.userId)
+        .then(user => {
+          if(!user.address) {
+            res.redirect('/user-from-google')
+          } else {
+            res.redirect('/home')
+          }
+          
+        })
       }
     })
 
     googleCallback(req, res, next);
+  }
+
+  // Controller from user from google
+
+  module.exports.userFromGoogle = (req, res, next) => {
+    console.log(req.currentUser)
+    res.render('user/user-from-google', { currentUser: req.currentUser })
+    
   }
 
   // Controller to post login
@@ -165,20 +181,35 @@ module.exports.activateUser = (req, res, next) => {
     .catch(e => next(e))
 }
 
-// Controller to show projects
+// Controller to show profile
 
-// module.exports.show = (req, res, next) => {
-//   User.findById(req.params.id)
-//     .populate({
-//       path: "projects",
-//       populate: "staff"
-//     })
-//     .populate({
-//       path: "staffProjects",
-//       populate: "author"
-//     })
-//     .then(user => {
-//       res.render('user/show', { user })
-//     })
-//     .catch(next(e))
-// };
+module.exports.showProfile = (req, res, next) => {
+  User.findById(req.params.id)
+    // .populate({
+    //   path: "projects",
+    //   populate: "staff"
+    // })
+    // .populate({
+    //   path: "staffProjects",
+    //   populate: "author"
+    // })
+    .then(user => {
+      res.render('user/show', { user })
+    })
+    .catch(e => next(e))
+};
+
+// Controller to update user
+
+module.exports.updateProfile = (req, res, next) => {
+  const body = req.body
+  User.findOneAndUpdate( { _id: req.params.id}, body, { runValidators: true, new: true })
+    .then(user => {
+      if (user) {
+        res.redirect(`/users/${user._id}`)
+      } else {
+        res.redirect('/home')
+      }
+    })
+    .catch(next)
+}

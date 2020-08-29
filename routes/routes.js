@@ -49,16 +49,14 @@ router.post('/login', sessionMiddleware.noAuthenticated, userController.login)
 router.post('/logout', sessionMiddleware.authenticated, userController.logout)
 router.get('/auth/google', sessionMiddleware.noAuthenticated, userController.doSocialLoginGoogle)
 router.get('/auth/google/callback', sessionMiddleware.noAuthenticated, userController.googleCallback)
+router.get('/user-from-google',sessionMiddleware.authenticated, userController.userFromGoogle)
 router.get('/user/new', sessionMiddleware.noAuthenticated, userController.renderSignup)
 router.post('/users', sessionMiddleware.noAuthenticated /*fileUploader.single('avatar')*/, userController.create)
 router.get('/users/:id/activate/:token',sessionMiddleware.noAuthenticated, userController.activateUser)
-// router.get('/user/:id', sessionMiddleware.authenticated, userController.show)
-// router.get('/profile/:id/edit', sessionMiddleware.authenticated, userController.renderEditProfile)
+router.get('/users/:id', sessionMiddleware.authenticated, userController.showProfile)
+router.get('/user/:id/edit', sessionMiddleware.authenticated, userController.updateProfile)
 // router.post('/profile/:id/edit', sessionMiddleware.authenticated, fileUploader.single('avatar'), userController.editProfile)
 
-
-
-// router.get('/logout', sessionMiddleware.authenticated, userController.logout)
 
 
 module.exports = router

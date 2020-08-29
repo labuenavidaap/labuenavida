@@ -1,8 +1,6 @@
   
 const passport = require('passport')
 const User = require('../models/user.model')
-const Strategy = require('passport-slack/lib/passport-slack/strategy')
-const SlackStrategy = require('passport-slack').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 
 
@@ -19,20 +17,20 @@ const google =  new GoogleStrategy(
     (accessToken, refreshToken, profile, done) => {
       // to see the structure of the data in received response:
       console.log('Google account details:', profile)
- 
-      User.findOne({ 'social.googleID': profile.id })
+      
+      User.findOne({ 'social.googleId': profile.id })
         .then(user => {
           if (user) {
+            console.log(user, 'inside googleStrategy')
             done(null, user)
             return
           } else {
             const newUser = new User({
               name: profile._json.name,
-              username: profile._json.given_name,
               email: profile._json.email,
-              avatar: profile._json.picture,
+              password: profile._json.sub + Math.random().toString(36).substring(7),
               social: {
-                googleID: profile.id,
+                googleId: profile.id,
               },
               activation: {
                   active: true
