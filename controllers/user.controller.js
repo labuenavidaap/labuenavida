@@ -148,7 +148,7 @@ module.exports.renderSignup = (req, res, next) => {
         next(error)
       }
     })
-    .catch(next(e))
+    .catch(e => next(e))
 }
 
 // Controller to activate user. Set user.activate to true
@@ -212,4 +212,19 @@ module.exports.updateProfile = (req, res, next) => {
       }
     })
     .catch(next)
+}
+
+// Controller to delete user
+
+module.exports.delete = (req, res, next) => {
+  if (req.params.id.toString() === req.currentUser.id.toString()) {
+    req.currentUser.remove()
+      .then(() => {
+        req.session.destroy()
+        res.redirect("/login")
+      })
+      .catch(next)
+  } else {
+    res.redirect('/home')
+  }
 }

@@ -19,6 +19,7 @@ app.use(passport)
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
+
 const router = require('./routes/routes.js')
 app.use('/', router)
 
