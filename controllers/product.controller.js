@@ -29,6 +29,7 @@ module.exports.renderAll = (req, res, next) => {
     .populate('comments')
     .populate('rates')
     .then(products => {
+      console.log(products);
       res.render('products/all-products', { products, current: req.currentUser })
     })
     .catch(next)

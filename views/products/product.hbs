@@ -19,11 +19,10 @@
             <p class="card-text">
                 Stock: {{product.stock}}
             </p>
-
-            <a href="products/{{product.id}}" class="btn btn-secondary mb-3">See details</a>
-
-            <img class="rounded-sm w-20 mb-1" src="{{product.image}}" style="width: 450px!important;" />
-
+            
+            {{#each product.image}}
+            <img class="rounded-sm w-20 mb-1" src="{{this}}" style="width: 450px!important;"/>
+            {{/each}}
             <div>
                 <button class="btn btn-sm mb-2 btn-outline-danger" id="{{this.id}}" onclick="wishlist(event)">
                     <i class="fa fa-heart">Wishlist</i>
