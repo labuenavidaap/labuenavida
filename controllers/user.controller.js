@@ -47,7 +47,7 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
   // Controller from user from google
 
   module.exports.userFromGoogle = (req, res, next) => {
-    console.log(req.currentUser)
+    console.log(req.currentUser, 'current user')
     res.render('user/user-from-google', { currentUser: req.currentUser })
     
   }
@@ -148,7 +148,7 @@ module.exports.renderSignup = (req, res, next) => {
         next(error)
       }
     })
-    .catch(next(e))
+    .catch(e => next(e))
 }
 
 // Controller to activate user. Set user.activate to true
@@ -206,10 +206,25 @@ module.exports.updateProfile = (req, res, next) => {
   User.findOneAndUpdate( { _id: req.params.id}, body, { runValidators: true, new: true })
     .then(user => {
       if (user) {
-        res.redirect(`/users/${user._id}`)
+        res.render(`user/edit`, { user })
       } else {
         res.redirect('/home')
       }
     })
     .catch(next)
+}
+
+// Controller to delete user
+
+module.exports.delete = (req, res, next) => {
+  if (req.params.id.toString() === req.currentUser.id.toString()) {
+    req.currentUser.remove()
+      .then(() => {
+        req.session.destroy()
+        res.redirect("/login")
+      })
+      .catch(next)
+  } else {
+    res.redirect('/home')
+  }
 }

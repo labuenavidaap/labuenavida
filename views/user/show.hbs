@@ -13,16 +13,18 @@
             <h1>Name: {{user.name}}</h1>
 
             {{#if user.producer}}
-            <p>PRODUCER</p>
+            <p>Type : PRODUCER</p>
+            {{else}}
+            <p>Type : CLIENT</p>
             {{/if}}
-            
+
             <p><strong>Email:</strong> {{user.email}}</p>
 
-            {{#if user.staff}}
+            {{!-- {{#if user.staff}}
             <p><strong><i class="fa fa-star mr-1"></i>STAFF</strong></p>
-            {{/if}}
+            {{/if}} --}}
 
-            {{#ifEquals currentUser.email user.email}}
+            
             <div>
                 <a class="btn button-1" href="/users/{{currentUser._id}}/edit">
                     <i class="fa fa-edit mr-2"></i>
@@ -36,35 +38,46 @@
                     </button>
                 </form>
             </div>
-            {{/ifEquals}}
+            
         </div>
     </div>
-
+    {{#if user.producer}}
+         <div class="row">
+            {{#each user.products as |product|}}
+            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
+                {{product.name}}
+            </div>
+            {{/each}}
+        </div>
+    {{else}}
     <div>
-        {{#if user.staff}}
-        <h2 class="my-4">Staff projects</h2>
+        
+        <h2 class="my-4 text-center">Bougth Products</h2>
 
         <div class="row">
-            {{#each user.staffProjects as |project|}}
+            {{#each user.bougthProducts as |product|}}
             <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-                {{>projects/projectcard project=project }}
+                {{product.name}}
             </div>
             {{/each}}
         </div>
 
         <hr />
-        {{/if}}
+        
     </div>
-
     <div>
-        <h2 class="my-4 text-center">Projects</h2>
+        <h2 class="my-4 text-center">Wishlist</h2>
 
         <div class="row">
-            {{#each user.projects as |project|}}
+            {{#each user.wishList as |product|}}
             <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-                {{>projects/projectcard project=project }}
+                {{product.name }}
             </div>
             {{/each}}
         </div>
     </div>
+
+    {{/if}}
+
+    
 </article>
