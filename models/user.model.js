@@ -35,18 +35,18 @@ const userSchema = new mongoose.Schema(
             type: String,
             minlength: [5, 'minlength five characters'],
             maxlength: [15, 'maxlength fifteen characters'],
-            required: [true, 'Password is required']
         },
         social: {
             googleId: String,
             facebookId: String
         },
         phone: {
-            type: String
+            type: String,
+            minlength: [9, 'The min length is nine numbers'],
+            maxlength: [15, 'The max length is fifteen numbers'],
         },
         address: {
             type: String,
-            required: [true, 'Address is required to send your products!']
         },
         activation: {
             active: {
@@ -105,8 +105,27 @@ const userSchema = new mongoose.Schema(
             default: false
         }
     },
-    { timestamps: true }
+    { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 )
+
+// here virtual
+
+// here virtual
+
+userSchema.pre('save', function (next) {
+    if (this.isModified('password')) {
+      bcrypt.hash(this.password, 10).then((hash) => {
+        this.password = hash;
+        next();
+      });
+    } else {
+      next();
+    }
+  })
+
+userSchema.methods.checkPassword = function (password) {
+return bcrypt.compare(password, this.password);
+}
 
 const User = mongoose.model('User', userSchema)
 module.exports = User

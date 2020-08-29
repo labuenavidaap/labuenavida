@@ -44,14 +44,15 @@ router.get('/', (req, res) => res.redirect('/home'))
 
 // USER ROUTES
 
-// router.get('/login', sessionMiddleware.noAuthenticated, userController.renderLogin)
-// router.post('/login', sessionMiddleware.noAuthenticated, userController.Login)
-// router.get('/auth/google', session.noAuthenticated, usersController.doSocialLoginGoogle)
-// router.get('/auth/google/callback', session.notAuthenticated, usersController.googleCallback)
-// router.get('/signup', sessionMiddleware.noAuthenticated, userController.renderSignup)
-// router.post('/signup', sessionMiddleware.noAuthenticated, fileUploader.single('avatar'), userController.signup)
-// router.get('/activate/:token', userController.activate)
-// router.get('/profile/:id', sessionMiddleware.authenticated, userController.renderProfile)
+router.get('/login', sessionMiddleware.noAuthenticated, userController.renderLogin)
+router.post('/login', sessionMiddleware.noAuthenticated, userController.login)
+router.post('/logout', sessionMiddleware.authenticated, userController.logout)
+router.get('/auth/google', sessionMiddleware.noAuthenticated, userController.doSocialLoginGoogle)
+router.get('/auth/google/callback', sessionMiddleware.noAuthenticated, userController.googleCallback)
+router.get('/user/new', sessionMiddleware.noAuthenticated, userController.renderSignup)
+router.post('/users', sessionMiddleware.noAuthenticated /*fileUploader.single('avatar')*/, userController.create)
+router.get('/activate/:token',sessionMiddleware.noAuthenticated, userController.activateUser)
+// router.get('/user/:id', sessionMiddleware.authenticated, userController.show)
 // router.get('/profile/:id/edit', sessionMiddleware.authenticated, userController.renderEditProfile)
 // router.post('/profile/:id/edit', sessionMiddleware.authenticated, fileUploader.single('avatar'), userController.editProfile)
 
