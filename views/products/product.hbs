@@ -8,20 +8,25 @@
             </h3>
 
             <p class="card-text">
-                {{product.producer.companyName}}</b>
+                <b>{{product.producer.companyName}}</b>
             </p>
             <p class="card-text">
                 {{product.description}}</b>
             </p>
             <p class="card-text">
-                Price: {{product.price}}
+                Price: {{product.price}}€
             </p>
             <p class="card-text">
                 Stock: {{product.stock}}
             </p>
-            
+            <div>
+                {{#each product.categories}}
+                <div class="btn btn-danger">{{this}}</div>
+                {{/each}}
+            </div>
+
             {{#each product.image}}
-            <img class="rounded-sm w-20 mb-1" src="{{this}}" style="width: 450px!important;"/>
+            <img class="rounded-sm w-20 mb-1" src="{{this}}" style="width: 450px!important;" />
             {{/each}}
             <div>
                 <button class="btn btn-sm mb-2 btn-outline-danger" id="{{this.id}}" onclick="wishlist(event)">
@@ -49,7 +54,7 @@
             {{#each product.comments as |com|}}
             <div class="card m-3 p-2 w-100">
                 <div>
-                    <b>{{com.user.username}}</b>
+                    <b>{{com.user.name}}</b>
                 </div>
                 <div>
                     {{com.text}}

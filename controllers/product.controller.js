@@ -13,14 +13,14 @@ module.exports.renderAll = (req, res, next) => {
   if (req.query.search) {
     res.locals.search = req.query.search
     criteria['$or'] = [
-      { name: new RegExp(req.query.search, "i") },
-      { ['title']: new RegExp(req.query.search, "i") },
+      { name: new RegExp(req.query.search, 'i') },
+      { ['title']: new RegExp(req.query.search, 'i') },
     ]
   }
-  console.log(req.currentUser);
+  
   Product.find(criteria)
     .sort({createdAt: -1})
-    .populate('user')
+    .populate('producer')
     .populate('comments')
     .populate('rates')
     .then(products => {
@@ -67,7 +67,6 @@ module.exports.editProduct = (req, res, next) => {
 }
 
 module.exports.renderCreateForm = (req, res, next) => {
-  console.log(req.currentUser);
   res.render('products/new-product', {currentUser: req.currentUser})
 }
 
