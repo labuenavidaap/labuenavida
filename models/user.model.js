@@ -34,7 +34,6 @@ const userSchema = new mongoose.Schema(
         password: {
             type: String,
             minlength: [5, 'minlength five characters'],
-            maxlength: [15, 'maxlength fifteen characters'],
         },
         social: {
             googleId: String,

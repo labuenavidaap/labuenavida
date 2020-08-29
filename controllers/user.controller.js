@@ -77,7 +77,7 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
           })
         }
       })
-      .catch(next)
+      .catch(next(e))
   }
 
 // Controller to logout user
@@ -132,7 +132,7 @@ module.exports.renderSignup = (req, res, next) => {
         next(error)
       }
     })
-    .catch(next)
+    .catch(next(e))
 }
 
 // Controller to activate user. Set user.activate to true
@@ -151,7 +151,7 @@ module.exports.activateUser = (req, res, next) => {
               message: 'Your account has been activated, log in below!'
             })
           })
-          .catch(e => next)
+          .catch(e => next(e))
       } else {
         res.render('user/login', {
           error: {
@@ -162,7 +162,7 @@ module.exports.activateUser = (req, res, next) => {
         })
       }
     })
-    .catch(e => next)
+    .catch(e => next(e))
 }
 
 // Controller to show projects
@@ -180,5 +180,5 @@ module.exports.activateUser = (req, res, next) => {
 //     .then(user => {
 //       res.render('user/show', { user })
 //     })
-//     .catch(next)
+//     .catch(next(e))
 // };
