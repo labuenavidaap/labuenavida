@@ -31,8 +31,6 @@ const google =  new GoogleStrategy(
               username: profile._json.given_name,
               email: profile._json.email,
               avatar: profile._json.picture,
-              password:
-                profile._json.sub + Math.random().toString(36).substring(7),
               social: {
                 googleID: profile.id,
               },

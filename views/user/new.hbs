@@ -1,0 +1,61 @@
+<h1>New user</h1>
+<article class="container">
+   <form action="/users" method="POST"{{!-- enctype="multipart/form-data"--}}>  
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input name="name" type="text" value="{{user.name}}" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name" required>
+
+      {{#if error.name}}
+        <div class="invalid-feedback">
+          {{error.name.message}}
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" value="{{user.email}}" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email" name="email" placeholder="Enter name" required>
+
+      {{#if error.email}}
+        <div class="invalid-feedback">
+          {{error.email.message}}
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control {{#if error.password }}is-invalid{{/if}}" id="password" name="password">
+
+      {{#if error.password}}
+        <div class="invalid-feedback">
+          {{error.password.message}}
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone number</label>
+      <input type="tel" value="{{user.phone}}" class="form-control {{#if error.phone }}is-invalid{{/if}}" name="phone" placeholder="555-555-555">
+
+      {{#if error.phone}}
+        <div class="invalid-feedback">
+          {{error.phone.message}}
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" class="form-control-file {{#if error.address }}is-invalid{{/if}}" id="address" name="address">
+
+      {{#if error.address}}
+        <div class="invalid-feedback">
+          {{error.address.message}}
+        </div>
+      {{/if}}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</article>
