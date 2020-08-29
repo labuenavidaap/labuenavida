@@ -47,9 +47,7 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
   // Controller from user from google
 
   module.exports.userFromGoogle = (req, res, next) => {
-    console.log(req.currentUser, 'current user')
     res.render('user/user-from-google', { currentUser: req.currentUser })
-    
   }
 
   // Controller to post login
@@ -117,7 +115,6 @@ module.exports.renderSignup = (req, res, next) => {
     ...req.body,
     avatar: req.file ? req.file.path : undefined
   })
-  console.log(user)
 
   user.save()
     .then(user => {
@@ -154,15 +151,12 @@ module.exports.renderSignup = (req, res, next) => {
 // Controller to activate user. Set user.activate to true
 
 module.exports.activateUser = (req, res, next) => {
-  console.log('Entra')
   User.findOne({ _id: req.params.id, 'activation.token': req.params.token })
     .then(user => {
       if (user) {
         user.activation.active = true;
-        console.log('Here!')
         user.save()
           .then(() => {
-            console.log('guarda!')
             res.render('user/login', {
               message: 'Your account has been activated, log in below!'
             })
