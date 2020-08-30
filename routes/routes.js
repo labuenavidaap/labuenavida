@@ -10,6 +10,7 @@ const rateController = require('../controllers/rate.controller')
 const upload = require('../config/multer.config.js')
 
 
+
 // routes
 router.get('/', (req, res) => res.redirect('/home'))
 
@@ -55,9 +56,9 @@ router.post('/signup', sessionMiddleware.noAuthenticated /*fileUploader.single('
 router.get('/users/:id/activate/:token',sessionMiddleware.noAuthenticated, userController.activateUser)
 router.get('/users/:id', sessionMiddleware.authenticated, userController.showProfile)
 router.get('/users/:id/edit', sessionMiddleware.authenticated, userController.editUser)
-router.post('/users/:id/edit', sessionMiddleware.authenticated,upload.single('logo'), upload.single('picture'), userController.updateProfile)
-
-// router.post('/users/:id/delete', session.isAuthenticated, usersController.delete);
+router.post('/users/:id/edit', sessionMiddleware.authenticated, upload.single('logo'), userController.updateProfile)
+router.get('/become-producer/:id', sessionMiddleware.authenticated, userController.becomeProducer)
+router.post('/users/:id/delete', sessionMiddleware.authenticated, userController.delete)
 
 
 module.exports = router

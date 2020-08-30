@@ -1,2 +1,18 @@
-<h1>user form google</h1>
-<a href="/users/{{currentUser.id}}/edit"> Click to edit address and phone</a>
+<div class="modal hide fade" tabindex="-1" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Welcome, {{currentUser.name}}</h5>
+        {{!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span> --}}
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Welcome to La Buena Vida. If you want to buy a product, you must complete a few fields of our form. Your address and your Phone Number.</p>
+      </div>
+      <div class="modal-footer">
+        <a href="/users/{{currentUser.id}}/edit"><button type="button" class="btn btn-primary">Go to Profile</button></a>
+      </div>
+    </div>
+  </div>
+</div>

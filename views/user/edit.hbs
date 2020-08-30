@@ -9,21 +9,25 @@
         {{/if}}
 
         <div class="col">
-            <form action="/users/{{user._id}}/edit" method="POST">
+            <form action="/users/{{user._id}}/edit" method="POST" enctype="multipart/form-data">
                 {{#if user.producer}}
-                <div class="form-group">
-                    <label for="logo">Logo</label>
-                    <input type="file" class="mb-3 form-control-file {{#if error.avatar }}is-invalid{{/if}}" id="logo"
-                        name="logo" disabled>
-                    <button type="button" data-enable="logo" class="btn btn-outline-primary btn-sm">Change
-                        Logo</button>
 
-                    {{#if error.logo}}
-                    <div class="invalid-feedback">
-                        {{error.logo.message}}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text btn-primary" id="inputGroupFileAddon01">Logo</span>
                     </div>
-                    {{/if}}
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                            aria-describedby="inputGroupFileAddon01" name="logo">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
                 </div>
+                {{#if error.logo}}
+                <div class="invalid-feedback">
+                    {{error.logo.message}}
+                </div>
+                {{/if}}
+
                 {{/if}}
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -66,8 +70,8 @@
 
                 <div class="form-group">
                     <label for="bio">Phone</label>
-                    <input type="tel" class="form-control {{#if error.phone }}is-invalid{{/if}}" name="phone"
-                        id="bio" value="{{user.phone}}">
+                    <input type="tel" class="form-control {{#if error.phone }}is-invalid{{/if}}" name="phone" id="bio"
+                        value="{{user.phone}}">
 
                     {{#if error.phone}}
                     <div class="invalid-feedback">
@@ -79,7 +83,7 @@
                 <div class="form-group">
                     <label for="bio">Address</label>
                     <input type="text" class="form-control {{#if error.address }}is-invalid{{/if}}" name="address"
-                        id="address"  value="{{user.address}}">
+                        id="address" value="{{user.address}}">
 
                     {{#if error.address}}
                     <div class="invalid-feedback">
@@ -88,12 +92,25 @@
                     {{/if}}
                 </div>
 
+                {{!-- <div class="form-group">
+                    
+                    <input type="checkbox" class="form-check-input {{#if error.producer }}is-invalid{{/if}}" name="producer"
+                        id="producer">
+                    <label for="producer" class="form-check-label">Become a Producer.</label>
+
+                    {{#if error.address}}
+                    <div class="invalid-feedback">
+                        {{error.address.message}}
+                    </div>
+                    {{/if}}
+                </div> --}}
+
                 {{#if user.producer}}
 
                 <div class="form-group">
                     <label for="Cname">Company Name</label>
                     <input type="text" class="form-control {{#if error.companyName }}is-invalid{{/if}}"
-                        name="companyName" id="cName">{{user.companyName}}</input>
+                        name="companyName" id="cName" value="{{user.companyName}}"></input>
 
                     {{#if error.companyName}}
                     <div class="invalid-feedback">
@@ -105,7 +122,7 @@
                 <div class="form-group">
                     <label for="Caddress">Company Address</label>
                     <input type="text" class="form-control {{#if error.companyName }}is-invalid{{/if}}"
-                        name="compAddress" id="cName">{{user.compAddress}}</input>
+                        name="compAddress" id="cName" value="{{user.compAddress}}"></input>
 
                     {{#if error.compAddress}}
                     <div class="invalid-feedback">
@@ -117,7 +134,7 @@
                 <div class="form-group">
                     <label for="Cmail">Company Email</label>
                     <input type="email" class="form-control {{#if error.compMail }}is-invalid{{/if}}" name="compMail"
-                        id="cName">{{user.compMail}}</input>
+                        id="cName" value="{{user.compMail}}"></input>
 
                     {{#if error.compMail}}
                     <div class="invalid-feedback">
@@ -129,7 +146,7 @@
                 <div class="form-group">
                     <label for="CPhone">Company Phone</label>
                     <input type="tel" class="form-control {{#if error.compPhone }}is-invalid{{/if}}" name="compPhone"
-                        id="cPhone">{{user.compPhone}}</input>
+                        id="cPhone" value="{{user.compPhone}}"></input>
 
                     {{#if error.compPhone}}
                     <div class="invalid-feedback">
@@ -141,7 +158,7 @@
                 <div class="form-group">
                     <label for="CLink">Company URL</label>
                     <input type="text" class="form-control {{#if error.compLink }}is-invalid{{/if}}" name="compLink"
-                        id="cPhone">{{user.compLink}}</input>
+                        id="cPhone" value="{{user.compLink}}"></input>
 
                     {{#if error.compLink}}
                     <div class="invalid-feedback">
@@ -153,7 +170,7 @@
                 <div class="form-group">
                     <label for="CBio">Company Bio</label>
                     <textarea rows="5" type="text" class="form-control {{#if error.bio }}is-invalid{{/if}}" name="bio"
-                        id="cPhone">{{user.bio}}</textarea>
+                        id="cPhone" value="{{user.bio}}"></textarea>
 
                     {{#if error.bio}}
                     <div class="invalid-feedback">
@@ -165,12 +182,7 @@
                 <div class="form-group">
                     <label for="certificates">Company Certificates</label>
                     <input type="text" class="form-control {{#if error.certificates }}is-invalid{{/if}}"
-                        name="certificates" id="cPhone">{{user.certificates}}</input>
-                    <ul>
-                        {{#each user.certificates as |cert|}}
-                        <li>{{cert}}</li>
-                        {{/each}}
-                    </ul>
+                        name="certificates" id="cPhone" value="{{user.certificates}}"></input>
 
 
                     {{#if error.certificates}}
@@ -179,32 +191,32 @@
                     </div>
                     {{/if}}
                 </div>
-
-                <div class="form-group">
-                    <label for="pictures">Company Pictures</label>
-                    <input type="file" class="form-control {{#if error.compPhone }}is-invalid{{/if}}" name="pictures"
-                        id="pictures">{{user.pictures}}</input>
-
-                    <button type="button" data-enable="pictures" class="btn btn-outline-primary btn-sm">Change
-                        picture</button>
-
-                    <ul>
-                        {{#each user.pictures as |img|}}
-                        <li><img src="{{img}}" alt=""></li>
-                        {{/each}}
-                    </ul>
-
-                    {{#if error.pictures}}
-                    <div class="invalid-feedback">
-                        {{error.pictures.message}}
+                <p> Picture of the Company</p>
+                <div class="input-group mb-3">
+                    
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Pictures</span>
                     </div>
-                    {{/if}}
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile01"
+                            aria-describedby="inputGroupFileAddon01" name="pictures">
+                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    </div>
                 </div>
+
+
+
+                {{#if error.pictures}}
+                <div class="invalid-feedback">
+                    {{error.pictures.message}}
+                </div>
+                {{/if}}
+
 
 
                 {{/if}}
 
-                <button type="submit" class="btn btn-primary">Update profile</button>
+                <button type="submit" class="btn btn-primary my-5">Update profile</button>
             </form>
         </div>
     </div>

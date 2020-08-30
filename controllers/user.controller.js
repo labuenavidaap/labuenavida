@@ -207,8 +207,15 @@ module.exports.editUser = (req, res, next) => {
 
 module.exports.updateProfile = (req, res, next) => {
   const body = req.body
+
+  if (req.file) {
+    body.logo = req.file.path
+    
+    
+  }
   User.findOneAndUpdate( { _id: req.params.id }, body, { runValidators: true, new: true })
     .then(user => {
+      console.log(user._id)
       res.redirect('/home')
     })
     .catch(next)
@@ -221,10 +228,31 @@ module.exports.delete = (req, res, next) => {
     req.currentUser.remove()
       .then(() => {
         req.session.destroy()
-        res.redirect('/login')
+        res.redirect('/home')
       })
       .catch(next)
   } else {
     res.redirect('/home')
   }
+}
+
+// Controller to become a producer
+
+module.exports.becomeProducer = (req, res, next) => {
+  
+  console.log(req.params.id)
+  User.findOneAndUpdate( { _id: req.params.id }, { runValidators: true, new: true })
+    .then(user => {
+      console.log(user)
+      if (user) {
+        user.producer = true
+        user.save()
+          .then(user => {
+            res.render('user/edit', { user })
+          })
+          .catch(e => next(e))
+      }
+      res.redirect('/home')
+    })
+    .catch(e => next(e))
 }

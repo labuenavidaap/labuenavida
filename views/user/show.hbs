@@ -32,17 +32,11 @@
             <p><strong>Company phone:</strong> {{user.compPhone}}</p>
             <p><strong>Company url:</strong> {{user.compLink}}</p>
             <p><strong>Company Politics:</strong> {{user.politic}}</p>
-            <p><strong>Company Certificates:</strong>/<p>
-                <ul>
-                    {{#each user.certificates as |cert|}}
-                    <li>{{cert}}</li>
-                    {{/each}}
-                </ul>
-            
+            <p><strong>Company Certificates:</strong>{{user.certificates}}<p>
             <p>Pictures of the Company:</p>
-            {{#each user.pictures  as |img|}}
-            <img src="{{img}}" alt="">
-            {{/each}}
+            
+            <img src="{{user.pictures}}" alt="user picture">
+            
 
 
 
@@ -55,7 +49,7 @@
                     Edit
                 </a>
 
-                <form action="/users/{{currentUser._id}}/delete" method="POST" class="mt-2">
+                <form action="/users/{{currentUser.id}}/delete" method="POST" class="mt-2">
                     <button type="submit" class="btn btn-danger">
                         <i class="fa fa-trash mr-2"></i>
                         Remove account

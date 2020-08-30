@@ -24,3 +24,9 @@
 //         });
 //     });
 //   });
+
+// Modal from login with google
+
+$(window).on('load',function(){
+    $('#myModal').modal('show');
+});

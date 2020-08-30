@@ -91,13 +91,13 @@ const userSchema = new mongoose.Schema(
             type: String
         },
         certificates: {
-            type: [String]
+            type: String
         }, 
         logo: {
             type: String
         },
         pictures: {
-            type: [String]
+            type: String
         },
         politic: {
             type: Boolean,
