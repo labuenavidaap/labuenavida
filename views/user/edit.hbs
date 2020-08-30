@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <label for="bio">Phone</label>
                     <input type="tel" class="form-control {{#if error.phone }}is-invalid{{/if}}" name="phone"
-                        id="bio">{{user.phone}}</input>
+                        id="bio" value="{{user.phone}}">
 
                     {{#if error.phone}}
                     <div class="invalid-feedback">
@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <label for="bio">Address</label>
                     <input type="text" class="form-control {{#if error.address }}is-invalid{{/if}}" name="address"
-                        id="address">{{user.address}}</input>
+                        id="address"  value="{{user.address}}">
 
                     {{#if error.address}}
                     <div class="invalid-feedback">

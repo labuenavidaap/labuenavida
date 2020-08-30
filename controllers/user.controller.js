@@ -12,8 +12,8 @@ module.exports.renderLogin = (req, res, next) => {
 module.exports.doSocialLoginGoogle = (req, res, next) => {
     const passportControllerGoogle = passport.authenticate('google', {
       scope: [
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/userinfo.email"
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'
       ]
     })
   
@@ -24,7 +24,7 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
   // Controller to callback login  Google (passport)
   
   module.exports.googleCallback = (req, res, next) => {
-    const googleCallback = passport.authenticate("google",  (error, user) => {
+    const googleCallback = passport.authenticate('google',  (error, user) => {
       if (error) {
         next(error)
       } else {
@@ -41,7 +41,7 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
       }
     })
 
-    googleCallback(req, res, next);
+    googleCallback(req, res, next)
   }
 
   // Controller from user from google
@@ -131,16 +131,16 @@ module.exports.renderSignup = (req, res, next) => {
     })
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
-        res.render("user/new", { error: error.errors, user });
+        res.render('user/new', { error: error.errors, user })
       } else if (error.code === 11000) { // error when duplicated user
-        res.render("user/new", {
+        res.render('user/new', {
           user,
           error: {
             email: {
               message: 'user already exists'
             }
           }
-        });
+        })
       } else {
         next(error)
       }
@@ -154,7 +154,7 @@ module.exports.activateUser = (req, res, next) => {
   User.findOne({ _id: req.params.id, 'activation.token': req.params.token })
     .then(user => {
       if (user) {
-        user.activation.active = true;
+        user.activation.active = true
         user.save()
           .then(() => {
             res.render('user/login', {
@@ -180,18 +180,18 @@ module.exports.activateUser = (req, res, next) => {
 module.exports.showProfile = (req, res, next) => {
   User.findById(req.params.id)
     // .populate({
-    //   path: "projects",
-    //   populate: "staff"
+    //   path: 'projects',
+    //   populate: 'staff'
     // })
     // .populate({
-    //   path: "staffProjects",
-    //   populate: "author"
+    //   path: 'staffProjects',
+    //   populate: 'author'
     // })
     .then(user => {
       res.render('user/show', { user })
     })
     .catch(e => next(e))
-};
+}
 
 // Controller to edit user
 
@@ -209,11 +209,7 @@ module.exports.updateProfile = (req, res, next) => {
   const body = req.body
   User.findOneAndUpdate( { _id: req.params.id }, body, { runValidators: true, new: true })
     .then(user => {
-      if (user) {
-        res.render('user/edit', { user })
-      } else {
-        res.redirect('/home')
-      }
+      res.redirect('/home')
     })
     .catch(next)
 }
@@ -225,7 +221,7 @@ module.exports.delete = (req, res, next) => {
     req.currentUser.remove()
       .then(() => {
         req.session.destroy()
-        res.redirect("/login")
+        res.redirect('/login')
       })
       .catch(next)
   } else {
