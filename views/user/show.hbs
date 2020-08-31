@@ -32,11 +32,12 @@
             <p><strong>Company phone:</strong> {{user.compPhone}}</p>
             <p><strong>Company url:</strong> {{user.compLink}}</p>
             <p><strong>Company Politics:</strong> {{user.politic}}</p>
-            <p><strong>Company Certificates:</strong>{{user.certificates}}<p>
+            <p><strong>Company Certificates:</strong>{{user.certificates}}
+            <p>
             <p>Pictures of the Company:</p>
-            
+
             <img src="{{user.pictures}}" alt="user picture">
-            
+
 
 
 
@@ -44,17 +45,19 @@
 
 
             <div>
-                <a class="btn button-1" href="/users/{{currentUser._id}}/edit">
+                <a class="btn btn-info my-3" href="/users/{{currentUser._id}}/edit">
                     <i class="fa fa-edit mr-2"></i>
                     Edit
                 </a>
 
                 <form action="/users/{{currentUser.id}}/delete" method="POST" class="mt-2">
-                    <button type="submit" class="btn btn-danger">
+                    <button type="submit" class="btn btn-danger my-3">
                         <i class="fa fa-trash mr-2"></i>
                         Remove account
                     </button>
                 </form>
+                <a href="/new-product"><button class="btn btn-success my-3"> New Product</button></a>
+
             </div>
 
         </div>
@@ -63,7 +66,19 @@
     <div class="row">
         {{#each user.products as |product|}}
         <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-            {{product.name}}
+            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{product.image}}" alt="{{product.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.bio}}</p>
+                        <a href="/products/{{product.id}}/edit" class="btn btn-primary">Edit Product</a>
+                        <form action="/delete/{{product.id}}" method="POST">
+                            <button class="btn btn-warning my-3"> Remove Product</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
         {{/each}}
     </div>
@@ -75,6 +90,14 @@
         <div class="row">
             {{#each user.bougthProducts as |product|}}
             <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{product.image}}" alt="{{product.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.bio}}</p>
+                        <a href="#" class="btn btn-primary">Corregir</a>
+                    </div>
+                </div>
                 {{product.name}}
             </div>
             {{/each}}

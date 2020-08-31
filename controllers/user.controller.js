@@ -179,17 +179,29 @@ module.exports.activateUser = (req, res, next) => {
 
 module.exports.showProfile = (req, res, next) => {
   User.findById(req.params.id)
-    // .populate({
-    //   path: 'projects',
-    //   populate: 'staff'
-    // })
-    // .populate({
-    //   path: 'staffProjects',
-    //   populate: 'author'
-    // })
+  .populate( 'products' )
     .then(user => {
-      res.render('user/show', { user })
+      
+      if (user.producer) {
+
+          res.render('user/show', { user })
+        
+      } else {
+        // user.populate({
+        //   path: 'projects',
+        //   populate: 'staff'
+        // })
+        // user.populate({
+        //   path: 'staffProjects',
+        //   populate: 'author'
+        // })
+       
+      }
     })
+
+
+
+   
     .catch(e => next(e))
 }
 
@@ -208,7 +220,7 @@ module.exports.editUser = (req, res, next) => {
 module.exports.updateProfile = (req, res, next) => {
   const body = req.body
 
-  if ((req.files.logo ||  req.files.pictures) && req.currentUser.producer) {
+  if ((req.files.logo && req.files.pictures) && req.currentUser.producer) {
 
     body.logo = req.files.logo[0].path
     body.pictures = req.files.pictures[0].path

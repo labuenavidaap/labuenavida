@@ -108,7 +108,12 @@ const userSchema = new mongoose.Schema(
 )
 
 // here virtual
-
+userSchema.virtual('products', {
+    ref: 'Product',
+    localField: '_id',
+    foreignField: 'producer',
+    justOne: false
+})
 // here virtual
 
 userSchema.pre('save', function (next) {

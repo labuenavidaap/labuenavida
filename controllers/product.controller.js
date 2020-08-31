@@ -59,10 +59,11 @@ module.exports.renderEditForm = (req, res, next) => {
 }
 
 module.exports.editProduct = (req, res, next) => {
-  const {name, description, price, categories, producer,stock} = req.body
+  const producer = req.currentUser
+  const {name, description, price, categories, stock} = req.body
   const image = req.file ? req.file.path : null
-  Product.findByIdAndUpdate(req.params.id, {name, description, image, price, categories, producer,stock}, { new: true })
-  .then(() => res.redirect(`/profile/${req.currentUser._id}`))
+  Product.findByIdAndUpdate(req.params.id, {name, description, image, price, categories, producer, stock}, { new: true })
+  .then(() => res.redirect(`/users/${req.currentUser.id}`))
   .catch(e => console.log(e))
 }
 
@@ -83,6 +84,6 @@ module.exports.createProduct = (req, res) => {
 
 module.exports.deleteProduct = (req, res, next) => {
   Product.findByIdAndRemove(req.params.id)
-  .then(() => res.redirect('/products'))
+  .then(() => res.redirect(`/users/${req.currentUser.id}`))
   .catch(e => console.log(e))
 }
