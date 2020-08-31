@@ -110,9 +110,9 @@
         <h2 class="my-4 text-center">Wishlist</h2>
 
         <div class="row">
-            {{#each user.wishList as |product|}}
+            {{#each wishList}}
             <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-                {{product.name }}
+                {{this.product.name }}
             </div>
             {{/each}}
         </div>

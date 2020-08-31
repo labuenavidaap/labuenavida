@@ -31,12 +31,17 @@
                 </a>
 
                 <div>
-                    <button class="btn btn-sm mb-2 btn-outline-danger" id="{{this.id}}" onclick="wishlist(event)">
-                        <i class="fa fa-heart">Wishlist</i>
-                    </button>
-                    <button class="btn btn-sm mb-2 btn-outline-danger" id="{{this.id}}" onclick="cart(event)">
-                        <i class="fa fa-heart">Carro</i>
-                    </button>
+                    <form action="/product/{{this.id}}/wishlist" method="POST">
+                        <button class="btn btn-sm mb-2 btn-outline-danger" id="{{this.id}}">
+                            <i class="fa fa-heart">Wishlist</i>
+                        </button>
+                    </form>
+
+                    <form action="/product/{{this.id}}/cart" method="POST">
+                        <button class="btn btn-sm mb-2 btn-outline-danger" id="{{this.id}}">
+                            <i class="fa fa-cart-arrow-down">Add to Cart</i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

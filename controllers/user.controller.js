@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('../models/user.model')
+const WishList = require('../models/wishlist.model')
 const mailer = require('../config/mailer.config')
 const passport = require('passport')
 
@@ -8,7 +9,6 @@ module.exports.renderLogin = (req, res, next) => {
 }
 
 // Controller to social login  Google (passport)
-
 module.exports.doSocialLoginGoogle = (req, res, next) => {
   const passportControllerGoogle = passport.authenticate('google', {
     scope: [
@@ -16,13 +16,10 @@ module.exports.doSocialLoginGoogle = (req, res, next) => {
       'https://www.googleapis.com/auth/userinfo.email'
     ]
   })
-
   passportControllerGoogle(req, res, next)
 }
 
-
 // Controller to callback login  Google (passport)
-
 module.exports.googleCallback = (req, res, next) => {
   const googleCallback = passport.authenticate('google', (error, user) => {
     if (error) {
@@ -36,22 +33,18 @@ module.exports.googleCallback = (req, res, next) => {
           } else {
             res.redirect('/home')
           }
-
         })
     }
   })
-
   googleCallback(req, res, next)
 }
 
 // Controller from user from google
-
 module.exports.userFromGoogle = (req, res, next) => {
   res.render('user/user-from-google', { currentUser: req.currentUser })
 }
 
 // Controller to post login
-
 module.exports.login = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then(user => {
@@ -95,27 +88,22 @@ module.exports.login = (req, res, next) => {
 }
 
 // Controller to logout user
-
 module.exports.logout = (req, res, next) => {
   req.session.destroy()
-
   res.redirect('/login')
 }
 
 // Controller to user/new view (signup)
-
 module.exports.renderSignup = (req, res, next) => {
   res.render('user/new')
 }
 
 // Controller to post new user
-
 module.exports.create = (req, res, next) => {
   const user = new User({
     ...req.body,
     avatar: req.file ? req.file.path : undefined
   })
-
   user.save()
     .then(user => {
       mailer.sendValidationEmail({
@@ -124,7 +112,6 @@ module.exports.create = (req, res, next) => {
         id: user._id.toString(),
         activationToken: user.activation.token
       })
-
       res.render('user/login', {
         message: 'Check your email for activation'
       })
@@ -149,7 +136,6 @@ module.exports.create = (req, res, next) => {
 }
 
 // Controller to activate user. Set user.activate to true
-
 module.exports.activateUser = (req, res, next) => {
   User.findOne({ _id: req.params.id, 'activation.token': req.params.token })
     .then(user => {
@@ -176,37 +162,35 @@ module.exports.activateUser = (req, res, next) => {
 }
 
 // Controller to show profile
-
 module.exports.showProfile = (req, res, next) => {
+  if (req.currentUser.producer) {
   User.findById(req.params.id)
   .populate( 'products' )
-    .then(user => {
-      
-      if (user.producer) {
-
-          res.render('user/show', { user })
-        
-      } else {
-        // user.populate({
-        //   path: 'projects',
-        //   populate: 'staff'
-        // })
-        // user.populate({
-        //   path: 'staffProjects',
-        //   populate: 'author'
-        // })
-       
+  .then(user => {
+    res.render('user/show', { user }) 
+  })
+  .catch(e => next(e))
+  } else {
+    User.findById(req.params.id)
+    .populate({
+      path: 'wishList',
+      populate: {
+        path: 'product'
       }
     })
-
-
-
-   
-    .catch(e => next(e))
+    .populate({
+      path: 'wishList',
+      populate: {
+        path: 'user'
+      }
+    })
+    .then(user => {
+      res.render('user/show', { user, wishList: user.wishList }) 
+    })
+  }
 }
 
 // Controller to edit user
-
 module.exports.editUser = (req, res, next) => {
   User.findById(req.params.id)
     .then(user => {
@@ -216,27 +200,20 @@ module.exports.editUser = (req, res, next) => {
 }
 
 // Controller to update user
-
 module.exports.updateProfile = (req, res, next) => {
   const body = req.body
-
   if ((req.files.logo && req.files.pictures) && req.currentUser.producer) {
-
     body.logo = req.files.logo[0].path
     body.pictures = req.files.pictures[0].path
-
-
   }
   User.findOneAndUpdate({ _id: req.params.id }, body, { runValidators: true, new: true })
     .then(user => {
-      console.log(user._id)
       res.redirect('/home')
     })
     .catch(next)
 }
 
 // Controller to delete user
-
 module.exports.delete = (req, res, next) => {
   if (req.params.id.toString() === req.currentUser.id.toString()) {
     req.currentUser.remove()
@@ -251,22 +228,30 @@ module.exports.delete = (req, res, next) => {
 }
 
 // Controller to become a producer
-
 module.exports.becomeProducer = (req, res, next) => {
-
-  console.log(req.params.id)
   User.findOneAndUpdate({ _id: req.params.id }, { runValidators: true, new: true })
     .then(user => {
-      console.log(user, 'user 1 ')
       if (user) {
         res.render('user/edit', { user })
       }
       return user
     })
     .then(user => {
-      console.log(user, 'user 2')
       user.producer = true
       user.save()
     })
     .catch(e => next(e))
 }
+
+module.exports.addToWishList = (req, res, next) => {
+  const wishListData = {}
+  wishListData.product = req.params.id
+  wishListData.user = req.currentUser.id
+
+  const wishList = new WishList(wishListData)
+
+  wishList.save()
+  .then(() => res.redirect(`/products`))
+  .catch(err => console.log(err))
+}
+

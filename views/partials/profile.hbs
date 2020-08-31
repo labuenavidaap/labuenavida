@@ -2,6 +2,8 @@
     <a href="/become-producer/{{currentUser.id}}" class="btn btn-outline-dark">Sell your products</a>
 {{/unless}}
 
+<a href="/users/{{currentUser.id}}/cart" class="btn btn-outline-primary"><i class="fa fa-cart-arrow-down"> Cart</i></a>
+
 <a href="/users/{{currentUser.id}}" class="btn btn-outline-primary">View profile</a>
 
 <form action="/logout" method="post" class="btn btn-outline-danger btn-sm">

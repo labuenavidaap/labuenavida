@@ -30,15 +30,14 @@ router.post('/delete/:id', sessionMiddleware.authenticated, productMiddleware.pr
 
 // CART & WISHLIST ROUTES
 
-// router.get('/profile/:id/cart', sessionMiddleware.authenticated, cartController.renderCart)
-// router.post('/product/:id/cart', sessionMiddleware.authenticated, cartController.addToCart)
+router.get('/users/:id/cart', sessionMiddleware.authenticated, cartController.renderCart)
+router.post('/product/:id/cart', sessionMiddleware.authenticated, cartController.addToCart)
 // router.post('/product/:id/cart/delete', sessionMiddleware.authenticated, cartController.removeFromCart)
 // router.get('/confirm-order/:id', sessionMiddleware.authenticated,cartController.renderConfirmOrder)
 // Payment With Stripe
 // router.get('/thank-you', sessionMiddleware.authenticated,)
 
-// router.get('/profile/:id/wishlist', sessionMiddleware.authenticated, userController.renderWishList)
-// router.post('/product/:id/wishlist', sessionMiddleware.authenticated, productController.addToWishList)
+router.post('/product/:id/wishlist', sessionMiddleware.authenticated, userController.addToWishList)
 // router.post('/product/:id/wishlist/delete', sessionMiddleware.authenticated, productController.removeFromWishList)
 
 

@@ -9,9 +9,9 @@ const cartSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
         },
-        products: {
-            type: [mongoose.Schema.Types.ObjectId],
-            ref: 'Products'
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
         },
         total: {
             type: Number

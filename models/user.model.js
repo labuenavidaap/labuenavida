@@ -2,6 +2,7 @@ const Product = require('./product.model')
 const Comment = require('./comment.model')
 const Rate = require('./rate.model')
 const Cart = require('./cart.model')
+const WishList = require('./wishlist.model')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
@@ -61,10 +62,6 @@ const userSchema = new mongoose.Schema(
             type: [mongoose.Schema.Types.ObjectId],
             ref: 'Cart'
         },
-        wishList: {
-            type: [mongoose.Schema.Types.ObjectId],
-            ref: 'Product'
-        },
         producer: {
             type: Boolean,
             default: false
@@ -114,6 +111,21 @@ userSchema.virtual('products', {
     foreignField: 'producer',
     justOne: false
 })
+
+userSchema.virtual('wishList', {
+    ref: 'WishList',
+    localField: '_id',
+    foreignField: 'user',
+    justOne: false
+})
+
+userSchema.virtual('cart', {
+    ref: 'Cart',
+    localField: '_id',
+    foreignField: 'user',
+    justOne: false
+})
+
 // here virtual
 
 userSchema.pre('save', function (next) {

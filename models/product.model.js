@@ -49,8 +49,8 @@ productSchema.virtual('comments', {
     justOne: false,
 })
   
-productSchema.virtual('likes', {
-    ref: 'rate',
+productSchema.virtual('rates', {
+    ref: 'Rate',
     localField: '_id',
     foreignField: 'product',
     justOne: false
