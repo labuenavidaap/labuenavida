@@ -4,95 +4,95 @@ const mailer = require('../config/mailer.config')
 const passport = require('passport')
 
 module.exports.renderLogin = (req, res, next) => {
-    res.render('user/login')
-  }
+  res.render('user/login')
+}
 
 // Controller to social login  Google (passport)
 
 module.exports.doSocialLoginGoogle = (req, res, next) => {
-    const passportControllerGoogle = passport.authenticate('google', {
-      scope: [
-        'https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'
-      ]
-    })
-  
-    passportControllerGoogle(req, res, next)
-  }
-  
-  
-  // Controller to callback login  Google (passport)
-  
-  module.exports.googleCallback = (req, res, next) => {
-    const googleCallback = passport.authenticate('google',  (error, user) => {
-      if (error) {
-        next(error)
-      } else {
-        req.session.userId = user.id
-        User.findById(req.session.userId)
+  const passportControllerGoogle = passport.authenticate('google', {
+    scope: [
+      'https://www.googleapis.com/auth/userinfo.profile',
+      'https://www.googleapis.com/auth/userinfo.email'
+    ]
+  })
+
+  passportControllerGoogle(req, res, next)
+}
+
+
+// Controller to callback login  Google (passport)
+
+module.exports.googleCallback = (req, res, next) => {
+  const googleCallback = passport.authenticate('google', (error, user) => {
+    if (error) {
+      next(error)
+    } else {
+      req.session.userId = user.id
+      User.findById(req.session.userId)
         .then(user => {
-          if(!user.address) {
+          if (!user.address) {
             res.redirect('/user-from-google')
           } else {
             res.redirect('/home')
           }
-          
+
         })
-      }
-    })
+    }
+  })
 
-    googleCallback(req, res, next)
-  }
+  googleCallback(req, res, next)
+}
 
-  // Controller from user from google
+// Controller from user from google
 
-  module.exports.userFromGoogle = (req, res, next) => {
-    res.render('user/user-from-google', { currentUser: req.currentUser })
-  }
+module.exports.userFromGoogle = (req, res, next) => {
+  res.render('user/user-from-google', { currentUser: req.currentUser })
+}
 
-  // Controller to post login
+// Controller to post login
 
-  module.exports.login = (req, res, next) => {
-    User.findOne({ email: req.body.email })
-      .then(user => {
-        if (user) {
-          user.checkPassword(req.body.password)
-            .then(match => {
-              if (match) {
-                if (user.activation.active) {
-                  req.session.userId = user._id
-                  res.redirect('/home')
-                } else {
-                  res.render('user/login', {
-                    error: {
-                      validation: {
-                        message: 'Your account is not active, check your email!'
-                      }
-                    }
-                  })
-                }
+module.exports.login = (req, res, next) => {
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (user) {
+        user.checkPassword(req.body.password)
+          .then(match => {
+            if (match) {
+              if (user.activation.active) {
+                req.session.userId = user._id
+                res.redirect('/home')
               } else {
                 res.render('user/login', {
                   error: {
-                    email: {
-                      message: 'Sorry, User not found'
+                    validation: {
+                      message: 'Your account is not active, check your email!'
                     }
                   }
                 })
               }
-            })
-        } else {
-          res.render('user/login', {
-            error: {
-              email: {
-                message: 'Sorry, User not found'
-              }
+            } else {
+              res.render('user/login', {
+                error: {
+                  email: {
+                    message: 'Sorry, User not found'
+                  }
+                }
+              })
             }
           })
-        }
-      })
-      .catch(e => next(e))
-  }
+      } else {
+        res.render('user/login', {
+          error: {
+            email: {
+              message: 'Sorry, User not found'
+            }
+          }
+        })
+      }
+    })
+    .catch(e => next(e))
+}
 
 // Controller to logout user
 
@@ -102,15 +102,15 @@ module.exports.logout = (req, res, next) => {
   res.redirect('/login')
 }
 
-  // Controller to user/new view (signup)
+// Controller to user/new view (signup)
 
 module.exports.renderSignup = (req, res, next) => {
   res.render('user/new')
 }
 
- // Controller to post new user
+// Controller to post new user
 
- module.exports.create = (req, res, next) => {
+module.exports.create = (req, res, next) => {
   const user = new User({
     ...req.body,
     avatar: req.file ? req.file.path : undefined
@@ -124,7 +124,7 @@ module.exports.renderSignup = (req, res, next) => {
         id: user._id.toString(),
         activationToken: user.activation.token
       })
-      
+
       res.render('user/login', {
         message: 'Check your email for activation'
       })
@@ -208,12 +208,14 @@ module.exports.editUser = (req, res, next) => {
 module.exports.updateProfile = (req, res, next) => {
   const body = req.body
 
-  if (req.file) {
-    body.logo = req.file.path
-    
-    
+  if (req.files && req.currentUser.producer) {
+
+    body.logo = req.files.logo[0].path
+    body.pictures = req.files.pictures[0].path
+
+
   }
-  User.findOneAndUpdate( { _id: req.params.id }, body, { runValidators: true, new: true })
+  User.findOneAndUpdate({ _id: req.params.id }, body, { runValidators: true, new: true })
     .then(user => {
       console.log(user._id)
       res.redirect('/home')
@@ -239,20 +241,20 @@ module.exports.delete = (req, res, next) => {
 // Controller to become a producer
 
 module.exports.becomeProducer = (req, res, next) => {
-  
+
   console.log(req.params.id)
-  User.findOneAndUpdate( { _id: req.params.id }, { runValidators: true, new: true })
+  User.findOneAndUpdate({ _id: req.params.id }, { runValidators: true, new: true })
     .then(user => {
-      console.log(user)
+      console.log(user, 'user 1 ')
       if (user) {
-        user.producer = true
-        user.save()
-          .then(user => {
-            res.render('user/edit', { user })
-          })
-          .catch(e => next(e))
+        res.render('user/edit', { user })
       }
-      res.redirect('/home')
+      return user
+    })
+    .then(user => {
+      console.log(user, 'user 2')
+      user.producer = true
+      user.save()
     })
     .catch(e => next(e))
 }

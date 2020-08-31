@@ -8,7 +8,7 @@ const commentController = require('../controllers/comment.controller')
 const cartController = require('../controllers/cart.controller')
 const rateController = require('../controllers/rate.controller')
 const upload = require('../config/multer.config.js')
-
+const cpUpload = upload.fields([{ name: 'logo', maxCount: 1 }, { name: 'pictures', maxCount: 1 }])
 
 
 // routes
@@ -56,7 +56,7 @@ router.post('/signup', sessionMiddleware.noAuthenticated /*fileUploader.single('
 router.get('/users/:id/activate/:token',sessionMiddleware.noAuthenticated, userController.activateUser)
 router.get('/users/:id', sessionMiddleware.authenticated, userController.showProfile)
 router.get('/users/:id/edit', sessionMiddleware.authenticated, userController.editUser)
-router.post('/users/:id/edit', sessionMiddleware.authenticated, upload.single('logo'), userController.updateProfile)
+router.post('/users/:id/edit', sessionMiddleware.authenticated, cpUpload, userController.updateProfile)
 router.get('/become-producer/:id', sessionMiddleware.authenticated, userController.becomeProducer)
 router.post('/users/:id/delete', sessionMiddleware.authenticated, userController.delete)
 
