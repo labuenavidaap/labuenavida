@@ -208,7 +208,7 @@ module.exports.editUser = (req, res, next) => {
 module.exports.updateProfile = (req, res, next) => {
   const body = req.body
 
-  if (req.files && req.currentUser.producer) {
+  if ((req.files.logo ||  req.files.pictures) && req.currentUser.producer) {
 
     body.logo = req.files.logo[0].path
     body.pictures = req.files.pictures[0].path

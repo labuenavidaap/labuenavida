@@ -72,9 +72,9 @@ module.exports.renderCreateForm = (req, res, next) => {
 
 module.exports.createProduct = (req, res) => {
   const productData = req.body
-  productData.user = req.currentUser._id
+  productData.producer = req.currentUser._id
   productData.image = req.file ? req.file.path : null
-  const project = new Product (productData)
+  const product = new Product (productData)
 
   product.save()
   .then(() => res.redirect(`/products`))
