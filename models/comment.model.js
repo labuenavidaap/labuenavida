@@ -19,6 +19,10 @@ const commentSchema = new mongoose.Schema(
             ref: 'Product',
             required: true
         },
+        rate: {
+            type: Number,
+            required: true
+        },
     },
     { timestamps: true }
 )

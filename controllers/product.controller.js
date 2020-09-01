@@ -1,7 +1,6 @@
 const Product = require('../models/product.model')
 const User = require('../models/user.model')
 const Comment = require('../models/comment.model')
-const Rate = require('../models/rate.model')
 
 module.exports.renderHome = (req, res, next) => {
   res.render('products/home', {currentUser: req.currentUser})    
@@ -22,7 +21,6 @@ module.exports.renderAll = (req, res, next) => {
     .sort({createdAt: -1})
     .populate('producer')
     .populate('comments')
-    .populate('rates')
     .then(products => {
       res.render('products/all-products', { products, currentUser: req.currentUser })
     })
@@ -43,9 +41,14 @@ module.exports.renderProduct= (req, res, next) => {
     populate: 'user'
   })
   .then(product => {
+    const averageRate = (product.comments.reduce((accum, current)=>{
+      return current.rate + accum
+    }, 0) / product.comments.length).toFixed(1)
+
     res.render('products/product', {
       product,
-      currentUser: req.currentUser
+      currentUser: req.currentUser,
+      averageRate,
     })
   })
   .catch(next)
@@ -74,6 +77,8 @@ module.exports.renderCreateForm = (req, res, next) => {
 module.exports.createProduct = (req, res) => {
   const productData = req.body
   productData.producer = req.currentUser._id
+  productData.price =  Number(req.body.price).toFixed(2).toString()
+  console.log(productData);
   productData.image = req.file ? req.file.path : null
   const product = new Product (productData)
 

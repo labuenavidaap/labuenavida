@@ -1,6 +1,5 @@
 const Product = require('./product.model')
 const Comment = require('./comment.model')
-const Rate = require('./rate.model')
 const Cart = require('./cart.model')
 const WishList = require('./wishlist.model')
 const bcrypt = require('bcrypt')

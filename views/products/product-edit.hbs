@@ -31,12 +31,12 @@
 
         <div class="form-group">
             <label for="price">Price</label>
-            <input type="price" id="input-content" name="price" placeholder="Price in Euros" class="w-100" value="{{product.price}}">
+            <input type="number" id="input-content" name="price" placeholder="Price in Euros" class="w-100" value="{{product.price}}" min="0">
         </div>
 
         <div class="form-group">
             <label for="stock">Stock</label>
-            <input type="stock" id="input-content" name="stock" placeholder="Stock" class="w-100" value="{{product.stock}}">
+            <input type="stock" id="input-content" name="stock" placeholder="Stock" class="w-100" value="{{product.stock}}" min="0">
         </div>
 
         <div class="form-group">
