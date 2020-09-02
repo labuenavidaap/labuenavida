@@ -41,10 +41,13 @@ module.exports.renderProduct= (req, res, next) => {
     populate: 'user'
   })
   .then(product => {
-    const averageRate = (product.comments.reduce((accum, current)=>{
-      return current.rate + accum
-    }, 0) / product.comments.length).toFixed(1)
-
+    let averageRate = 0
+    if (product.comments.length != 0) {
+      averageRate = (product.comments.reduce((accum, current)=>{
+        return current.rate + accum
+      }, 0) / product.comments.length).toFixed(1)
+    } 
+    
     res.render('products/product', {
       product,
       currentUser: req.currentUser,
@@ -78,7 +81,6 @@ module.exports.createProduct = (req, res) => {
   const productData = req.body
   productData.producer = req.currentUser._id
   productData.price =  Number(req.body.price).toFixed(2).toString()
-  console.log(productData);
   productData.image = req.file ? req.file.path : null
   const product = new Product (productData)
 
