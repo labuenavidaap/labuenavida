@@ -56,7 +56,7 @@ router.get('/users/:id/edit', sessionMiddleware.authenticated, userController.ed
 router.post('/users/:id/edit', sessionMiddleware.authenticated, cpUpload, userController.updateProfile)
 router.get('/become-producer/:id', sessionMiddleware.authenticated, userController.becomeProducer)
 router.post('/users/:id/delete', sessionMiddleware.authenticated, userController.delete)
-router.get('/producer-prodile/:id', sessionMiddleware.authenticated, userController.renderPublicProfile)
+router.get('/producer-profile/:id', sessionMiddleware.authenticated, userController.renderPublicProfile)
 
 
 module.exports = router

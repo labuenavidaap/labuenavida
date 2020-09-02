@@ -1,0 +1,36 @@
+<div class="row">
+    <p><strong>Company Name:</strong> {{user.companyName}}</p>
+    <p><strong>Comapny Bio:</strong> {{user.bio}}</p>
+
+    <p><strong>Company Address:</strong> {{user.compAddress}}</p>
+    <p><strong>Company email:</strong> {{user.compMail}}</p>
+    <p><strong>Company phone:</strong> {{user.compPhone}}</p>
+    <p><strong>Company url:</strong> {{user.compLink}}</p>
+    <p><strong>Company Politics:</strong> {{user.politic}}</p>
+    <p><strong>Company Certificates:</strong>{{user.certificates}}
+    <p>
+    <p>Pictures of the Company:</p>
+
+    <img src="{{user.pictures}}" alt="user picture" width="300px">
+    </section>
+    <div class="row">
+        {{#each user.products as |product|}}
+        <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
+            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{product.image}}" alt="{{product.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{product.name}}</h5>
+                        <p class="card-text">{{product.bio}}</p>
+                        <a href="/products/{{product.id}}">Go to product</a>
+                        <form action="/products/{{product.id}}/cart" method="POST">
+                            <button class="btn btn-sm m-2 btn-outline-success " id="{{product.id}}">
+                                <i class="fa fa-cart-arrow-down">Add to Cart</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+</div>
