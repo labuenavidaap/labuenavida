@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const User = require('../models/user.model')
 const Cart = require('../models/cart.model')
+const Product = require('../models/product.model')
 const mailer = require('../config/mailer.config')
 const passport = require('passport')
 
@@ -19,13 +20,18 @@ module.exports.renderCart = (req, res, next) => {
       }
     })
     .then(user => {
-      res.render('cart/cart', { user, cart: user.cart }) 
-    })  
+      let finalCartPrice = user.cart.reduce((accum, current) => {
+        return accum + Number(current.product.price) * current.quantity 
+      }, 0).toFixed(2)
+      
+      res.render('cart/cart', { user, cart: user.cart, finalCartPrice}) 
+    })
+    
 }
 
 module.exports.addToCart = (req, res, next) => {
     const cartData = {}
-    console.log(req.params.id);
+    cartData.quantity = req.body.quantity
     cartData.product = req.params.id
     cartData.user = req.currentUser.id
 

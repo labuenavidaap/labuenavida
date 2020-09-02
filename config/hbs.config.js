@@ -9,6 +9,10 @@ hbs.registerHelper('date', (date) => {
   return [format(d.getDate()), format(d.getMonth() + 1), d.getFullYear()].join('/')
 })
 
+hbs.registerHelper('cartPrice', (cart) => {
+  return Number(cart.product.price) * cart.quantity
+})
+
 // hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
 //   return arg1 === arg2 ? options.fn(this) : options.inverse(this)
 // })
