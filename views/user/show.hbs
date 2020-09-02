@@ -122,11 +122,18 @@
                     <div class="card-body">
                         <h5 class="card-title">{{this.product.name}}</h5>
                         <p class="card-text">Price: {{this.product.price}}€</p>
-                        <form action="/product/{{this.id}}/cart" method="POST">
+                        <div>
+                            <form action="/product/{{this.id}}/cart" method="POST">
                             <button class="btn btn-sm m-2 btn-outline-success " id="{{this.id}}">
                                 <i class="fa fa-cart-arrow-down mx-2">Add to Cart</i>
                             </button>
                         </form>
+                        <form action="/product/{{this.id}}/wishlist/delete" method="POST">
+                            <button class="btn btn-sm m-2 btn-outline-danger " id="{{this.id}}">
+                                Delete
+                            </button>
+                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

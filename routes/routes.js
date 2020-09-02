@@ -30,13 +30,13 @@ router.post('/delete/:id', sessionMiddleware.authenticated, productMiddleware.pr
 
 router.get('/users/:id/cart', sessionMiddleware.authenticated, cartController.renderCart)
 router.post('/product/:id/cart', sessionMiddleware.authenticated, cartController.addToCart)
-// router.post('/product/:id/cart/delete', sessionMiddleware.authenticated, cartController.removeFromCart)
+router.post('/product/:id/cart/delete', sessionMiddleware.authenticated, cartController.removeFromCart)
 // router.get('/confirm-order/:id', sessionMiddleware.authenticated,cartController.renderConfirmOrder)
 // Payment With Stripe
 // router.get('/thank-you', sessionMiddleware.authenticated,)
 
 router.post('/product/:id/wishlist', sessionMiddleware.authenticated, userController.addToWishList)
-// router.post('/product/:id/wishlist/delete', sessionMiddleware.authenticated, productController.removeFromWishList)
+router.post('/product/:id/wishlist/delete', sessionMiddleware.authenticated, userController.removeFromWishList)
 
 
 
@@ -56,6 +56,7 @@ router.get('/users/:id/edit', sessionMiddleware.authenticated, userController.ed
 router.post('/users/:id/edit', sessionMiddleware.authenticated, cpUpload, userController.updateProfile)
 router.get('/become-producer/:id', sessionMiddleware.authenticated, userController.becomeProducer)
 router.post('/users/:id/delete', sessionMiddleware.authenticated, userController.delete)
+router.get('/producer-prodile/:id', sessionMiddleware.authenticated, userController.renderPublicProfile)
 
 
 module.exports = router

@@ -255,3 +255,23 @@ module.exports.addToWishList = (req, res, next) => {
   .catch(err => console.log(err))
 }
 
+module.exports.removeFromWishList = (req, res, next) => {
+  WishList.findByIdAndDelete(req.params.id)
+  .then(p => res.redirect(`/users/${req.currentUser.id}`))
+  .catch(err => console.log(err))
+}
+
+module.exports.removeFromWishList = (req, res, next) => {
+  WishList.findByIdAndDelete(req.params.id)
+  .then(p => res.redirect(`/users/${req.currentUser.id}`))
+  .catch(err => console.log(err))
+}
+
+module.exports.renderPublicProfile= (req, res, next) => {
+  User.findById(req.params.id)
+  .populate( 'products' )
+  .then(user => {
+    res.render('user/public-profile', { user }) 
+  })
+  .catch(e => next(e))
+}

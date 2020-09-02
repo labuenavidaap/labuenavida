@@ -35,3 +35,9 @@ module.exports.addToCart = (req, res, next) => {
     .then(() => res.redirect('/products'))
     .catch(err => console.log(err))
 }
+
+module.exports.removeFromCart = (req, res, next) => {
+  Cart.findByIdAndDelete(req.params.id)
+  .then(p => res.redirect(`/users/${req.currentUser.id}/cart`))
+  .catch(err => console.log(err))
+}
