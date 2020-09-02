@@ -36,7 +36,7 @@
             <p>
             <p>Pictures of the Company:</p>
 
-            <img src="{{user.pictures}}" alt="user picture">
+            <img src="{{user.pictures}}" alt="user picture" width="300px">
 
 
 
@@ -76,6 +76,11 @@
                         <form action="/delete/{{product.id}}" method="POST">
                             <button class="btn btn-warning my-3"> Remove Product</button>
                         </form>
+                        <form action="/product/{{this.id}}/cart" method="POST">
+                            <button class="btn btn-sm m-2 btn-outline-success " id="{{this.id}}">
+                                <i class="fa fa-cart-arrow-down">Add to Cart</i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -112,7 +117,18 @@
         <div class="row">
             {{#each wishList}}
             <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-                {{this.product.name }}
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="{{this.product.image}}" alt="{{this.product.name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.product.name}}</h5>
+                        <p class="card-text">Price: {{this.product.price}}€</p>
+                        <form action="/product/{{this.id}}/cart" method="POST">
+                            <button class="btn btn-sm m-2 btn-outline-success " id="{{this.id}}">
+                                <i class="fa fa-cart-arrow-down mx-2">Add to Cart</i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
             {{/each}}
         </div>
