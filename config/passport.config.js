@@ -15,13 +15,10 @@ const google =  new GoogleStrategy(
       callbackURL: '/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
-      // to see the structure of the data in received response:
-      console.log('Google account details:', profile)
       
       User.findOne({ 'social.googleId': profile.id })
         .then(user => {
           if (user) {
-            console.log(user, 'inside googleStrategy')
             done(null, user)
             return
           } else {

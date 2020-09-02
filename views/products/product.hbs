@@ -25,6 +25,10 @@
                 {{/each}}
             </div>
 
+            <div>
+                Rate: {{averageRate}} / 5<i class="fa fa-star" aria-hidden="true"></i>
+            </div>
+
             <img class="rounded-sm w-20 mb-1" src="{{product.image}}" style="width: 450px!important;" />
 
             <div>
@@ -47,6 +51,8 @@
             <form action="/new-comment/{{product.id}}" method="POST">
                 <input type="text" id="input-content" name="text" placeholder="Your text" class="w-100">
 
+                <input type="number" name="rate" min="1" max="5" placeholder="Rate">
+
                 <button type="submit" class="btn btn-primary mt-3 mb-4">Add comment</button>
 
                 {{#if errorMessage}}
@@ -62,6 +68,9 @@
                 </div>
                 <div>
                     {{com.text}}
+                </div>
+                <div>
+                    {{com.rate}}
                 </div>
             </div>
             {{/each}}

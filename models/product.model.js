@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Comment = require('../models/comment.model')
-const Rate = require('../models/rate.model')
 
 
 const productSchema = new mongoose.Schema(
@@ -19,8 +18,7 @@ const productSchema = new mongoose.Schema(
             default: 'https://res.cloudinary.com/difhe4gl3/image/upload/v1598377563/laBuenaVida/web-img/Anagrama_tgfgfa.png'
         },
         price: {
-            type: Number,
-            min: 0,
+            type: String,
         },
         categories: {
             type: [String],
@@ -47,13 +45,6 @@ productSchema.virtual('comments', {
     localField: '_id',
     foreignField: 'product',
     justOne: false,
-})
-  
-productSchema.virtual('rates', {
-    ref: 'Rate',
-    localField: '_id',
-    foreignField: 'product',
-    justOne: false
 })
 
 const Product = mongoose.model('Product', productSchema)
