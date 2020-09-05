@@ -32,7 +32,7 @@ router.post('/delete/:id', sessionMiddleware.authenticated, productMiddleware.pr
 router.get('/users/:id/cart', sessionMiddleware.authenticated, cartMiddleware.itemsInCart, cartController.renderCart)
 router.post('/product/:id/cart', sessionMiddleware.authenticated,cartController.addToCart)
 router.post('/product/:id/cart/delete', sessionMiddleware.authenticated, cartController.removeFromCart)
-// router.get('/confirm-order/:id', sessionMiddleware.authenticated,artController.renderConfirmOrder)
+//router.get('/confirm-order/:id', sessionMiddleware.authenticated,artController.renderConfirmOrder)
 // Payment With Stripe
 // router.get('/thank-you', sessionMiddleware.authenticated,
 
