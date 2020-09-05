@@ -15,6 +15,7 @@ const orderSchema = new mongoose.Schema(
         },
         total: {
             type: String,
+            default: 0
         }
     },
     { timestamps: true }

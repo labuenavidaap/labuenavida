@@ -1,0 +1,42 @@
+<h1 class="text-center py-5">CHECK YOUR DATA AND ORDER:</h1>
+<div>
+    <h5>Check your Data:</h5>
+    <p>Name: {{user.name}}</p>
+    <p>Address: {{user.address}}</p>
+    <p>Phone: {{user.phone}}</p>
+    <a href="/users/{{user.id}}/edit" class="btn btn-primary m-5">Change your Data</a>
+</div>
+            
+<div>
+    <h5>Check your Order:</h5>
+    <ul class="list-group">
+        {{#each cart}}
+        <li class="list-group-item cart-container">
+            <span class="px-2"><img src="{{this.product.image }}" alt="{{this.product.name }}"
+                    style="width: 50px;" /></span>
+            <span class="pl-5"> Product: {{this.product.name }}</span>
+            <span class="pl-5">Quantity: {{this.quantity}}</span>
+            <span class="pl-5">Price: {{this.product.price}}</span>
+            <span class="float-right">Total: {{cartPrice this}}</span>
+            <span class="float-right">
+                <div>
+                    <button class="btn btn-sm m-2 btn-outline-danger " id="{{this.id}}"
+                        onclick="deleteFromCart(event)">
+                        Delete from Cart
+                    </button>
+                </div>
+            </span>
+        </li>
+
+        {{/each}}
+        <li class="text-center">
+            <span class="p-5 bg-danger text-white">Final Price: <b>{{finalCartPrice}}</b></span>
+        </li>
+        <li>
+            <form action="/confirm-order/{{user.id}}/pay" method="POST">
+                <button class="btn btn-success mx-5">Confirm Payment</button>
+            </form>   
+        </li>
+    </ul>
+
+</div>
