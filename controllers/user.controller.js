@@ -184,6 +184,12 @@ module.exports.showProfile = (req, res, next) => {
         path: 'user'
       }
     })
+    .populate({
+      path: 'order',
+      populate: {
+        path: 'product'
+      }
+    })
     .then(user => {
       res.render('user/show', { user, wishList: user.wishList }) 
     })

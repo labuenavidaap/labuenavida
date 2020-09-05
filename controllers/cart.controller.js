@@ -77,61 +77,38 @@ module.exports.payment = (req, res, next) => {
     })
     .then(user => {
 
-      let finalCartPrice = user.cart.reduce((accum, current) => {
-        return accum + Number(current.product.price) * current.quantity
-      }, 0).toFixed(2)
+      if (user) {
+        let finalCartPrice = user.cart.reduce((accum, current) => {
+          return accum + Number(current.product.price) * current.quantity
+        }, 0).toFixed(2)
 
-      const orderData = {
-        user: req.params.id,
-        product: user.cart,
-        total: finalCartPrice,
-      }
-      const order = new Order(orderData)
-      return order
-        .save()
-        .then(() => {
-          Cart.deleteMany({ user: user.id })
-            .then(res.redirect(`/thank-you/${user.id}`))
+        stripe.customers.create({
+          email: req.body.stripeEmail,
+          source: req.body.stripeToken
         })
-
-
-      // if (user) {
-      //   let finalCartPrice = user.cart.reduce((accum, current) => {
-      //     return accum + Number(current.product.price) * current.quantity
-      //   }, 0).toFixed(2)
-
-      //   stripe.customers.create({
-      //     email: req.body.stripeEmail,
-      //     source: req.body.stripeToken
-      //   })
-      //     .then(costumer => {
-      //       stripe.charges.create({
-      //         amount: finalCartPrice,
-      //         description: `Buy: ${user.name}`,
-      //         currency: "EUR",
-      //         customer: costumer.id
-      //       })
-      //     })
-      //     .then(charge => {
-      //       const orderData = {
-      //         user: req.params.id,
-      //         product: user.cart,
-      //         total: finalCartPrice,
-      //       }
-      //       const order = new Order(orderData)
-      //       return order
-      //         .save()
-      //         .then(() => {
-      //           return User.findByIdAndUpdate(req.user.id, {
-      //             $addToSet: {
-      //               purchased: user.id
-      //             }
-      //           })
-      //             .then(() =>
-      //               res.redirect(`/thank-you/${user.id}`))
-      //         })
-      //     })
-      // }
+          .then(costumer => {
+            stripe.charges.create({
+              amount: finalCartPrice,
+              description: `Buy: ${user.name}`,
+              currency: "EUR",
+              customer: costumer.id
+            })
+          })
+          .then(charge => {
+            const orderData = {
+              user: req.params.id,
+              product: user.cart,
+              total: finalCartPrice,
+            }
+            const order = new Order(orderData)
+            return order
+              .save()
+              .then(() => {
+                Cart.deleteMany({ user: user.id })
+                  .then(res.redirect(`/thank-you/${user.id}`))
+              })
+          })
+      }
     })
     .catch(error => next(error))
 }

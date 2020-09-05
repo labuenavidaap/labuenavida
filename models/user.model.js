@@ -2,6 +2,7 @@ const Product = require('./product.model')
 const Comment = require('./comment.model')
 const Cart = require('./cart.model')
 const WishList = require('./wishlist.model')
+const Order = require('./order.model')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
@@ -56,10 +57,6 @@ const userSchema = new mongoose.Schema(
                 type: String,
                 default: generateRandomToken
             }
-        },
-        bougthProducts: {
-            type: [mongoose.Schema.Types.ObjectId],
-            ref: 'Cart'
         },
         producer: {
             type: Boolean,
@@ -124,6 +121,14 @@ userSchema.virtual('cart', {
     foreignField: 'user',
     justOne: false
 })
+
+userSchema.virtual('order', {
+    ref: 'Order',
+    localField: '_id',
+    foreignField: 'user',
+    justOne: false
+})
+
 
 // here virtual
 

@@ -85,20 +85,16 @@
     {{else}}
     <div>
 
-        <h2 class="my-4 text-center">Bougth Products</h2>
+        <h2 class="my-4 text-center">Previous Orders</h2>
 
         <div class="row">
-            {{#each user.bougthProducts as |product|}}
+            {{#each user.order as |order|}}
             <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{{product.image}}" alt="{{product.name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">{{product.bio}}</p>
+                    <p>{{order.createdAt}}</p>
+                    <p>{{order.total}}€</p>
                         <a href="#" class="btn btn-primary">Corregir</a>
-                    </div>
                 </div>
-                {{product.name}}
             </div>
             {{/each}}
         </div>
