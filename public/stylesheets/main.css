@@ -1,3 +1,27 @@
-.checked {
-    color: orange;
+.filter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 15%;
+    box-sizing: border-box;
+    background-color: blue;
+    padding: 20px 10px 20px -10px;
+    margin: -20px 0 -20px;
+    text-align: left;
+    color: white;
+    font-size: 16px;
+    line-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.all-products {
+    padding-left: 5%;
+    display: flex;
+    flex-wrap: wrap
+} 
+.all-products>* {
+    flex: 1 1 300px;
 }
