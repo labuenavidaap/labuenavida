@@ -31,21 +31,21 @@
 
             <img class="rounded-sm w-20 mb-1" src="{{product.image}}" style="width: 450px!important;" />
 
-            <div>
-                <form action="/product/{{product.id}}/wishlist" method="POST">
-                    <button class="btn btn-sm mb-2 btn-outline-danger" id="{{product.id}}">
+            <div class="card-body d-flex justify-content-center">
+                <div>
+                    <button class="btn btn-sm m-2 btn-outline-info" id="{{product.id}}" onclick="addToWishlist(event)">
                         <i class="fa fa-heart">Wishlist</i>
                     </button>
-                </form>
-
-                <form action="/product/{{product.id}}/cart" method="POST">
-                    <label for="quantity">Units</label>
-                    <input type="number" min="1" max="{{product.stock}}" name="quantity" value="1">
-                    <button class="btn btn-sm mb-2 btn-outline-danger">
-                        <i class="fa fa-cart-arrow-down">Add to Cart</i>
-                    </button>
-
-                </form>
+                </div>
+                <div>
+                    <form action="/product/{{product.id}}/cart" method="POST">
+                        <label for="quantity">Units</label>
+                        <input type="number" min="1" max="{{product.stock}}" name="quantity" value="1">
+                        <button class="btn btn-sm mb-2 btn-outline-danger">
+                            <i class="fa fa-cart-arrow-down">Add to Cart</i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
 

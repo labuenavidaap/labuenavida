@@ -1,7 +1,6 @@
 const User = require('../models/user.model')
 
 module.exports.itemsInCart = (req, res, next) => {
-    console.log(req.session)
   User.findById(req.session.userId)
   .populate('cart')
     .then(user => {

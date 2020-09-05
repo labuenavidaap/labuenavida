@@ -1,38 +1,40 @@
-// document.querySelectorAll("[data-enable]").forEach(el => {
-//     el.addEventListener("click", function() {
-//       const target = document.getElementById(this.dataset.enable)
+function addToWishlist(event) {
+    const button = event.currentTarget
 
-// const { text } = require("express")
+    axios.post(`/product/${button.id}/wishlist`)
+        .then(res => {
+        })
+}
 
-  
-//       target.disabled = !target.disabled
-  
-//       if (target.type === "file") {
-//         target.closest("form").enctype = target.disabled ? "application/x-www-form-urlencoded" : "multipart/form-data"
-//       }
-  
-//       if (!target.disabled) {
-//         target.click()
-//       }
-//     })
-//   })
-  
-//   document.querySelectorAll("[data-like-project]").forEach(el => {
-//     el.addEventListener("click", function () {
-//       axios.post(`/projects/${this.dataset.likeProject}/like`)
-//         .then(response => {
-//           const likesContainer = this.querySelector(".likes-count")
-  
-//           likesContainer.innerText = Number(likesContainer.innerText) + response.data.like
-//         });
-//     });
-//   });
+function deleteFromWishlist(event) {
+    const button = event.currentTarget
 
+    axios.post(`/product/${button.id}/wishlist/delete`)
+        .then(res => {
+            button.closest('.product-container').remove()
+        })
+}
 
+function addToCart(event) {
+    const button = event.currentTarget
+    axios.post(`/product/${button.id}/cart`)
+        .then(res => {
+            let currentNumber = document.getElementById('cart-number')
+            currentNumber.innerHTML =  Number(currentNumber.innerHTML) + 1
+        })
+}
 
+function deleteFromCart(event) {
+    const button = event.currentTarget
 
-// Modal from login with google
+    axios.post(`/product/${button.id}/cart/delete`)
+        .then(res => {
+            button.closest('.cart-container').remove()
+            let currentNumber = document.getElementById('cart-number')
+            currentNumber.innerHTML =  Number(currentNumber.innerHTML) - 1
+        })
+}
 
-$(window).on('load',function(){
+$(window).on('load', function () {
     $('#myModal').modal('show');
 });

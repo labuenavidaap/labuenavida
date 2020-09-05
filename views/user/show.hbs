@@ -111,29 +111,32 @@
 
         <div class="row">
             {{#each wishList}}
-            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
+            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4 product-container">
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="{{this.product.image}}" alt="{{this.product.name}}">
                     <div class="card-body">
                         <h5 class="card-title">{{this.product.name}}</h5>
                         <p class="card-text">Price: {{this.product.price}}€</p>
-                        <div>
-                            <form action="/product/{{this.id}}/cart" method="POST">
-                            <button class="btn btn-sm m-2 btn-outline-success " id="{{this.id}}">
-                                <i class="fa fa-cart-arrow-down mx-2">Add to Cart</i>
-                            </button>
-                        </form>
-                        <form action="/product/{{this.id}}/wishlist/delete" method="POST">
-                            <button class="btn btn-sm m-2 btn-outline-danger " id="{{this.id}}">
-                                Delete
-                            </button>
-                        </form>
+                        <div class="card-body d-flex justify-content-center">
+                            <div>
+                                <button class="btn btn-sm m-2 btn-outline-success " id="{{this.product.id}}"
+                                    onclick="addToCart(event)">
+                                    <i class="fa fa-cart-arrow-down">Add to Cart</i>
+                                </button>
+                            </div>
+                            <div>
+                                <button class="btn btn-sm m-2 btn-outline-danger " id="{{this.id}}"
+                                    onclick="deleteFromWishlist(event)">
+                                    Delete from Wishlist
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{/each}}
         </div>
+        {{/each}}
+    </div>
     </div>
 
     {{/if}}

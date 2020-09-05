@@ -31,16 +31,16 @@
                             the company</a></li>
                 </ul>
                 <div class="card-body d-flex justify-content-center">
-                    <form action="/product/{{this.id}}/wishlist" method="POST">
-                        <button class="btn btn-sm m-2 btn-outline-info" id="{{this.id}}">
+                    <div>
+                        <button class="btn btn-sm m-2 btn-outline-info" id="{{this.id}}" onclick="addToWishlist(event)">
                             <i class="fa fa-heart">Wishlist</i>
                         </button>
-                    </form>
-                    <form action="/product/{{this.id}}/cart" method="POST">
-                        <button class="btn btn-sm m-2 btn-outline-success " id="{{this.id}}">
+                    </div>
+                    <div>
+                        <button class="btn btn-sm m-2 btn-outline-success " id="{{this.id}}" onclick="addToCart(event)">
                             <i class="fa fa-cart-arrow-down">Add to Cart</i>
                         </button>
-                    </form>
+                    </div>
                 </div>
             </div>
             {{/each}}
