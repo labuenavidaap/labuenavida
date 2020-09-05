@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const User = require('../models/user.model')
 const Cart = require('../models/cart.model')
+const Order = require('../models/order.model')
 const Product = require('../models/product.model')
 const mailer = require('../config/mailer.config')
 const passport = require('passport')
@@ -47,3 +48,11 @@ module.exports.removeFromCart = (req, res, next) => {
   .then(p => res.redirect(`/users/${req.currentUser.id}/cart`))
   .catch(err => console.log(err))
 }
+
+// module.exports.renderConfirmOrder = (req, res, next) => {
+
+// }
+
+// module.exports.payment = (req, res, next) => {
+  
+// }

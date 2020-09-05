@@ -9,7 +9,12 @@ module.exports.authenticated = (req, res, next) => {
 
         next()
       } else {
-        res.redirect('/login')
+        if (req.header('isAjax')) {
+          res.status(401).json({})
+        } else {
+          res.redirect('/login')
+        }
+        
       }
     })
     .catch(next)
