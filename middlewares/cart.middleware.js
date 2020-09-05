@@ -5,9 +5,12 @@ module.exports.itemsInCart = (req, res, next) => {
   User.findById(req.session.userId)
   .populate('cart')
     .then(user => {
+      if (user) {
         res.locals.numProducts = user.cart.length 
-        console.log(res.locals.numProducts)
-        next()
+      } else {
+        res.locals.numProducts = 0
+      }
+      next()  
     })
     .catch(e => next(e))
 }
