@@ -3,7 +3,16 @@ const User = require('../models/user.model')
 const Comment = require('../models/comment.model')
 
 module.exports.renderHome = (req, res, next) => {
-  res.render('products/home', {currentUser: req.currentUser})    
+
+  Product.find()
+    .populate('comments')
+    .sort({rate: -1})
+    .limit(3)
+    .then(products => {
+      console.log(products)
+      res.render('products/home', {currentUser: req.currentUser, products})  
+    })
+  // res.render('products/home', {currentUser: req.currentUser})    
 }
 
 module.exports.renderAll = (req, res, next) => {

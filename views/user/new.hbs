@@ -3,7 +3,7 @@
    <form action="/signup" method="POST"{{!-- enctype="multipart/form-data"--}}>  
     <div class="form-group">
       <label for="name">Name</label>
-      <input name="name" type="text" value="{{user.name}}" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name" required>
+      <input name="name" type="text" value="{{user.name}}" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name" >
 
       {{#if error.name}}
         <div class="invalid-feedback">
@@ -14,7 +14,7 @@
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" value="{{user.email}}" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email" name="email" placeholder="Enter name" required>
+      <input type="email" value="{{user.email}}" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email" name="email" placeholder="Enter name">
 
       {{#if error.email}}
         <div class="invalid-feedback">
@@ -47,7 +47,7 @@
 
     <div class="form-group">
       <label for="address">Address</label>
-      <input type="text" class="form-control-file {{#if error.address }}is-invalid{{/if}}" id="address" name="address">
+      <input type="text" class="form-control {{#if error.address }}is-invalid{{/if}}" id="address" name="address">
 
       {{#if error.address}}
         <div class="invalid-feedback">

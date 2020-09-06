@@ -41,7 +41,7 @@ module.exports.googleCallback = (req, res, next) => {
 
 // Controller from user from google
 module.exports.userFromGoogle = (req, res, next) => {
-  res.render('user/user-from-google', { currentUser: req.currentUser })
+  res.render('home', { currentUser: req.currentUser })
 }
 
 // Controller to post login
