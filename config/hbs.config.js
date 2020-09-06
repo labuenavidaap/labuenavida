@@ -12,14 +12,3 @@ hbs.registerHelper('date', (date) => {
 hbs.registerHelper('cartPrice', (cart) => {
   return (Number(cart.product.price) * cart.quantity).toFixed(2)
 })
-
-// hbs.registerHelper('itemsInCart', (items) => {
-//   if(items.data.root.user.cart) {
-//      return items.data.root.user.cart.length
-//   } else {
-//     return 0
-//   }
-// })
-// hbs.registerHelper('ifEquals', function(arg1, arg2, options) {
-//   return arg1 === arg2 ? options.fn(this) : options.inverse(this)
-// })

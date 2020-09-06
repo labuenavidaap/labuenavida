@@ -14,7 +14,7 @@ module.exports.authenticated = (req, res, next) => {
         } else {
           res.redirect('/login')
         }
-        
+
       }
     })
     .catch(next)

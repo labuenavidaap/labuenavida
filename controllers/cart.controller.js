@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
-const User = require('../models/user.model')
-const Cart = require('../models/cart.model')
-const Order = require('../models/order.model')
-const Product = require('../models/product.model')
 const mailer = require('../config/mailer.config')
 const passport = require('passport')
-const secretKey = process.env.STRIPE_SECRET_KEY;
-const stripe = require("stripe")(secretKey)
+const secretKey = process.env.STRIPE_SECRET_KEY
+const stripe = require('stripe')(secretKey)
+const Cart = require('../models/cart.model')
+const WishList = require('../models/wishlist.model')
+const User = require('../models/user.model')
+const Order = require('../models/order.model')
+const Product = require('../models/product.model')
 
 module.exports.renderCart = (req, res, next) => {
   User.findById(req.params.id)
@@ -38,7 +39,6 @@ module.exports.addToCart = (req, res, next) => {
   cartData.user = req.currentUser.id
 
   const cart = new Cart(cartData)
-
   cart.save()
     .then(() => res.redirect('/products'))
     .catch(err => console.log(err))
@@ -63,7 +63,7 @@ module.exports.renderConfirmOrder = (req, res, next) => {
         return accum + Number(current.product.price) * current.quantity
       }, 0).toFixed(2)
 
-      res.render('cart/confirm-order', { user, cart: user.cart, finalCartPrice })
+      res.render('cart/confirm', { user, cart: user.cart, finalCartPrice })
     })
 }
 
@@ -76,7 +76,6 @@ module.exports.payment = (req, res, next) => {
       }
     })
     .then(user => {
-
       if (user) {
         let finalCartPrice = user.cart.reduce((accum, current) => {
           return accum + Number(current.product.price) * current.quantity
@@ -90,7 +89,7 @@ module.exports.payment = (req, res, next) => {
             stripe.charges.create({
               amount: finalCartPrice,
               description: `Buy: ${user.name}`,
-              currency: "EUR",
+              currency: 'EUR',
               customer: costumer.id
             })
           })
@@ -115,4 +114,21 @@ module.exports.payment = (req, res, next) => {
 
 module.exports.renderThankYou = (req, res, next) => {
   res.render('cart/thankyou', { user: req.currentUser })
+}
+
+module.exports.addToWishList = (req, res, next) => {
+  const wishListData = {}
+  wishListData.product = req.params.id
+  wishListData.user = req.currentUser.id
+
+  const wishList = new WishList(wishListData)
+  wishList.save()
+    .then(() => res.redirect(`/products`))
+    .catch(err => console.log(err))
+}
+
+module.exports.removeFromWishList = (req, res, next) => {
+  WishList.findByIdAndDelete(req.params.id)
+    .then(p => res.redirect(`/users/${req.currentUser.id}`))
+    .catch(err => console.log(err))
 }

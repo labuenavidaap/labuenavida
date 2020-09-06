@@ -11,10 +11,11 @@
             <span class="float-right">Total: {{cartPrice this}}</span>
             <span class="float-right">
                 <div>
-                    <button class="btn btn-sm m-2 btn-outline-danger " id="{{this.id}}"
-                        onclick="deleteFromCart(event)">
-                        Delete from Cart
-                    </button>
+                    <form action="/product/{{this.id}}/cart/delete" method="POST">
+                        <button class="btn btn-sm m-2 btn-outline-danger " id="{{this.id}}">
+                            Delete from Cart
+                        </button>
+                    </form>
                 </div>
             </span>
         </li>

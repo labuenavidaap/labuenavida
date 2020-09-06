@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const Comment = require('../models/comment.model')
 
-
 const productSchema = new mongoose.Schema(
     {
         name: {
@@ -35,7 +34,7 @@ const productSchema = new mongoose.Schema(
             required: true,
             min: 0
         },
-    
+
     },
     { timestamps: true }
 )
