@@ -5,13 +5,19 @@ const Comment = require('../models/comment.model')
 
 module.exports.renderHome = (req, res, next) => {
   Product.find()
+    .populate('producer')
     .populate('comments')
-    .sort({rate: -1})
-    .limit(3)
     .then(products => {
-      console.log(products)
-      res.render('product/home', {currentUser: req.currentUser, products})  
-    })  
+      const productRate = products.map(product => {
+        if (product.comments.length != 0) {
+          product.averageRate = (product.comments.reduce((accum, current) => {
+            return current.rate + accum
+          }, 0) / product.comments.length).toFixed(1)
+        } else { product.averageRate = 0 }
+        return product
+      }).sort((a, b) => b.averageRate - a.averageRate).slice(0, 3)
+      res.render('product/home', { currentUser: req.currentUser, products: productRate })
+    })
 }
 
 module.exports.renderAllProducts = (req, res, next) => {
@@ -50,12 +56,12 @@ module.exports.renderOneProduct = (req, res, next) => {
     .then(product => {
       let averageRate = 0
       if (product.comments.length != 0) {
-        averageRate = (product.comments.reduce((accum, current) => {
+        product.averageRate = (product.comments.reduce((accum, current) => {
           return current.rate + accum
         }, 0) / product.comments.length).toFixed(1)
       }
 
-      res.render('product/show', { product, currentUser: req.currentUser, averageRate })
+      res.render('product/show', { product, currentUser: req.currentUser })
     })
     .catch(next)
 }
