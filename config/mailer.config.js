@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer')
-
 const host = process.env.PORT || 'https://localhost:3000/'
 const user = process.env.NM_USER
 

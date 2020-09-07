@@ -4,7 +4,7 @@ const commentSchema = new mongoose.Schema(
     {
         text: {
             type: String,
-            required:[true, 'Comment is required'],
+            required: [true, 'Comment is required'],
         },
         photo: {
             type: String

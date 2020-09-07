@@ -1,20 +1,20 @@
+const bcrypt = require('bcrypt')
+const mongoose = require('mongoose')
 const Product = require('./product.model')
 const Comment = require('./comment.model')
 const Cart = require('./cart.model')
 const WishList = require('./wishlist.model')
 const Order = require('./order.model')
-const bcrypt = require('bcrypt')
-const mongoose = require('mongoose')
 
 const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const generateRandomToken = () => {
-  const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  let token = ''
-  for (let i = 0; i < 25; i++) {
-    token += characters[Math.floor(Math.random() * characters.length)]
-  }
-  return token
+    const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    let token = ''
+    for (let i = 0; i < 25; i++) {
+        token += characters[Math.floor(Math.random() * characters.length)]
+    }
+    return token
 }
 
 const userSchema = new mongoose.Schema(
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema(
         },
         password: {
             type: String,
-            minlength: [5, 'minlength five characters'],
+            minlength: [5, 'The min length is five characters'],
         },
         social: {
             googleId: String,
@@ -58,13 +58,11 @@ const userSchema = new mongoose.Schema(
                 default: generateRandomToken
             }
         },
+        // Producer:
         producer: {
             type: Boolean,
             default: false
         },
-
-        // here starts producer properties:
-        
         companyName: {
             type: String
         },
@@ -85,7 +83,7 @@ const userSchema = new mongoose.Schema(
         },
         certificates: {
             type: String
-        }, 
+        },
         logo: {
             type: String
         },
@@ -100,7 +98,6 @@ const userSchema = new mongoose.Schema(
     { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 )
 
-// here virtual
 userSchema.virtual('products', {
     ref: 'Product',
     localField: '_id',
@@ -129,22 +126,19 @@ userSchema.virtual('order', {
     justOne: false
 })
 
-
-// here virtual
-
 userSchema.pre('save', function (next) {
     if (this.isModified('password')) {
-      bcrypt.hash(this.password, 10).then((hash) => {
-        this.password = hash;
-        next();
-      });
+        bcrypt.hash(this.password, 10).then((hash) => {
+            this.password = hash
+            next()
+        })
     } else {
-      next();
+        next()
     }
-  })
+})
 
 userSchema.methods.checkPassword = function (password) {
-return bcrypt.compare(password, this.password);
+    return bcrypt.compare(password, this.password)
 }
 
 const User = mongoose.model('User', userSchema)

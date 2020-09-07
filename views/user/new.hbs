@@ -47,7 +47,11 @@
 
     <div class="form-group">
       <label for="address">Address</label>
+<<<<<<< HEAD
       <input type="text" class="form-control {{#if error.address }}is-invalid{{/if}}" id="address" name="address">
+=======
+      <input type="text" value="{{user.address}}" class="form-control-file {{#if error.address }}is-invalid{{/if}}" id="address" name="address">
+>>>>>>> master
 
       {{#if error.address}}
         <div class="invalid-feedback">

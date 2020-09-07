@@ -1,5 +1,5 @@
 require('dotenv').config()
-require("../config/db.config")
+require('../config/db.config')
 var ObjectId = require('mongodb').ObjectID
 
 
@@ -9,47 +9,47 @@ const Product = require('../models/product.model')
 const Rate = require('../models/rate.model')
 const Cart = require('../models/cart.model')
 
-// const userOne = new User({
-//     name: "Fernando Marín Sánchez",
-//     email: "fermarinsanchez@gmail.com",
-//     password: "12345678",
-//     phone: "666666666",
-//     address: "13 Rue del Percebe",
-//     producer: true,
-//     companyName: "Jamones Guays",
-//     compAddress: "Calle del Jamón 32, 28080, Madrid",
-//     compMail: "hola@jamonesguays.es",
-//     compPhone: "777777777",
-//     compLink: "www.jamonesguays.es",
-//     bio: "Los jamones mas guays del mundo entero. No son los mejores pero si los mas guays.",
-//     certificates: ["Ibericos"," guays"],
-//     logo: "https://www.sierradejabugo.es/wp-content/uploads/jamon-1.jpg",
-//     pictures: "https://jamonalia.es/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/0/6/06072-jamon-iberico-puro-pata-negra-julian-martin-guijuelo.jpg",
-//     politic: true,
-// })
+const userOne = new User({
+    name: 'Fernando Marín Sánchez',
+    email: 'fermarinsanchez@gmail.com',
+    password: '12345678',
+    phone: '666666666',
+    address: '13 Rue del Percebe',
+    producer: true,
+    companyName: 'Jamones Guays',
+    compAddress: 'Calle del Jamón 32, 28080, Madrid',
+    compMail: 'hola@jamonesguays.es',
+    compPhone: '777777777',
+    compLink: 'www.jamonesguays.es',
+    bio: 'Los jamones mas guays del mundo entero. No son los mejores pero si los mas guays.',
+    certificates: ['Ibericos',' guays'],
+    logo: 'https://www.sierradejabugo.es/wp-content/uploads/jamon-1.jpg',
+    pictures: 'https://jamonalia.es/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/0/6/06072-jamon-iberico-puro-pata-negra-julian-martin-guijuelo.jpg',
+    politic: true,
+})
 
-// userOne.save()
+userOne.save()
 
-// const userTwo = new User({
-//     name: "Miguel Valle",
-//     email: "mi¡guelvalle@gmail.com",
-//     password: "12345679",
-//     phone: "555555555",
-//     address: "12 Rue del Percebe",
-//     producer: true,
-//     companyName: "Jamones Guays 2",
-//     compAddress: "Calle del Jamón 33, 28080, Madrid",
-//     compMail: "holatu@jamonesguays.es",
-//     compPhone: "999999999",
-//     compLink: "www.jamonesguays2.es",
-//     bio: "Los jamones 2 mas guays del mundo entero. No son los mejores pero si los mas guays.",
-//     certificates: ["Ibericoss"," guays del paraguay"],
-//     logo: "https://www.sierradejabugo.es/wp-content/uploads/jamon-1.jpg",
-//     pictures: "https://jamonalia.es/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/0/6/06072-jamon-iberico-puro-pata-negra-julian-martin-guijuelo.jpg",
-//     politic: true,
-// })
+const userTwo = new User({
+    name: 'Miguel Valle',
+    email: 'mi¡guelvalle@gmail.com',
+    password: '12345679',
+    phone: '555555555',
+    address: '12 Rue del Percebe',
+    producer: true,
+    companyName: 'Jamones Guays 2',
+    compAddress: 'Calle del Jamón 33, 28080, Madrid',
+    compMail: 'holatu@jamonesguays.es',
+    compPhone: '999999999',
+    compLink: 'www.jamonesguays2.es',
+    bio: 'Los jamones 2 mas guays del mundo entero. No son los mejores pero si los mas guays.',
+    certificates: ['Ibericoss',' guays del paraguay'],
+    logo: 'https://www.sierradejabugo.es/wp-content/uploads/jamon-1.jpg',
+    pictures: 'https://jamonalia.es/pub/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/0/6/06072-jamon-iberico-puro-pata-negra-julian-martin-guijuelo.jpg',
+    politic: true,
+})
 
-// userTwo.save()
+userTwo.save()
 
 const product1 = new Product({
     name: 'Patatas Fritas Sabor Jamón',
