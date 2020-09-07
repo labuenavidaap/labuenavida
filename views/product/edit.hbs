@@ -5,12 +5,22 @@
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="input-content" name="name" placeholder="Name" class="w-100" value="{{product.name}}">
+            {{#if error.name}}
+                    <div class="invalid-feedback">
+                        {{error.name.message}}
+                    </div>
+                    {{/if}}
         </div>
 
         <div class="form-group">
             <label for="description">Description</label>
             <textarea rows="5" type="text" class="form-control {{#if error.description }}is-invalid{{/if}}" name="description"
                         id="pDecscription" value="{{product.description}}"></textarea>
+                        {{#if error.description}}
+                    <div class="invalid-feedback">
+                        {{error.description.message}}
+                    </div>
+                    {{/if}}
         </div>
 
         <div class="form-group">

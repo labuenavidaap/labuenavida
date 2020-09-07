@@ -225,13 +225,10 @@ module.exports.editUser = (req, res, next) => {
     .then(user => {
       res.redirect(`/users/${req.params.id}`)
     })
-    .catch(e => {
+    .catch(err => {
+      console.log(err)
       res.render('user/edit', { user: req.currentUser, 
-        error: {
-          phone: {
-            message: 'The min length is five characters'
-          }
-        }
+        error: err.errors
       })
     })
 }
