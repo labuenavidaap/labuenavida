@@ -37,7 +37,11 @@ module.exports.googleCallback = (req, res, next) => {
 }
 
 module.exports.userFromGoogle = (req, res, next) => {
+<<<<<<< HEAD
+  res.render('home', { currentUser: req.currentUser })
+=======
   res.render('user/login-google', { currentUser: req.currentUser })
+>>>>>>> master
 }
 
 module.exports.login = (req, res, next) => {

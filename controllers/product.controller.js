@@ -4,7 +4,20 @@ const User = require('../models/user.model')
 const Comment = require('../models/comment.model')
 
 module.exports.renderHome = (req, res, next) => {
+<<<<<<< HEAD
+
+  Product.find()
+    .populate('comments')
+    .sort({rate: -1})
+    .limit(3)
+    .then(products => {
+      console.log(products)
+      res.render('products/home', {currentUser: req.currentUser, products})  
+    })
+  // res.render('products/home', {currentUser: req.currentUser})    
+=======
   res.render('product/home', { currentUser: req.currentUser })
+>>>>>>> master
 }
 
 module.exports.renderAllProducts = (req, res, next) => {
