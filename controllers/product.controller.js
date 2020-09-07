@@ -95,8 +95,16 @@ module.exports.editProduct = (req, res, next) => {
   const { name, description, price, categories, stock } = req.body
   const image = req.file ? req.file.path : null
   Product.findByIdAndUpdate(req.params.id, { name, description, image, price, categories, producer, stock }, { new: true })
-    .then(() => res.redirect(`/users/${req.currentUser.id}`))
-    .catch(err => console.log(err))
+    .then(product => { 
+      res.redirect(`/users/${req.currentUser.id}`)
+      return product
+    })
+    .catch(err => {
+      console.log(err)
+      res.render('product/edit', { product, 
+        error: err.errors
+      })
+    })
 }
 
 module.exports.deleteProduct = (req, res, next) => {
