@@ -76,37 +76,41 @@ module.exports.payment = (req, res, next) => {
       }
     })
     .then(user => {
-      if (user) {
-        let finalCartPrice = user.cart.reduce((accum, current) => {
-          return accum + Number(current.product.price) * current.quantity
-        }, 0).toFixed(2)
-
-        stripe.customers.create({
-          email: req.body.stripeEmail,
-          source: req.body.stripeToken
-        })
-          .then(costumer => {
-            stripe.charges.create({
-              amount: finalCartPrice,
-              description: `Buy: ${user.name}`,
-              currency: 'EUR',
-              customer: costumer.id
-            })
+      if (user.address && user.phone) {
+        if (user) {
+          let finalCartPrice = user.cart.reduce((accum, current) => {
+            return accum + Number(current.product.price) * current.quantity
+          }, 0).toFixed(2)
+  
+          stripe.customers.create({
+            email: req.body.stripeEmail,
+            source: req.body.stripeToken
           })
-          .then(charge => {
-            const orderData = {
-              user: req.params.id,
-              product: user.cart,
-              total: finalCartPrice,
-            }
-            const order = new Order(orderData)
-            return order
-              .save()
-              .then(() => {
-                Cart.deleteMany({ user: user.id })
-                  .then(res.redirect(`/thank-you/${user.id}`))
+            .then(costumer => {
+              stripe.charges.create({
+                amount: finalCartPrice,
+                description: `Buy: ${user.name}`,
+                currency: 'EUR',
+                customer: costumer.id
               })
-          })
+            })
+            .then(charge => {
+              const orderData = {
+                user: req.params.id,
+                product: user.cart,
+                total: finalCartPrice,
+              }
+              const order = new Order(orderData)
+              return order
+                .save()
+                .then(() => {
+                  Cart.deleteMany({ user: user.id })
+                    .then(res.redirect(`/thank-you/${user.id}`))
+                })
+            })
+        }
+      } else {
+        res.redirect(`/confirm-order/${user.id}`)
       }
     })
     .catch(error => next(error))
