@@ -36,7 +36,7 @@
 
     <div class="form-group">
       <label for="phone">Phone number</label>
-      <input type="tel" value="{{user.phone}}" class="form-control {{#if error.phone }}is-invalid{{/if}}" name="phone" placeholder="555-555-555">
+      <input type="tel" value="{{user.phone}}" class="form-control {{#if error.phone.minlength }}is-invalid{{/if}}" name="phone" placeholder="555-555-555" required>
 
       {{#if error.phone}}
         <div class="invalid-feedback">

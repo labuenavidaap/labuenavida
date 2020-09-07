@@ -2,8 +2,9 @@
 
 <section id="products" class="container d-flex justify-content-center">
   <div class="row">
-    <div class="all-products">
-      {{#each products}}
+
+    {{#each products}}
+    <div class="col-4">
       <div class="card m-3" style="width: 18rem;">
         <a href="products/{{this.id}}">
           <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
@@ -22,6 +23,9 @@
               href="/producer-profile/{{this.producer.id}}">{{this.producer.companyName}}</a></li>
           <li class="list-group-item"><a href="/producer-profile/{{this.producer.id}}">See other products of
               the company</a></li>
+              <li class="list-group-item">
+                Rate: {{this.averageRate}} / 5<i class="fa fa-star" aria-hidden="true"></i>
+              </li>
         </ul>
         <div class="card-body d-flex justify-content-center">
           <div>
@@ -36,8 +40,9 @@
           </div>
         </div>
       </div>
-      {{/each}}
     </div>
+    {{/each}}
+
   </div>
 </section>
 <div id="pain-points" class="container d-flex justify-content-around">

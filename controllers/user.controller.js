@@ -225,7 +225,15 @@ module.exports.editUser = (req, res, next) => {
     .then(user => {
       res.redirect(`/users/${req.params.id}`)
     })
-    .catch(next)
+    .catch(e => {
+      res.render('user/edit', { user: req.currentUser, 
+        error: {
+          phone: {
+            message: 'The min length is five characters'
+          }
+        }
+      })
+    })
 }
 
 module.exports.deleteUser = (req, res, next) => {
