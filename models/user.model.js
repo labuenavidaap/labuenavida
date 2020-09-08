@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema(
         name: {
             type: String,
             required: [true, 'Name is required'],
-            match: [USER_PATTERN, 'Please fill a valid username withpu any Symbol'],
+            match: [USER_PATTERN, 'Please fill a valid username without any Symbol'],
             minlength: [3, 'The min length is three characters'],
             trim: true
         },

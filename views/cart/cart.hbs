@@ -1,6 +1,11 @@
 <h1 class="text-center py-5">CART</h1>
 <div>
     <ul class="list-group">
+        {{#if message}}
+        <div class="alert alert-danger" role="alert">
+            {{message}}
+        </div>
+        {{/if}}
         {{#each cart}}
         <li class="list-group-item cart-container">
             <span class="px-2"><img src="{{this.product.image }}" alt="{{this.product.name }}"

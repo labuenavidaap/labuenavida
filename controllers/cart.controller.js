@@ -59,11 +59,15 @@ module.exports.renderConfirmOrder = (req, res, next) => {
       }
     })
     .then(user => {
-      let finalCartPrice = user.cart.reduce((accum, current) => {
-        return accum + Number(current.product.price) * current.quantity
-      }, 0).toFixed(2)
-
-      res.render('cart/confirm', { user, cart: user.cart, finalCartPrice })
+      if (user.cart.length) {
+        let finalCartPrice = user.cart.reduce((accum, current) => {
+          return accum + Number(current.product.price) * current.quantity
+        }, 0).toFixed(2)
+  
+        res.render('cart/confirm', { user, cart: user.cart, finalCartPrice })
+      } else {
+        res.render(`cart/cart`, {user: req.currentUser.id, message: "You must add at least one product to continue"})
+      }
     })
 }
 
@@ -81,7 +85,7 @@ module.exports.payment = (req, res, next) => {
           let finalCartPrice = user.cart.reduce((accum, current) => {
             return accum + Number(current.product.price) * current.quantity
           }, 0).toFixed(2)
-  
+
           stripe.customers.create({
             email: req.body.stripeEmail,
             source: req.body.stripeToken
