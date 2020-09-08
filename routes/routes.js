@@ -44,6 +44,7 @@ router.post('/product/:id/cart', sessionMiddleware.authenticated, cartController
 router.post('/product/:id/cart/delete', sessionMiddleware.authenticated, cartController.removeFromCart)
 router.get('/confirm-order/:id', sessionMiddleware.authenticated, cartMiddleware.itemsInCart, cartController.renderConfirmOrder)
 router.post('/confirm-order/:id/pay', sessionMiddleware.authenticated, cartController.payment)
+router.post('/create-checkout-session', cartController.stripe)
 router.get('/thank-you/:id', sessionMiddleware.authenticated, cartMiddleware.itemsInCart, cartController.renderThankYou)
 router.post('/product/:id/wishlist', sessionMiddleware.authenticated, cartController.addToWishList)
 router.post('/product/:id/wishlist/delete', sessionMiddleware.authenticated, cartController.removeFromWishList)

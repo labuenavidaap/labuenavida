@@ -1,5 +1,55 @@
+/* Import FONTS */
+
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Montserrat:wght@300;400;700&display=swap');
+
+/* VARIABLES */
+
+
+:root {
+
+    /* Headers and paragraphs: */
+
+    --header-font: 'Fjalla One', sans-serif;
+    --p-font: 'Montserrat', sans-serif;
+    --h1-desk: 48px;
+    --h2-desk: 36px;
+    --h3-desk: 30px;
+    --h4-desk: 20px;
+    --p-desk: 16px;
+    
+    --h1-mob: 36px;
+    --h2-mob: 30px;
+    --h3-mob: 28px;
+    --h4-mob: 20px;
+    --p-mob: 18px;
+    
+    /* Colors: */
+    
+    --primary-yelow: #F9A826;
+    --primary-blue: #50A6AC;
+    --primary-dark-green: #226162;
+    --secondary-light-yellow: #F8CE8A;
+    --secondary-light-blue: rgba(80, 166, 172,0.6);
+    --secondary-black: #333333;
+    --secondary-white: #FFFFFF;
+}
+
+
+/*  END VARIABLES */
+
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #cafdf8;
+    font-size: var(--p-mob);
 }
 
 .filter {
