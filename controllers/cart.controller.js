@@ -161,7 +161,6 @@ module.exports.stripe = async (req, res, next) => {
     success_url: "https://localhost:3000/",
     cancel_url: "https://example.com/cancel",
   });
-
   res.json({ id : session.id});
 }
 
