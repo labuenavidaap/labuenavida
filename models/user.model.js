@@ -6,7 +6,8 @@ const Cart = require('./cart.model')
 const WishList = require('./wishlist.model')
 const Order = require('./order.model')
 
-const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+const EMAIL_PATTERN = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+const USER_PATTERN = /^[a-z0-9\s]+$/i
 
 const generateRandomToken = () => {
     const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -22,6 +23,7 @@ const userSchema = new mongoose.Schema(
         name: {
             type: String,
             required: [true, 'Name is required'],
+            match: [USER_PATTERN, 'Please fill a valid username withpu any Symbol'],
             minlength: [3, 'The min length is three characters'],
             trim: true
         },
@@ -45,6 +47,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             minlength: [9, 'The min length is nine numbers'],
             maxlength: [15, 'The max length is fifteen numbers'],
+            trim: true,
         },
         address: {
             type: String,

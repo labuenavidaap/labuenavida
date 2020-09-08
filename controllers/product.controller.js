@@ -79,7 +79,12 @@ module.exports.createProduct = (req, res) => {
 
   product.save()
     .then(() => res.redirect(`/products`))
-    .catch(err => console.log(err))
+    .catch(err => {
+      res.render('product/new', {
+        product,
+        error: err.errors
+      })
+    })
 }
 
 module.exports.renderEditForm = (req, res, next) => {
@@ -91,19 +96,24 @@ module.exports.renderEditForm = (req, res, next) => {
 }
 
 module.exports.editProduct = (req, res, next) => {
-  const producer = req.currentUser
-  const { name, description, price, categories, stock } = req.body
-  const image = req.file ? req.file.path : null
-  Product.findByIdAndUpdate(req.params.id, { name, description, image, price, categories, producer, stock }, { new: true })
-    .then(product => { 
+  const body = req.body
+  body.image = req.file ? req.file.path : null
+  body.producer = req.currentUser.id
+
+  Product.findOneAndUpdate({ _id: req.params.id }, body, { runValidators: true, new: true })
+    .then(product => {
       res.redirect(`/users/${req.currentUser.id}`)
       return product
     })
     .catch(err => {
-      console.log(err)
-      res.render('product/edit', { product, 
-        error: err.errors
-      })
+      Product.findById(req.params.id)
+        .then(product => {
+          res.render('product/edit', {
+            product,
+            error: err.errors
+          })
+        })
+        .catch(err => console.log(err))
     })
 }
 

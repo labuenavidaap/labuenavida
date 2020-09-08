@@ -26,7 +26,7 @@
             </div>
 
             <div>
-                Rate: {{product.averageRate}} / 5<i class="fa fa-star" aria-hidden="true"></i>
+                Rate: {{#if product.averageRate}}{{product.averageRate}} / 5<i class="fa fa-star" aria-hidden="true">{{else}} No rates yet {{/if}}</i>
             </div>
 
             <img class="rounded-sm w-20 mb-1" src="{{product.image}}" style="width: 450px!important;" />
