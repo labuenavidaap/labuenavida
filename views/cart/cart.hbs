@@ -26,12 +26,18 @@
         </li>
 
         {{/each}}
+        {{#if user.name}}
         <li>
             <span class="float-right p-5">Final Price: {{finalCartPrice}}</span>
         </li>
         <li>
             <a href="/confirm-order/{{user.id}}" class="btn btn-success float-right mx-5">Checkout</a>
         </li>
+        {{else}}
+        <li>
+            <a href="/products" class="btn btn-danger float-right mx-5">Buy products</a>
+        </li>
+        {{/if}}
     </ul>
 
 </div>
