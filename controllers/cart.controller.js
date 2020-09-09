@@ -34,11 +34,10 @@ module.exports.renderCart = (req, res, next) => {
 }
 
 module.exports.addToCart = (req, res, next) => {
-  Cart.findOne({product: req.params.id})
+  Cart.findOne({ product: req.params.id })
     .then(cart => {
-      console.log(cart.id);
       if (cart) {
-        Cart.findByIdAndUpdate(cart.id, { $inc: {quantity: req.body.quantity || 1 }})
+        Cart.findByIdAndUpdate(cart.id, { $inc: { quantity: req.body.quantity || 1 } })
           .then(() => res.redirect(`/products/${req.params.id}`))
           .catch(err => console.log(err))
       } else {
@@ -46,7 +45,7 @@ module.exports.addToCart = (req, res, next) => {
         cartData.quantity = req.body.quantity || 1
         cartData.product = req.params.id
         cartData.user = req.currentUser.id
-      
+
         const newCart = new Cart(cartData)
         newCart.save()
           .then(() => res.redirect('/products'))
@@ -77,20 +76,27 @@ module.exports.renderConfirmOrder = (req, res, next) => {
 
         res.render('cart/confirm', { user, cart: user.cart, finalCartPrice })
       } else {
-        res.render(`cart/cart`, { user: req.currentUser.id, message: "You must add at least one product to continue" })
+        res.render(`cart/cart`, { user: req.currentUser.id, message: 'You must add at least one product to continue' })
       }
     })
 }
 
 module.exports.addToWishList = (req, res, next) => {
-  const wishListData = {}
-  wishListData.product = req.params.id
-  wishListData.user = req.currentUser.id
+  WishList.findOne({ product: req.params.id})
+    .then(wlist => {
+      if (wlist) {
+        return
+      } else {
+        const wishListData = {}
+        wishListData.product = req.params.id
+        wishListData.user = req.currentUser.id
 
-  const wishList = new WishList(wishListData)
-  wishList.save()
-    .then(() => res.redirect(`/products`))
-    .catch(err => console.log(err))
+        const wishList = new WishList(wishListData)
+        wishList.save()
+          .then(() => res.redirect(`/products`))
+          .catch(err => console.log(err))
+      }
+    })
 }
 
 module.exports.removeFromWishList = (req, res, next) => {
@@ -123,22 +129,22 @@ module.exports.stripe = (req, res, next) => {
           .save()
           .then(order => {
             const session = stripe.checkout.sessions.create({
-              payment_method_types: ["card"],
+              payment_method_types: ['card'],
               line_items: [
                 {
                   price_data: {
-                    currency: "EUR",
+                    currency: 'EUR',
                     product_data: {
-                      name: "La Buena Vida",
+                      name: 'La Buena Vida',
                     },
                     unit_amount: (order.total * 100).toFixed(0),
                   },
                   quantity: 1,
                 },
               ],
-              mode: "payment",
+              mode: 'payment',
               success_url: `http://localhost:3000/thank-you/${req.currentUser.id}`,
-              cancel_url: "https://example.com/cancel",
+              cancel_url: 'https://example.com/cancel',
             })
               .then(session => {
                 res.json({ id: session.id })
@@ -159,7 +165,7 @@ module.exports.renderThankYou = (req, res, next) => {
 module.exports.thankYouRedirect = (req, res, next) => {
   User.findById(req.params.id)
     .populate({
-      path: 'order', 
+      path: 'order',
       options: { sort: { 'createdAt': -1 } }
     })
     .populate('cart')
@@ -171,10 +177,10 @@ module.exports.thankYouRedirect = (req, res, next) => {
         order: user.order[0].total
       })
       const reduceStock = user.cart.map(cart => {
-        return Product.findByIdAndUpdate(cart.product, { $inc: {stock: -cart.quantity }})
+        return Product.findByIdAndUpdate(cart.product, { $inc: { stock: -cart.quantity } })
       })
 
-      const deleteCart = Cart.deleteMany({user: user.id})
+      const deleteCart = Cart.deleteMany({ user: user.id })
       Promise.all([...reduceStock, deleteCart])
         .then(() => res.redirect('/products'))
         .catch(err => console.error(err))

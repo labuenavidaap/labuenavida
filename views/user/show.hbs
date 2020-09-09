@@ -91,7 +91,7 @@
             {{#each user.order as |order|}}
             <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
                 <div class="card" style="width: 18rem;">
-                    <p>{{order.createdAt}}</p>
+                    <p>{{date order.createdAt}}</p>
                     <p>{{order.total}}€</p>
                         <a href="#" class="btn btn-primary">Corregir</a>
                 </div>
