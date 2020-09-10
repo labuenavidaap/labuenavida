@@ -60,4 +60,13 @@ $(window).on('load', function () {
 })
 
 
+// const btnProducer = document.getElementById('producer')
+// const cbPolitic = document.getElementById('politic')
 
+// if (cbPolitic.checked) {
+//     btnProducer.submit()
+// } else {
+//    btnProducer.submit(function (e) {
+//         e.preventDefault();
+//     })
+// }

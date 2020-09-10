@@ -39,7 +39,7 @@
                 </div>
                 <div>
                     <form action="/product/{{product.id}}/cart" method="POST">
-                        <label for="quantity">Units</label>
+                        <label for="quantity">Units:</label>
                         <input type="number" min="1" max="{{product.stock}}" name="quantity" value="1">
                         <button class="btn btn-sm mb-2 btn-outline-danger">
                             <i class="fa fa-cart-arrow-down">Add to Cart</i>

@@ -1,4 +1,6 @@
 <h1>
     Thank you {{user.name}}
 </h1>
-<a href="/products" class="btn btn-warning">Continue buying</a>
+<form action="/thank-you/{{user.id}}" method="POST">
+    <button class="btn btn-warning">Continue buying</button>
+</form>
