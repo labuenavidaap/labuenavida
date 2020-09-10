@@ -63,10 +63,10 @@ const userSchema = new mongoose.Schema(
             }
         },
         // Producer:
-        tryProducer: {
-            type: Boolean,
-            default: false
-        },
+        // tryProducer: {
+        //     type: Boolean,
+        //     default: false
+        // },
         producer: {
             type: Boolean,
             default: false
@@ -100,13 +100,13 @@ const userSchema = new mongoose.Schema(
         },
         politic: {
             type: Boolean,
-            // require: true, 
-            // validate: {
-            //     validator: function (value) {
-            //         console.log('Running validation');
-            //         return this.companyName && value
-            //     }
-            // }
+            require: true, 
+            validate: {
+                validator: function (value) {
+                    console.log('Running validation');
+                    return this.companyName && value
+                }
+            }
         }
     },
     { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }

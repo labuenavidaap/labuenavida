@@ -176,20 +176,12 @@ module.exports.renderProfile = (req, res, next) => {
 module.exports.becomeProducer = (req, res, next) => {
   User.findOneAndUpdate({ _id: req.params.id }, { runValidators: true, new: true })
     .then(user => {
+      let tryProducer = true
+      
       if (user) {
-        res.render('user/edit', { user })
+        res.render('user/edit', { user, tryProducer })
       }
       return user
-    })
-    .then(user => {
-      user.tryProducer = true
-      user.save()
-        .then(user => {
-          setTimeout(() => {
-            user.tryProducer = false
-            user.save()
-          }, 10000)
-        })
     })
     .catch(err => console.log(err))
 }

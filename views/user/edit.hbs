@@ -11,7 +11,7 @@
         <div class="col">
             <form action="/users/{{user._id}}/edit" method="POST" enctype="multipart/form-data">
 
-                {{#if (orCond user)}}
+                {{#if (orCond user tryProducer)}}
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -93,7 +93,7 @@
                     {{/if}}
                 </div>
 
-                {{#if (orCond user)}}
+                {{#if (orCond user tryProducer)}}
 
                 <div class="form-group">
                     <label for="Cname">Company Name</label>
