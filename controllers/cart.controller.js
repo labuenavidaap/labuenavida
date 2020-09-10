@@ -34,7 +34,7 @@ module.exports.renderCart = (req, res, next) => {
 }
 
 module.exports.addToCart = (req, res, next) => {
-  Cart.findOne({ product: req.params.id })
+  Cart.findOne({ product: req.params.id, user: req.currentUser.id})
     .then(cart => {
       if (cart) {
         Cart.findByIdAndUpdate(cart.id, { $inc: { quantity: req.body.quantity || 1 } })
@@ -82,7 +82,7 @@ module.exports.renderConfirmOrder = (req, res, next) => {
 }
 
 module.exports.addToWishList = (req, res, next) => {
-  WishList.findOne({ product: req.params.id})
+  WishList.findOne({ product: req.params.id, user: req.currentUser.id})
     .then(wlist => {
       if (wlist) {
         return
@@ -152,6 +152,7 @@ module.exports.stripe = (req, res, next) => {
           })
           .catch(err => console.log(err))
       } else {
+        console.log('HOLA');
         res.redirect(`/confirm-order/${user.id}`)
       }
     })

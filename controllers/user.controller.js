@@ -25,19 +25,11 @@ module.exports.googleCallback = (req, res, next) => {
       req.session.userId = user.id
       User.findById(req.session.userId)
         .then(user => {
-          if (!user.address) {
-            res.redirect('/user-from-google')
-          } else {
             res.redirect('/home')
-          }
         })
     }
   })
   googleCallback(req, res, next)
-}
-
-module.exports.userFromGoogle = (req, res, next) => {
-  res.render('home', { currentUser: req.currentUser })
 }
 
 module.exports.login = (req, res, next) => {
@@ -190,8 +182,14 @@ module.exports.becomeProducer = (req, res, next) => {
       return user
     })
     .then(user => {
-      user.producer = true
+      user.tryProducer = true
       user.save()
+        .then(user => {
+          setTimeout(() => {
+            user.tryProducer = false
+            user.save()
+          }, 10000)
+        })
     })
     .catch(err => console.log(err))
 }
@@ -214,7 +212,13 @@ module.exports.renderEditUser = (req, res, next) => {
 }
 
 module.exports.editUser = (req, res, next) => {
+  console.log('Editing user');
+  
   const body = req.body
+
+  if (req.body.companyName) {
+     body.producer = true
+  }
 
   if ((req.files.logo && req.files.pictures) && req.currentUser.producer) {
     body.logo = req.files.logo[0].path
@@ -227,6 +231,7 @@ module.exports.editUser = (req, res, next) => {
     })
     .catch(err => {
       console.log(err)
+      console.log('Error aqui');
       res.render('user/edit', { user: req.currentUser, 
         error: err.errors
       })
