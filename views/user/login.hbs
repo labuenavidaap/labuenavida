@@ -1,47 +1,66 @@
 <article class="container">
-    <h1>Login View</h1>
-  {{#if message}}
-    <div class="alert alert-primary" role="alert">
-      {{message}}
-    </div>
-  {{/if}}
-
-  {{#if error.validation}}
-    <div class="alert alert-danger" role="alert">
-      {{error.validation.message}}
-    </div>
-  {{/if}}
-
-  <form action="/login" method="POST">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input name="email" type="email" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email"
-        placeholder="Enter email" value="{{ user.email }}" required>
-  
-      {{#if error.email}}
-      <div class="invalid-feedback">
-        {{error.email.message}}
+  <h1 class="text-center pb-5 px-5">Login</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 px-5">
+        <img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599739159/laBuenaVida/web-img/login_z3j6nq.png"
+          alt="man open door login illustration" class="img-fluid pb-5">
       </div>
-      {{/if}}
     </div>
-  
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input name="password" type="password" class="form-control {{#if error.password }}is-invalid{{/if}}" id="password"
-        placeholder="Enter password" value="{{ user.password }}" required>
-  
-      {{#if error.password}}
-      <div class="invalid-feedback">
-        {{error.password.message}}
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 login-inputs">
+        {{#if message}}
+        <div class="alert alert-primary" role="alert">
+          {{message}}
+        </div>
+        {{/if}}
+
+        {{#if error.validation}}
+        <div class="alert alert-danger" role="alert">
+          {{error.validation.message}}
+        </div>
+        {{/if}}
+
+        <form action="/login" method="POST">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input name="email" type="email" class="form-control {{#if error.email }}is-invalid{{/if}}" id="email"
+              value="{{ user.email }}" required>
+
+            {{#if error.email}}
+            <div class="invalid-feedback">
+              {{error.email.message}}
+            </div>
+            {{/if}}
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input name="password" type="password" class="form-control {{#if error.password }}is-invalid{{/if}}"
+              id="password" value="{{ user.password }}" required>
+
+            {{#if error.password}}
+            <div class="invalid-feedback">
+              {{error.password.message}}
+            </div>
+            {{/if}}
+          </div>
+          <div class="login-buttons">
+            <button type="submit" class="my-3">Login</button>
+            <a href="/auth/google" style="background-color: #3c86c1 ;" class="mb-5"></button><span><i
+                    class="fa fa-google"></i> Login with Google</span></a>
+          </div>
+          <div>
+            <p class="pb-5 text-center" >Don't have an account? <a href="/user/signup" style="text-decoration: none; color: #226162; font-weight: bold;">Sign up</a></p>
+          </div>
+          {{!-- <div class="d-flex mb-3">
+            <button type="submit" class="btn btn-secondary mr-3">Login</button>
+            <a href="/auth/google" class="btn btn-primary"><i class="fa fa-google"></i> Login with Google</a>
+          </div> --}}
+        </form>
       </div>
-      {{/if}}
     </div>
-  
-    <div class="d-flex mb-3">
-      <button type="submit" class="btn btn-secondary mr-3">Login</button>
-      <a href="/auth/google" class="btn btn-primary"><i class="fa fa-google"></i> Login with Google</a>
-    </div>
-  
-    <p>Don't have an account? <a href="/user/signup">register</a></p>
-  </form>
+  </div>
 </article>

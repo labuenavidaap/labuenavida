@@ -1,3 +1,4 @@
+{{#unless avoidCart}}
 {{#unless currentUser.producer}}
     <a href="/become-producer/{{currentUser.id}}" class="btn btn-outline-dark">Sell your products</a>
 {{/unless}}
@@ -9,3 +10,4 @@
 <form action="/logout" method="post" class="btn btn-outline-danger btn-sm">
   <button type="submit" class="">Logout</button>
 </form>
+{{/unless}}

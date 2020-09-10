@@ -41,13 +41,6 @@
             <span class="pl-5">Quantity: {{this.quantity}}</span>
             <span class="pl-5">Price: {{this.product.price}}</span>
             <span class="float-right">Total: {{cartPrice this}}</span>
-            <span class="float-right">
-                <div>
-                    <button class="btn btn-sm m-2 btn-outline-danger " id="{{this.id}}" onclick="deleteFromCart(event)">
-                        Delete from Cart
-                    </button>
-                </div>
-            </span>
         </li>
 
         {{/each}}
@@ -55,42 +48,10 @@
             <span class="p-5 bg-danger text-white">Final Price: <b>{{finalCartPrice}}</b></span>
         </li>
         <li>
-            <form action="/confirm-order/{{user.id}}/pay" method="POST">
-                <button class="btn btn-success mx-5" id="checkout-button">Confirm Payment</button>
-            </form>
+            <button class="btn btn-success mx-5" id="checkout-button">Confirm Payment</button>
         </li>
     </ul>
 
 </div>
 <script src="https://js.stripe.com/v3/"></script>
-<script src="/js/stripe.js">
-
-      // Create an instance of the Stripe object with your publishable API key
-      var stripe = Stripe('pk_test_51HO0RHCbVlpVVSMqknO9OGwNJemEptYsSH793Nw2f82Wzz4hX1JrCRhLTozAosgdqz9Ea4EQCdGxaEusZoj8zmEG00P1k5Y8qs');
-      var checkoutButton = document.getElementById('checkout-button');
-
-      checkoutButton.addEventListener('click', function() {
-        // Create a new Checkout Session using the server-side endpoint you
-        // created in step 3.
-        fetch('/create-checkout-session', {
-          method: 'POST',
-        })
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(session) {
-          return stripe.redirectToCheckout({ sessionId: session.id });
-        })
-        .then(function(result) {
-          // If `redirectToCheckout` fails due to a browser or network
-          // error, you should display the localized error message to your
-          // customer using `error.message`.
-          if (result.error) {
-            alert(result.error.message);
-          }
-        })
-        .catch(function(error) {
-          console.error('Error:', error);
-        });
-      });
-    </script>
+<script src="/js/stripe.js"></script>

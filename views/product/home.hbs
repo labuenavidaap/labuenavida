@@ -1,9 +1,68 @@
-<h3 class="text-center">Products with best rate:</h3>
+<div>
+  <h1>Welcome to La Buena Vida. The place of small traders </h1>
+  {{#unless currentUser}}
+  <div class="d-flex justify-content-center">
+    <a href="/user/signup"><button class="home-sign-in d-flex justify-content-center">Sign in</button></a>
+  </div>
+  {{/unless}}
+</div>
+<div class="container">
+  <div class="row d-flex justify-content-center">
+    <div class="col-12-sm">
+      <img
+        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599603302/laBuenaVida/web-img/Ilustracion_home_dimvbr.png"
+        alt="people eating - illustration" class="img-fluid py-5">
+    </div>
+    <div class="home-icons-container">
+      <div class="home-icons"
+        style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660741/laBuenaVida/web-img/calendar_x82xgd.png) no-repeat center center / contain;">
+      </div>
+      <p>Delivery in less <br> than 48 hours</p>
+      <div class="home-icons"
+        style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660754/laBuenaVida/web-img/truck_dzkt1o.png) no-repeat center center / contain;">
+      </div>
+
+      <p>Safe delivery</p>
+      <div class="home-icons"
+        style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660753/laBuenaVida/web-img/map_h7kywh.png) no-repeat center center / contain;">
+      </div>
+
+      <p>Proximity <br> product</p>
+    </div>
+  </div>
+</div>
+
+<h3 class="text-center py-3">Products with best rate:</h3>
 
 <section id="products" class="container d-flex justify-content-center">
   <div class="row">
-
     {{#each products}}
+    <div class="product-card">
+      <div class="badge-card">{{this.categories.[0]}}</div>
+      <div class="product-tumb" style="background-image: url({{this.image}});">
+      </div>
+      <div class="product-details">
+        <p><a href="products/{{this.id}}">{{this.name}}</p></a>
+        <div class="product-bottom-details">
+          <span>{{this.price}} €</span>
+          <span class="card-rate">{{this.averageRate}} / 5 <i class="fa fa-star" aria-hidden="true"></i></span>
+          <div class="container-buttons-card">
+            <div class="card-icon-heart">
+              <button id="{{this.id}}" onclick="addToWishlist(event)"><img
+                  src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
+                  alt="heart icon"></button>
+            </div>
+            <div class="card-icon-cart">
+              <button id="{{this.id}}" onclick="addToCart(event)"><img
+                  src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
+                  alt="cart icon"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+    {{!-- {{#each products}}
     <div class="col-4">
       <div class="card m-3" style="width: 18rem;">
         <a href="products/{{this.id}}">
@@ -41,24 +100,36 @@
         </div>
       </div>
     </div>
-    {{/each}}
+    {{/each}} --}}
 
   </div>
 </section>
-<div id="pain-points" class="container d-flex justify-content-around">
-  <div class="row" href="">
-    <a class="col-3 text-center card">
-      <h3>PP1</h3>
-    </a>
-    <a class="col-3 text-center card" href="">
-      <h3>PP2</h3>
-    </a>
-    <a class="col-3 text-center card" href="">
-      <h3>PP3</h3>
-    </a>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="sell-your-prods">
+          <p class="text-center">See all our products</p>
+          <div class="d-flex justify-content-center">
+            <a href="/products"><button class="home-sign-in d-flex justify-content-center">All products</button></a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div>
-  <a href="/products" class="btn btn-danger">Products</a>
-  <a href="" class="btn btn-primary">Sell your products</a>
-</div>
+</section>
+<section>
+  <div class="container-fluid newsletter-container">
+    <div class="row">
+      <div class="col-12 ">
+        <p>Subscribe to the newsletter to receive news of La Buena Vida</p>
+        <input type="email" placeholder="Enter your email">
+        <div class="d-flex justify-content-center">
+          <a href="/user/signup"><button class="home-suscribe d-flex justify-content-center">Suscribe</button></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

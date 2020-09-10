@@ -10,29 +10,69 @@
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
-    <script src="https://js.stripe.com/terminal/v1/"></script>
+
 </head>
 
 <body>
-    <div class="navbar fixed-top navbar-light bg-light d-flex justify-content-between mb-3">
+
+
+    <nav class="navbar w-100 navbar-expand-xl fixed-top navbar-light" style="background-color: #cafdf8;">
+        <a class="navbar-brand" href="/"><img
+                src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599598714/laBuenaVida/web-img/VERSION_MOBILE_eycumk.png"
+                width="78" height="45" alt="la buena vida logo" loading="lazy">
+        </a>
+        <div class="d-flex justify-content-end ml-auto align-items-center">
+            {{#if currentUser}}
+            {{#if currentUser.producer}}
+            <a href="/users/{{currentUser.id}}" class="icon-navbar mr-3"><img
+                    src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599754193/laBuenaVida/web-img/producer_kzlf4z.svg"
+                    alt="user producer icon" class="icon-navbar"></a>
+            {{else}}
+            <a href="/users/{{currentUser.id}}" class="icon-navbar mr-3"><img
+                    src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599753365/laBuenaVida/web-img/user_oyvfwy.svg"
+                    alt="user client icon" class="icon-navbar"></a>
+            <a href="/users/{{currentUser.id}}/cart" class="icon-navbar"><img
+                    src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599750692/laBuenaVida/web-img/carrito_header_mmyrgm.png"
+                    alt="cart icon" class="icon-navbar"></a> <span class="badge rounded-circle text-white mx-0"
+                id="cart-number" style="background-color: #226162 ;">{{numProducts}}</span>
+            {{/if}}
+
+            {{/if}}
+        </div>
+        <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav text-center">
+                <a class="nav-link" href="/">Home</a>
+                {{#if currentUser}}
+                {{>profile}}
+                {{else}}
+                <a class="nav-link" href="/show-all">Products</a>
+                <a class="nav-link" href="/login">Log in</a>
+                <a class="nav-link" href="/user/signup">Sign in</a>
+                {{/if}}
+            </div>
+        </div>
+
+    </nav>
+
+
+    {{!-- <div class="navbar fixed-top navbar-light bg-light d-flex justify-content-between mb-3">
         <a class="navbar-brand mr-9" href="/" style="width:70%!important"><b>La Buena Vida</b></a>
         {{#if currentUser}}
         {{>profile}}
         {{else}}
         {{>login}}
         {{/if}}
-    </div>
+    </div> --}}
     <div class="mt-3 mb-3" style="margin-top:100px!important">
         {{{body}}}
     </div>
-    
+
     {{>footer}}
-
-
-    {{!-- <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v8.0&appId=729802397582879&autoLogAppEvents=1"
-        nonce="lOQb6HvY"></script> --}}
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -43,9 +83,7 @@
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-   
     <script src="/js/index.js"></script>
-    {{!-- <script src="/js/facebookSDK.js"></script> --}}
 </body>
 
 
