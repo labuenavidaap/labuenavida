@@ -25,7 +25,7 @@ module.exports.googleCallback = (req, res, next) => {
       req.session.userId = user.id
       User.findById(req.session.userId)
         .then(user => {
-            res.redirect('/home')
+          res.redirect('/home')
         })
     }
   })

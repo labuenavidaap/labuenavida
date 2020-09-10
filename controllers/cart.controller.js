@@ -186,5 +186,7 @@ module.exports.thankYouRedirect = (req, res, next) => {
         .then(() => res.redirect('/products'))
         .catch(err => console.error(err))
     })
+
 }
+
 

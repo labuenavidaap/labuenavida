@@ -1,10 +1,11 @@
-{{!-- <div class="pl-3 d-flex justify-content-center  mt-3">
-    <h5>Search by name:</h5>
+<div class="search-products-container">
     <form class="form-inline my-lg-0 text-center" action="/products">
-        <input value="{{search}}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search by Title"
+        <input value="{{search}}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search by name"
             class="text-center">
     </form>
-</div> --}}
+    <i class="fa fa-search-plus mx-2" aria-hidden="true"></i>
+</div>
+
 
 <h2 class="text-center"> All Products</h2>
 {{#if message}}
@@ -15,6 +16,40 @@
 <section id="products" class="container d-flex justify-content-center">
     <div class="row">
         <div class="all-products">
+
+            <section id="products" class="container d-flex justify-content-center">
+                <div class="row">
+                    {{#each products}}
+                    <div class="product-card">
+                        <div class="badge-card">{{this.categories.[0]}}</div>
+                        <div class="product-tumb" style="background-image: url({{this.image}});">
+                        </div>
+                        <div class="product-details">
+                            <p><a href="products/{{this.id}}">{{this.name}}</p></a>
+                            <div class="product-bottom-details">
+                                <span>{{this.price}} €</span>
+                                <span class="card-rate">{{this.averageRate}} / 5 <i class="fa fa-star"
+                                        aria-hidden="true"></i></span>
+                                <div class="container-buttons-card-all">
+                                    <div class="card-icon-heart">
+                                        <button id="{{this.id}}" onclick="addToWishlist(event)"><img
+                                                src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
+                                                alt="heart icon"></button>
+                                    </div>
+                                    <div class="card-icon-cart">
+                                        <button id="{{this.id}}" onclick="addToCart(event)"><img
+                                                src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
+                                                alt="cart icon"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+
+
+                    {{!-- 
             {{#each products}}
             <div class="card m-3" style="width: 18rem;">
                 <a href="products/{{this.id}}">
@@ -48,7 +83,7 @@
                     </div>
                 </div>
             </div>
-            {{/each}}
+            {{/each}} --}}
+                </div>
         </div>
-    </div>
 </section>

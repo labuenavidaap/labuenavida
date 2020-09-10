@@ -1,13 +1,14 @@
 {{#unless avoidCart}}
 {{#unless currentUser.producer}}
-    <a href="/become-producer/{{currentUser.id}}" class="btn btn-outline-dark">Sell your products</a>
+    <a href="/become-producer/{{currentUser.id}}" class="nav-link">Sell your products</a>
 {{/unless}}
 
-<a href="/users/{{currentUser.id}}/cart" class="btn btn-outline-primary" ><i class="fa fa-cart-arrow-down"></i>Cart</a> <span class="badge" id="cart-number">{{numProducts}}</span>
 
-<a href="/users/{{currentUser.id}}" class="btn btn-outline-primary">View profile</a>
 
-<form action="/logout" method="post" class="btn btn-outline-danger btn-sm">
+<a href="/users/{{currentUser.id}}" class="nav-link">View profile</a>
+
+<form action="/logout" method="post" class="nav-link">
   <button type="submit" class="">Logout</button>
 </form>
-{{/unless}}
+
+{{/unless}} 
