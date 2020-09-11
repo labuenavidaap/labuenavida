@@ -176,7 +176,7 @@ module.exports.renderProfile = (req, res, next) => {
 module.exports.becomeProducer = (req, res, next) => {
   User.findOneAndUpdate({ _id: req.params.id }, { runValidators: true, new: true })
     .then(user => {
-      let tryProducer = true
+      const tryProducer = true
       res.render('user/edit', { user, tryProducer })
     })
     .catch(err => console.log(err))
@@ -204,7 +204,7 @@ module.exports.editUser = (req, res, next) => {
   body.producer = true
 
   if (!req.currentUser.producer && !req.body.politic) {
-    let tryProducer = true
+    const tryProducer = true
     return res.render('user/edit', {
       user: req.currentUser,
       tryProducer,
@@ -226,8 +226,7 @@ module.exports.editUser = (req, res, next) => {
       res.redirect(`/users/${req.params.id}`)
     })
     .catch(err => {
-      let tryProducer = true
-      console.log(err.errors.phone.message);
+      const tryProducer = true
       res.render('user/edit', {
         user: req.currentUser,
         tryProducer,

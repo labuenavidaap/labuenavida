@@ -95,7 +95,6 @@ const userSchema = new mongoose.Schema(
         },
         politic: {
             type: Boolean,
-            require: true, 
             validate: {
                 validator: function (value) {
                     console.log('Running validation')

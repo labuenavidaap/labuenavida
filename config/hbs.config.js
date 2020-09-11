@@ -18,4 +18,4 @@ hbs.registerHelper('orCond', (user, tryProducer) => {
     return true
   }
   else false
-});
+})
