@@ -181,7 +181,7 @@
                 </div>
                 <p> Picture of the Company</p>
                 <div class="input-group mb-3">
-                    
+
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroupFileAddon01">Pictures</span>
                     </div>
@@ -192,11 +192,19 @@
                     </div>
                 </div>
 
+                {{#unless user.producer}}
                 <div class="form-group">
-                    <input type="checkbox" id="politic" name="politic" value="politic">
-                    <label for="politic"> By submitting this application you agree with our <a href="">Terms and Conditions</a></label>
+                    <input type="checkbox" id="politic" class="{{#if error.politic}}is-invalid{{/if}}"
+                        name="politic" value="true">
+                    <label for="politic"> By submitting this application you agree with our <a href="">Terms and
+                            Conditions</a></label>
+                    {{#if error.politic}}
+                    <div class="invalid-feedback">
+                        {{error.politic.message}}
+                    </div>
+                    {{/if}}
                 </div>
-
+                {{/unless}}
 
 
                 {{#if error.pictures}}

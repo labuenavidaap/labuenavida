@@ -62,11 +62,6 @@ const userSchema = new mongoose.Schema(
                 default: generateRandomToken
             }
         },
-        // Producer:
-        // tryProducer: {
-        //     type: Boolean,
-        //     default: false
-        // },
         producer: {
             type: Boolean,
             default: false
@@ -103,9 +98,10 @@ const userSchema = new mongoose.Schema(
             require: true, 
             validate: {
                 validator: function (value) {
-                    console.log('Running validation');
-                    return this.companyName && value
-                }
+                    console.log('Running validation')
+                    return !this.producer || value
+                },
+                message: 'To become a producer you must accept our Terms & Conditions'
             }
         }
     },
