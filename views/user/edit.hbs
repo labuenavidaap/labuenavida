@@ -197,13 +197,19 @@
                             </label>
                         </div>
                     </div>
+                    {{#if error.pictures}}
+                    <div class="invalid-feedback">
+                        {{error.pictures.message}}
+                    </div>
+                    {{/if}}
                 </div>
                 {{#unless user.producer}}
-                
+
                 <div class="container-form-edit-user flex-row">
                     <div class="form-group">
-                        <input type="checkbox" id="politic" name="politic" value="true" class="{{#if error.politic}}is-invalid{{/if}}">
-                        <label for="politic"> 
+                        <input type="checkbox" id="politic" name="politic" value="true"
+                            class="{{#if error.politic}}is-invalid{{/if}}">
+                        <label for="politic">
                             Agree with our <a href="">Terms and
                                 Conditions</a>
                         </label>
@@ -216,16 +222,6 @@
                 </div>
                 {{/unless}}
         </div>
-
-
-        {{#if error.pictures}}
-        <div class="invalid-feedback">
-            {{error.pictures.message}}
-        </div>
-        {{/if}}
-
-
-
         {{/if}}
         <div class="container">
             <div class="row">
