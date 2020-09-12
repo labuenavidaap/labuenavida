@@ -73,10 +73,16 @@ const userSchema = new mongoose.Schema(
             type: String
         },
         compMail: {
-            type: String
+            type: String,
+            match: [EMAIL_PATTERN, 'Please fill a valid email address'],
+            lowercase: true,
+            trim: true
         },
         compPhone: {
-            type: String
+            type: String,
+            minlength: [9, 'The min length is nine numbers'],
+            maxlength: [15, 'The max length is fifteen numbers'],
+            trim: true,
         },
         compLink: {
             type: String

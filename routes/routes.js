@@ -24,6 +24,7 @@ router.get('/become-producer/:id', sessionMiddleware.authenticated, userControll
 router.get('/producer-profile/:id', sessionMiddleware.couldBeAuthenticated, userController.renderPublicProfile)
 router.get('/users/:id/edit', sessionMiddleware.authenticated, cartMiddleware.itemsInCart, userController.renderEditUser)
 router.post('/users/:id/edit', sessionMiddleware.authenticated, cpUpload, userController.editUser)
+router.post('/users/:id/edit-profile', sessionMiddleware.authenticated, userController.editNormalUser)
 router.post('/users/:id/delete', sessionMiddleware.authenticated, userController.deleteUser)
 router.post('/logout', sessionMiddleware.authenticated, userController.logout)
 

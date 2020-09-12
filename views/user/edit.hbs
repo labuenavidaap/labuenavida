@@ -2,36 +2,35 @@
 <article class="container">
     <div class="row">
 
-
         <div class="col-12">
-            <form action="/users/{{user._id}}/edit" method="POST" enctype="multipart/form-data">
+            <form
+                action="{{#if (orCond user tryProducer)}}/users/{{user._id}}/edit{{else}}/users/{{user._id}}/edit-profile{{/if}}"
+                method="POST" enctype="{{#if (orCond user tryProducer)}}multipart/form-data{{/if}}">
+                <div class="container-form-edit-user">
 
-                {{#if (orCond user tryProducer)}}
-
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 container-upload-logo">
-                            {{#if user.logo}}
-                            <img src="{{user.logo}}" alt="{{user.logo}} logo">
+                    {{#if (orCond user tryProducer)}}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 container-upload-logo">
+                                {{#if user.logo}}
+                                <img src="{{user.logo}}" alt="{{user.logo}} logo">
+                                {{/if}}
+                                <label class="custom-file-upload">
+                                    <input type="file" name="logo"
+                                        style="background-color: rgba(155, 251, 242, 0.53);" />
+                                    <i class="fa fa-cloud-upload pl-1"></i> Upload logo
+                                </label>
+                            </div>
+                            {{#if error.logo}}
+                            <div class="invalid-feedback">
+                                {{error.logo.message}}
+                            </div>
                             {{/if}}
-                            <label class="custom-file-upload">
-                                <input type="file" name="logo" style="background-color: rgba(155, 251, 242, 0.53);" />
-                                <i class="fa fa-cloud-upload pl-1"></i> Upload logo
-                            </label>
                         </div>
                     </div>
-                </div>
+                    {{/if}}
 
 
-                {{#if error.logo}}
-                <div class="invalid-feedback">
-                    {{error.logo.message}}
-                </div>
-                {{/if}}
-
-                {{/if}}
-                <div class="container-form-edit-user">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input name="name" type="text" value="{{user.name}}"
@@ -181,46 +180,46 @@
                         </div>
                         {{/if}}
                     </div>
-                </div>
 
 
-                <div class="container-form-edit-user">
-                    <label class=""> Picture of the Company</label>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 container-upload-logo">
-                            <label class="custom-file-upload">
-                                <input type="file" name="pictures"
-                                    style="background-color: rgba(155, 251, 242, 0.53);" />
-                                <i class="fa fa-cloud-upload pl-1"></i> Upload picture
-                            </label>
+                    <div class="container-form-edit-user">
+                        <label class=""> Picture of the Company</label>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 container-upload-logo">
+                                <label class="custom-file-upload">
+                                    <input type="file" name="pictures"
+                                        style="background-color: rgba(155, 251, 242, 0.53);" />
+                                    <i class="fa fa-cloud-upload pl-1"></i> Upload picture
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    {{#if error.pictures}}
-                    <div class="invalid-feedback">
-                        {{error.pictures.message}}
-                    </div>
-                    {{/if}}
-                </div>
-                {{#unless user.producer}}
-
-                <div class="container-form-edit-user flex-row">
-                    <div class="form-group">
-                        <input type="checkbox" id="politic" name="politic" value="true"
-                            class="{{#if error.politic}}is-invalid{{/if}}">
-                        <label for="politic">
-                            Agree with our <a href="">Terms and
-                                Conditions</a>
-                        </label>
-                        {{#if error.politic}}
-                        <div class="invalid-feedback alert alert-danger" role="alert">
-                            {{error.politic.message}}
+                        {{#if error.pictures}}
+                        <div class="invalid-feedback">
+                            {{error.pictures.message}}
                         </div>
                         {{/if}}
                     </div>
+                    {{#unless user.producer}}
+
+                    <div class="container-form-edit-user flex-row">
+                        <div class="form-group">
+                            <input type="checkbox" id="politic" name="politic" value="true"
+                                class="{{#if error.politic}}is-invalid{{/if}}">
+                            <label for="politic">
+                                Agree with our <a href="">Terms and
+                                    Conditions</a>
+                            </label>
+                            {{#if error.politic}}
+                            <div class="invalid-feedback alert alert-danger" role="alert">
+                                {{error.politic.message}}
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/unless}}
                 </div>
-                {{/unless}}
         </div>
         {{/if}}
         <div class="container">

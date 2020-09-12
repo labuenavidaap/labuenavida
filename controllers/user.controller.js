@@ -201,6 +201,7 @@ module.exports.renderEditUser = (req, res, next) => {
 
 module.exports.editUser = (req, res, next) => {
   const body = req.body
+
   if (req.body.companyName) {
     body.producer = true
   }
@@ -232,6 +233,21 @@ module.exports.editUser = (req, res, next) => {
       res.render('user/edit', {
         user: req.currentUser,
         tryProducer,
+        error: err.errors
+      })
+    })
+}
+
+module.exports.editNormalUser = (req, res, next) => {
+  const body = req.body
+
+  User.findOneAndUpdate({ _id: req.params.id }, body, { runValidators: true, new: true })
+    .then(user => {
+      res.redirect(`/users/${req.params.id}`)
+    })
+    .catch(err => {
+      res.render('user/edit', {
+        user: req.currentUser,
         error: err.errors
       })
     })
