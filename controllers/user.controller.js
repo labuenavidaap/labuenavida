@@ -201,8 +201,10 @@ module.exports.renderEditUser = (req, res, next) => {
 
 module.exports.editUser = (req, res, next) => {
   const body = req.body
-  body.producer = true
-
+  if (req.body.companyName) {
+    body.producer = true
+  }
+  
   if (!req.currentUser.producer && !req.body.politic) {
     const tryProducer = true
     return res.render('user/edit', {
