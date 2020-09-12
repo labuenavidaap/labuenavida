@@ -1,5 +1,5 @@
 <div>
-  <h1>Welcome to La Buena Vida. The place of small traders </h1>
+  <h1 class="home-header">Welcome to La Buena Vida. <br> The place of small traders</h1>
   {{#unless currentUser}}
   <div class="d-flex justify-content-center">
     <a href="/user/signup"><button class="home-sign-in d-flex justify-content-center">Sign in</button></a>
@@ -7,35 +7,40 @@
   {{/unless}}
 </div>
 <div class="container">
-  <div class="row d-flex justify-content-center">
-    <div class="col-12-sm">
+  <div class="row">
+    <div class="col-12">
       <img
-        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599603302/laBuenaVida/web-img/Ilustracion_home_dimvbr.png"
+        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599909211/laBuenaVida/web-img/Ilustracion_home_wttai1.png"
         alt="people eating - illustration" class="img-fluid py-5">
-    </div>
-    <div class="home-icons-container">
-      <div class="home-icons"
-        style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660741/laBuenaVida/web-img/calendar_x82xgd.png) no-repeat center center / contain;">
-      </div>
-      <p>Delivery in less <br> than 48 hours</p>
-      <div class="home-icons"
-        style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660754/laBuenaVida/web-img/truck_dzkt1o.png) no-repeat center center / contain;">
-      </div>
 
-      <p>Safe delivery</p>
-      <div class="home-icons"
-        style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660753/laBuenaVida/web-img/map_h7kywh.png) no-repeat center center / contain;">
+      <div class="home-icons-container">
+        <div class="home-icons-p">
+          <div class="home-icons"
+            style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660741/laBuenaVida/web-img/calendar_x82xgd.png) no-repeat center center / contain;">
+          </div>
+          <p>Delivery in less <br> than 48 hours</p>
+        </div>
+        <div class="home-icons-p">
+          <div class="home-icons"
+            style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660754/laBuenaVida/web-img/truck_dzkt1o.png) no-repeat center center / contain;">
+          </div>
+          <p>Safe delivery</p>
+        </div>
+        <div class="home-icons-p">
+          <div class="home-icons"
+            style="background: url(https://res.cloudinary.com/difhe4gl3/image/upload/v1599660753/laBuenaVida/web-img/map_h7kywh.png) no-repeat center center / contain;">
+          </div>
+          <p>Proximity <br> product</p>
+        </div>
       </div>
-
-      <p>Proximity <br> product</p>
     </div>
   </div>
 </div>
 
-<h3 class="text-center py-3">Products with best rate:</h3>
+<h3 class="text-center pt-5 home-products-header">Products with best rate:</h3>
 
-<section id="products" class="container d-flex justify-content-center">
-  <div class="row">
+<section id="products" class="container-fluid d-flex justify-content-center">
+  <div class="row d-flex">
     {{#each products}}
     <div class="product-card">
       <div class="badge-card">{{this.categories.[0]}}</div>
@@ -62,46 +67,6 @@
       </div>
     </div>
     {{/each}}
-    {{!-- {{#each products}}
-    <div class="col-4">
-      <div class="card m-3" style="width: 18rem;">
-        <a href="products/{{this.id}}">
-          <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
-          <div class="card-body">
-            <h5 class="card-title">{{this.name}}</h5>
-            <ul>
-              {{#each category as |type|}}
-              <li>{{type}}</li>
-              {{/each}}
-            </ul>
-          </div>
-        </a>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Price: {{this.price}}€</li>
-          <li class="list-group-item">Company: <a
-              href="/producer-profile/{{this.producer.id}}">{{this.producer.companyName}}</a></li>
-          <li class="list-group-item"><a href="/producer-profile/{{this.producer.id}}">See other products of
-              the company</a></li>
-              <li class="list-group-item">
-                Rate: {{this.averageRate}} / 5<i class="fa fa-star" aria-hidden="true"></i>
-              </li>
-        </ul>
-        <div class="card-body d-flex justify-content-center">
-          <div>
-            <button class="btn btn-sm m-2 btn-outline-info" id="{{this.id}}" onclick="addToWishlist(event)">
-              <i class="fa fa-heart">Wishlist</i>
-            </button>
-          </div>
-          <div>
-            <button class="btn btn-sm m-2 btn-outline-success " id="{{this.id}}" onclick="addToCart(event)">
-              <i class="fa fa-cart-arrow-down">Add to Cart</i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    {{/each}} --}}
-
   </div>
 </section>
 <section>
@@ -110,9 +75,9 @@
       <div class="col-12">
         <div class="sell-your-prods">
           <div class="d-flex justify-content-center">
-            <a href="/products"><button class="home-sign-in d-flex justify-content-center mb-5">All products</button></a>
+            <a href="/products"><button class="home-sign-in d-flex justify-content-center mb-5 padding-button-xl">All
+                products</button></a>
           </div>
-          
         </div>
       </div>
     </div>
@@ -121,7 +86,7 @@
 <section>
   <div class="container-fluid newsletter-container">
     <div class="row">
-      <div class="col-12 ">
+      <div class="col-12">
         <p class="btn">Subscribe to the newsletter to receive news of La Buena Vida</p>
         <input type="email" placeholder="Enter your email">
         <div class="d-flex justify-content-center">

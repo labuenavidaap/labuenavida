@@ -19,8 +19,9 @@
     <nav class="navbar w-100  fixed-top navbar-light" style="background-color: #cafdf8;">
         <a class="navbar-brand" href="/"><img
                 src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599598714/laBuenaVida/web-img/VERSION_MOBILE_eycumk.png"
-                width="78" height="45" alt="la buena vida logo" loading="lazy">
+                width="78" height="45" alt="la buena vida logo" loading="lazy" class="logo-navbar">
         </a>
+        {{#unless avoidCart}}
         <div class="d-flex justify-content-end ml-auto align-items-center">
             {{#if currentUser}}
             {{#if currentUser.producer}}
@@ -39,12 +40,13 @@
 
             {{/if}}
         </div>
+        {{/unless}}
         <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
             data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class=" navbar-collapse collapse" id="navbarNavAltMarkup">
+        <div class="navbar-collapse collapse nav-border" id="navbarNavAltMarkup">
             <div class="navbar-nav text-center">
                 <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/products">Products</a>
@@ -58,16 +60,6 @@
         </div>
 
     </nav>
-
-
-    {{!-- <div class="navbar fixed-top navbar-light bg-light d-flex justify-content-between mb-3">
-        <a class="navbar-brand mr-9" href="/" style="width:70%!important"><b>La Buena Vida</b></a>
-        {{#if currentUser}}
-        {{>profile}}
-        {{else}}
-        {{>login}}
-        {{/if}}
-    </div> --}}
     <div class="mt-3 mb-3" style="margin-top:100px!important">
         {{{body}}}
     </div>

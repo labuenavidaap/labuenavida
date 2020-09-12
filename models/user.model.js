@@ -80,9 +80,7 @@ const userSchema = new mongoose.Schema(
         },
         compPhone: {
             type: String,
-            minlength: [9, 'The min length is nine numbers'],
-            maxlength: [15, 'The max length is fifteen numbers'],
-            trim: true,
+            trim: true
         },
         compLink: {
             type: String

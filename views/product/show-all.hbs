@@ -14,54 +14,48 @@
     {{mesage}}
 </div>
 {{/if}}
-<section id="products" class="container d-flex justify-content-center">
-    <div class="row">
-        <div class="all-products">
-
-            <section id="products" class="container d-flex justify-content-center">
-                <div class="row">
-                    {{#each products}}
-                    <div class="product-card">
-                        <div class="badge-card">{{this.categories.[0]}}</div>
-                        <div class="product-tumb" style="background-image: url({{this.image}});">
-                            <div class="container-buttons-card-all">
-                                <div class="card-icon-heart">
-                                    <button id="{{this.id}}" onclick="addToWishlist(event)"><img
-                                            src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
-                                            alt="heart icon"></button>
-                                </div>
-                                <div class="card-icon-cart">
-                                    <button id="{{this.id}}" onclick="addToCart(event)"><img
-                                            src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
-                                            alt="cart icon"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-details">
-                            <p><a href="/products/{{this.id}}">{{this.name}}</p></a>
-                            <div class="product-bottom-details">
-                                <span>{{this.price}} €</span>
-                                <a href="/producer-profile/{{this.producer.id}}"><img src="{{this.producer.logo}}"
-                                        alt="{{this.producer.name}} logo" class="card-logo"></a>
-                            </div>
-                        </div>
+<section id="products" class="container-fluid d-flex justify-content-center">
+    <div class="row d-flex justify-content-center width-all-products">
+        {{#each products}}
+        <div class="product-card">
+            <div class="badge-card">{{this.categories.[0]}}</div>
+            <div class="product-tumb" style="background-image: url({{this.image}});">
+                <div class="container-buttons-card-all">
+                    <div class="card-icon-heart">
+                        <button id="{{this.id}}" onclick="addToWishlist(event)"><img
+                                src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
+                                alt="heart icon"></button>
                     </div>
-                    {{else}}
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599772744/laBuenaVida/web-img/buscar_xdpwo4.png"
-                                    alt="no matches found" class="img-fluid py-4">
-                                <h4 class="text-center py-3">Sorry, no matches found by "{{search}}"</h4>
-                                <div class="d-flex justify-content-center">
-                                    <a href="/products"><button
-                                            class="home-sign-in d-flex justify-content-center mb-5">All
-                                            products</button></a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-icon-cart">
+                        <button id="{{this.id}}" onclick="addToCart(event)"><img
+                                src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
+                                alt="cart icon"></button>
                     </div>
-                    {{/each}}
                 </div>
+            </div>
+            <div class="product-details">
+                <p><a href="/products/{{this.id}}">{{this.name}}</p></a>
+                <div class="product-bottom-details">
+                    <span>{{this.price}} €</span>
+                    <a href="/public-profile/{{this.producer.id}}"><img src="{{this.producer.logo}}"
+                            alt="{{this.producer.name}} logo" class="card-logo"></a>
+                </div>
+            </div>
         </div>
+        {{else}}
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599772744/laBuenaVida/web-img/buscar_xdpwo4.png"
+                        alt="no matches found" class="img-fluid py-4">
+                    <h4 class="text-center py-3">Sorry, no matches found by "{{search}}"</h4>
+                    <div class="d-flex justify-content-center">
+                        <a href="/products"><button class="home-sign-in d-flex justify-content-center mb-5">All
+                                products</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
 </section>

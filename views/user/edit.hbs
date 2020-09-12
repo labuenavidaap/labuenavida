@@ -1,8 +1,13 @@
-<h1 class="text-center py-5">Edit user </h1>
+
+{{#if tryProducer}}
+<h1 class="text-center py-5">Become a producer</h1>
+{{else}}
+<h1 class="text-center py-5">Edit user</h1>
+{{/if}}
 <article class="container">
     <div class="row">
 
-        <div class="col-12">
+        <div class="col-12 form-xl">
             <form
                 action="{{#if (orCond user tryProducer)}}/users/{{user._id}}/edit{{else}}/users/{{user._id}}/edit-profile{{/if}}"
                 method="POST" enctype="{{#if (orCond user tryProducer)}}multipart/form-data{{/if}}">

@@ -86,6 +86,16 @@ h4 {
     width: 30px;
 }
 
+.logo-navbar {
+    width: 78px;
+    height: 45px;
+}
+
+.nav-border {
+    border-bottom: solid 1px #226162;
+}
+
+
 button:focus {
     outline: none;
 }
@@ -101,26 +111,41 @@ button:focus {
     min-width: 330px;
 }
 
+.group-buttons {
+    border-radius: 24px;
+    background-color: #226162;
+    font-family: var(--p-font);
+    color: var(--secondary-white);
+    font-size: var(--p-mob);
+    margin: 0px 16px 18px;
+    padding: 10px 0;
+    min-width: 330px;
+}
+
 
 .home-icons-container {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     padding-top: 50px;
 }
 
-.home-icons-container p {
+.home-icons-p p {
     font-size: var(--h4-mob);
     font-weight: bold;
     color: var(--primary-yelow);
-    padding: 20px;
     text-align: center;
 }
 
 .home-icons {
-    width: 114px;
     height: 114px;
+    margin-bottom: 20px;
 
+}
+
+.home-icons-p {
+    padding-top: 30px;
 }
 
 .container-thanks {
@@ -140,7 +165,7 @@ button:focus {
 .product-card {
     width: 380px;
     position: relative;
-    margin: 50px auto;
+    margin: 24px 50px;
     background: var(--secondary-white);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.23);
     border-radius: 5px;
@@ -262,6 +287,7 @@ button:focus {
     position: relative;
     left: 20px;
     bottom: 10px;
+    border-radius: 50%;
 }
 
 /* End of Home Cards */
@@ -406,8 +432,12 @@ input[type="file"] {
     position: relative;
     float: right;
     bottom: -105px;
-    left: 128px;
+    left: 96px;
     display: flex;
+}
+
+.hr-profile {
+    margin-top: 35px;
 }
 
 .container-upload-logo {
@@ -528,7 +558,7 @@ input[type="file"] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 40px;
+    padding-top: 24px;
 }
 
 .login-buttons button {
@@ -671,22 +701,6 @@ input[type="file"] {
     margin: 0
 }
 
-@media (max-width:991px) {
-    .site-footer [class^=col-] {
-        margin-bottom: 30px
-    }
-}
-
-@media (max-width:767px) {
-    .site-footer {
-        padding-bottom: 0
-    }
-
-    .site-footer .copyright-text,
-    .site-footer .social-icons {
-        text-align: center
-    }
-}
 
 .social-icons {
     padding-left: 0;
@@ -809,4 +823,131 @@ input[type="file"] {
 
 .form-control:valid {
     background-color: #cafdf8 !important;
+}
+
+/* Media queries */
+
+@media (max-width:991px) {
+    .site-footer [class^=col-] {
+        margin-bottom: 30px
+    }
+
+}
+
+@media (min-width:767px) {
+
+    body {
+        background-color: #cafdf8;
+        font-size: var(--p-desk);
+        font-family: var(--p-font);
+    }
+
+    h1 {
+        font-size: var(--h1-desk);
+        font-family: var(--header-font);
+        padding: 0 16px;
+    }
+
+    h2 {
+        font-size: var(--h2-desk);
+        font-family: var(--header-font);
+    }
+
+    h3 {
+        font-size: var(--h3-desk);
+        font-family: var(--header-font);
+    }
+
+    h4 {
+        font-size: var(--h-desk);
+        font-family: var(--header-font);
+    }
+
+
+    .home-header {
+        text-align: center;
+    }
+
+    .home-header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .home-icons-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: 50px;
+        width: 100%;
+    }
+
+    .home-products-header {
+        margin-top: 35px;
+    }
+
+    .product-card {
+        margin: 14px 14px;
+    }
+
+    .site-footer {
+        padding-bottom: 0
+    }
+
+    .newsletter-container {
+        margin-bottom: -50px;
+    }
+
+    .padding-button-xl {
+        margin: 55px 0;
+    }
+
+    .logo-navbar {
+        width: 117px;
+        height: 68px;
+    }
+
+    .form-xl {
+        padding: 0px 241px;
+    }
+
+    .profile-header {
+        margin-bottom: 20px;
+    }
+
+    .container-buttons-card-user {
+        position: relative;
+        float: right;
+        bottom: -105px;
+        left: 128px;
+        display: flex;
+    }
+
+    .producer-img img {
+        width: 500px;
+    }
+
+    .width-all-products {
+        width: 85%;
+    }
+ 
+    .comment-panel-xl {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+    }
+}
+
+
+
+@media (max-width:767px) {
+    .site-footer {
+        padding-bottom: 0
+    }
+
+    .site-footer .copyright-text,
+    .site-footer .social-icons {
+        text-align: center
+    }
 }
