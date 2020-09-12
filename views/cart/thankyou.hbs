@@ -1,6 +1,17 @@
-<h1>
+<h1 class="text-center py-5">
     Thank you {{user.name}}
 </h1>
-<form action="/thank-you/{{user.id}}" method="POST">
-    <button class="btn btn-warning">Continue buying</button>
-</form>
+<div class="container">
+    <div class="row">
+        <div class="col-12 container-thanks">
+            <img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599906757/laBuenaVida/web-img/exito_gbn6gy.png"
+                alt="Thank you for buying" class="img-fluid">
+            <p>Thank you very much {{user.name}}, for shopping at La Buena Vida . In a few moments you will receive an
+                email with the details of your purchase. You will receive our products at your home within 24h. Thank
+                you for trusting La Buena Vida.</p>
+            <form action="/thank-you/{{user.id}}" method="POST">
+                <button class="home-sign-in">Continue buying</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,50 +1,53 @@
-<h1 class="text-center py-5">CART</h1>
-<div>
-    <div>
-
-    </div>
-
-
-    <ul class="list-group">
-        {{#if message}}
-        <div class="alert alert-danger" role="alert">
-            {{message}}
-        </div>
-        {{/if}}
-        {{#each cart}}
-        <li class="list-group-item cart-container">
-            <span class="px-2"><img src="{{this.product.image }}" alt="{{this.product.name }}"
-                    style="width: 100px;" /></span>
-            <ul>
-                <li class=""> Product: {{this.product.name }}</li>
-                <li class="">Quantity: {{this.quantity}} units.</li>
-                <li class="">Price: {{this.product.price}} €</li>
-                <li class="float-right">Total: {{cartPrice this}} €</li>
-            </ul>
-
-            
-                <div class="remove-from-cart">
-                    <form action="/product/{{this.id}}/cart/delete" method="POST">
-                        <button class="" id="{{this.id}}">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>
-                    </form>
+<h1 class="text-center py-5"> Your Cart, {{user.name}}</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-group">
+                {{#if message}}
+                <div class="alert alert-danger" role="alert">
+                    {{message}}
                 </div>
-        </li>
+                {{/if}}
+                <div class="container-cart">
+                    {{#each cart}}
+                    <li class="list-group-item cart-container">
+                        <span class="px-2"><img src="{{this.product.image }}" alt="{{this.product.name }}" /></span>
+                        <ul>
+                            <li class=""> Product: {{this.product.name }}</li>
+                            <li class="">Quantity: {{this.quantity}} units.</li>
+                            <li class="">Price: {{this.product.price}} €</li>
+                            <li class="float-right">Total: {{cartPrice this}} €</li>
+                        </ul>
 
-        {{/each}}
-        {{#if user.name}}
-        <li>
-            <span class="float-right p-5">Final Price: {{finalCartPrice}} €</span>
-        </li>
-        <li>
-            <a href="/confirm-order/{{user.id}}" class="btn btn-success float-right mx-5">Checkout</a>
-        </li>
-        {{else}}
-        <li>
-            <a href="/products" class="btn btn-danger float-right mx-5">Buy products</a>
-        </li>
-        {{/if}}
-    </ul>
 
+                        <div class="remove-from-cart">
+                            <form action="/product/{{this.id}}/cart/delete" method="POST">
+                                <button class="" id="{{this.id}}">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+
+                    {{/each}}
+                </div>
+                {{#if user.name}}
+                <li>
+                    <span class="cart-final-price">Final Price: {{finalCartPrice}} €</span>
+                </li>
+                <li>
+
+                    <div class="d-flex justify-content-center">
+                        <a href="/confirm-order/{{user.id}}"> <button class="home-sign-in d-flex
+                            justify-content-center" style="text-decoration: none;">Checkout</button></a>
+                    </div>
+                    {{else}}
+                    <div class="d-flex justify-content-center">
+                        <a href="/products" class="home-sign-in d-flex justify-content-center">Buy products</a>
+                    </div>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
 </div>

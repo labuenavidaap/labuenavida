@@ -99,8 +99,8 @@ button:focus {
     margin: 32px 16px;
     padding: 10px 0;
     min-width: 330px;
-
 }
+
 
 .home-icons-container {
     display: flex;
@@ -121,6 +121,18 @@ button:focus {
     width: 114px;
     height: 114px;
 
+}
+
+.container-thanks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-thanks img {
+    max-width: 10em;
+    padding-bottom: 35px;
 }
 
 /* Home Cards */
@@ -421,7 +433,7 @@ input[type="file"] {
 
 .container-form-edit-user input {
     border-color: var(--secondary-light-blue);
-  
+
 }
 
 .container-form-new-product label {
@@ -539,20 +551,42 @@ input[type="file"] {
     text-decoration: none;
 }
 
+.container-cart div {
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.container-cart img {
+    width: 100px;
+}
+
 .remove-from-cart {
     background-color: tomato;
     position: relative;
-    width: 50px;
-    
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    margin-bottom: 16px;
 }
 
 .remove-from-cart i {
     color: var(--secondary-white);
-    
+    font-size: 20px;
+    margin: 4px 0 1px 0;
 }
 
 .remove-from-cart button {
     background-color: transparent;
+}
+
+.cart-final-price {
+    float: right;
+    padding: 15px 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: var(--primary-yelow);
+    color: var(--secondary-black);
 }
 
 .logout {
