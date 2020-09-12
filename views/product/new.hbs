@@ -1,77 +1,97 @@
-<div id="form" class="w-100 ">
-    <h4>NEW PRODUCT:</h4>
-    <form action="/new-product" method="POST" enctype="multipart/form-data">
+<div id="form" class="container">
+    <h3 class="py-5 text-center">NEW PRODUCT</h3>
+    <div class="container-form-new-product">
 
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="input-content" name="name"
-                placeholder="Name" class="w-100" value="{{product.name}}">
-            {{#if error.name}}
-            <div class="invalid-feedback">
-                {{error.name.message}}
+        <form action="/new-product" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="input-content"
+                    name="name" placeholder="Name" class="w-100" value="{{product.name}}">
+                {{#if error.name}}
+                <div class="invalid-feedback">
+                    {{error.name.message}}
+                </div>
+                {{/if}}
             </div>
-            {{/if}}
-        </div>
 
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea rows="5" type="text" class="form-control {{#if error.description }}is-invalid{{/if}}"
-                name="description" id="pDecscription" value="{{product.description}}">{{product.description}}</textarea>
-            {{#if error.description }}
-            <div class="invalid-feedback">
-                {{error.description.message}}
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea rows="5" type="text" class="form-control {{#if error.description }}is-invalid{{/if}}"
+                    name="description" id="pDecscription"
+                    value="{{product.description}}">{{product.description}}</textarea>
+                {{#if error.description }}
+                <div class="invalid-feedback">
+                    {{error.description.message}}
+                </div>
+                {{/if}}
             </div>
-            {{/if}}
-        </div>
 
-        <div class="form-group">
-            <label for="categories">Categories</label>
-            <input type="checkbox" id="Food" name="categories" value="Food">
-            <label for="Food"> Food</label><br>
-            <input type="checkbox" id="Drink" name="categories" value="Drink">
-            <label for="Drink"> Drink</label><br>
-            <input type="checkbox" id="Vegetables" name="categories" value="Vegetables">
-            <label for="Vegetables"> Vegetables</label><br>
-            <input type="checkbox" id="Fruit" name="categories" value="Fruit">
-            <label for="Fruit"> Fruit</label><br>
-            <input type="checkbox" id="Meat" name="categories" value="Meat">
-            <label for="vehicMeatle3"> Meat</label><br>
-            <input type="checkbox" id="Alcohol" name="categories" value="Alcohol">
-            <label for="Alcohol"> Alcohol</label><br>
-        </div>
-
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="number" class="form-control {{#if error.price }}is-invalid{{/if}}" id="input-content"
-                name="price" placeholder="Price in Euros" class="w-100" min="0" value="{{product.price}}">
-            {{#if error.price }}
-            <div class="invalid-feedback">
-                {{error.price.message}}
+            <div class="form-group">
+                <label for="categories">Categories</label><br>
+                <input type="checkbox" id="Food" name="categories" value="Food">
+                <label for="Food"> Food</label><br>
+                <input type="checkbox" id="Drink" name="categories" value="Drink">
+                <label for="Drink"> Drink</label><br>
+                <input type="checkbox" id="Vegetables" name="categories" value="Vegetables">
+                <label for="Vegetables"> Vegetables</label><br>
+                <input type="checkbox" id="Fruit" name="categories" value="Fruit">
+                <label for="Fruit"> Fruit</label><br>
+                <input type="checkbox" id="Meat" name="categories" value="Meat">
+                <label for="vehicMeatle3"> Meat</label><br>
+                <input type="checkbox" id="Alcohol" name="categories" value="Alcohol">
+                <label for="Alcohol"> Alcohol</label><br>
             </div>
-            {{/if}}
-        </div>
 
-        <div class="form-group">
-            <label for="stock">Stock</label>
-            <input type="stock" class="form-control {{#if error.stock }}is-invalid{{/if}}" id="input-content"
-                name="stock" placeholder="Stock" class="w-100" min="0" value="{{product.stock}}">
-            {{#if error.stock }}
-            <div class="invalid-feedback">
-                {{error.stock.message}}
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control {{#if error.price }}is-invalid{{/if}}" id="input-content"
+                    name="price" placeholder="Price in Euros" class="w-100" min="0" value="{{product.price}}">
+                {{#if error.price }}
+                <div class="invalid-feedback">
+                    {{error.price.message}}
+                </div>
+                {{/if}}
             </div>
-            {{/if}}
+
+            <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="stock" class="form-control {{#if error.stock }}is-invalid{{/if}}" id="input-content"
+                    name="stock" placeholder="Stock" class="w-100" min="0" value="{{product.stock}}">
+                {{#if error.stock }}
+                <div class="invalid-feedback">
+                    {{error.stock.message}}
+                </div>
+                {{/if}}
+            </div>
+    </div>
+    <div class="form-group">
+        <div class="container-form-new-product">
+            <label for="image">Image of product</label>
         </div>
-
-        <div class="form-group">
-            <label for="image">Image</label>
-            <input type="file" class="form-control {{#if error.image }}is-invalid{{/if}}" id="input-content"
-                name="image" placeholder="Image" class="w-100" value="{{product.image}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 container-upload-logo">
+                    <label class="custom-file-upload">
+                        <input type="file" style="background-color: rgba(155, 251, 242, 0.53);"
+                            class="form-control {{#if error.image }}is-invalid{{/if}}" id="input-content" name="image"
+                            value="{{product.image}}" />
+                        <i class="fa fa-cloud-upload pl-1"></i> Upload picture
+                    </label>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary mt-3 mb-4">Add product</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 container-upload-logo">
+                <button type="submit" id="producer" class="home-sign-in d-flex justify-content-center">Add new product</button>
+            </div>
+        </div>
+    </div>
 
-        {{#if errorMessage}}
-        <p class="error">{{errorMessage}}</p>
-        {{/if}}
+    {{#if errorMessage}}
+    <p class="error">{{errorMessage}}</p>
+    {{/if}}
     </form>
 </div>

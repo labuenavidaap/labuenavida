@@ -1,86 +1,98 @@
 <h1 class="text-center">Show User View</h1>
 
 <article class="container">
-    <div class="row card py-5" style="margin-top: 9px;">
+    <div class="row  py-5" style="margin-top: 9px;">
         {{!-- <div class="col-2">
             <img class="w-100 rounded-circle" src="{{user.avatar}}" />
         </div> --}}
 
-        <div class="col-12 text-center">
+        <div class="col-12 ">
+            <h1 class="text-center">{{user.name}}</h1>
 
 
-
-            <h1>Name: {{user.name}}</h1>
-
-            {{#if user.producer}}
-            <p>Type : PRODUCER</p>
-            <img src="{{user.logo}}" alt="{{user.companyName}}">
-            {{else}}
-            <p>Type : CLIENT</p>
-            {{/if}}
-
-            <p><strong>Email:</strong> {{user.email}}</p>
-            <p><strong>Address:</strong> {{user.address}}</p>
-            <p><strong>Phone:</strong> {{user.phone}}</p>
-
-            {{#if user.producer}}
-            <p><strong>Company Name:</strong> {{user.companyName}}</p>
-            <p><strong>Comapny Bio:</strong> {{user.bio}}</p>
-
-            <p><strong>Company Address:</strong> {{user.compAddress}}</p>
-            <p><strong>Company email:</strong> {{user.compMail}}</p>
-            <p><strong>Company phone:</strong> {{user.compPhone}}</p>
-            <p><strong>Company url:</strong> {{user.compLink}}</p>
-            <p><strong>Company Politics:</strong> {{user.politic}}</p>
-            <p><strong>Company Certificates:</strong>{{user.certificates}}
-            <p>
-            <p>Pictures of the Company:</p>
-
-            <img src="{{user.pictures}}" alt="user picture" width="300px">
-
-
-
-
-            {{/if}}
-
-
-            <div>
-                <a class="btn btn-info my-3" href="/users/{{currentUser._id}}/edit">
-                    <i class="fa fa-edit mr-2"></i>
-                    Edit
-                </a>
-
-                <form action="/users/{{currentUser.id}}/delete" method="POST" class="mt-2">
-                    <button type="submit" class="btn btn-danger my-3">
-                        <i class="fa fa-trash mr-2"></i>
-                        Remove account
-                    </button>
-                </form>
-                <a href="/new-product"><button class="btn btn-success my-3"> New Product</button></a>
-
-            </div>
-
-        </div>
-    </div>
-    {{#if user.producer}}
-    <div class="row">
-        {{#each user.products as |product|}}
-        <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{{product.image}}" alt="{{product.name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">{{product.bio}}</p>
-                        <a href="/products/{{product.id}}/edit" class="btn btn-primary">Edit Product</a>
-                        <form action="/delete/{{product.id}}" method="POST">
-                            <button class="btn btn-warning my-3"> Remove Product</button>
-                        </form>
+            <div class="container">
+                {{#if user.producer}}
+                <div class="row">
+                    <div class="col-12 profile-producer-header ">
+                        <p>PRODUCER</p>
+                        <img src="{{user.logo}}" alt="{{user.companyName}}" class="rounded-circle">
+                        {{else}}
+                        <p class="pb-3">CLIENT</p>
+                    </div>
+                </div>
+                {{/if}}
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="p-4">
+                            <li class="">Email: {{user.email}}</li><hr>
+                            <li class="">Address: {{user.address}}</li><hr>
+                            <li class="">Phone: {{user.phone}}</li><hr>
+                            {{#if user.producer}}
+                            <li class=""><b>Producer Data</b> <i class="fa fa-arrow-down" aria-hidden="true"></i></li><hr>
+                            <li class="">Bio:<br>{{user.bio}}</li><hr>
+                            <li class="">Address: {{user.compAddress}}</li><hr>
+                            <li class=""><small>Phone: <a
+                                        href="tel:{{user.compPhone}}"></a>{{user.compPhone}} | Email: <a
+                                        href="mailto:{{user.compMail}}"></a>{{user.compMail}} </small></li><hr>
+                            {{/if}}
+                        </ul>
                     </div>
                 </div>
             </div>
+            {{#if user.producer}}
+            <div class="producer-img">
+                <img src="{{user.pictures}}" alt="user picture">
+            </div>
+            {{/if}}
+            <div>
+                <a class="home-sign-in d-flex justify-content-center" href="/users/{{currentUser._id}}/edit">
+                    Edit profile
+                </a>
+                <form action="/users/{{currentUser.id}}/delete" method="POST">
+                    <button type="submit" class="home-sign-in d-flex justify-content-center"
+                        style="background-color: tomato;">
+                        Remove account
+                    </button>
+                </form>
+                {{#if user.producer}}
+                <a href="/new-product"><button class="home-sign-in d-flex justify-content-center"
+                        style="background-color: #50A6AC;"> New Product</button></a>
+                {{/if}}
+            </div>
         </div>
-        {{/each}}
+    </div>
+    <hr>
+    {{#if user.producer}}
+    <h3 class="text-center py-3">Products of {{user.companyName}}</h3>
+    <div class="row">
+        <div class="col-12">
+            {{#each user.products as |product|}}
+
+            <div class="product-card mb-5">
+                <div class="badge-card">{{product.categories.[0]}}</div>
+                <div class="product-tumb" style="background-image: url({{product.image}});">
+                    <div class="container-buttons-card-user">
+                        <div class="card-icon-edit">
+                            <a href="/products/{{product.id}}/edit"><button><img
+                                        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846428/assets/noun_edit_3020483_copia_m1nfb7.png"
+                                        alt="pencil edit icon"></button></a>
+                        </div>
+                        <div class="card-icon-delete">
+                            <form action="/delete/{{product.id}}" method="POST">
+                                <button><img
+                                        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846689/assets/noun_Trash_1294925_copia_et475o.png"
+                                        alt="Trash icon"></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-details">
+                    <p class="text-left"><a href="/products/{{product.id}}">{{product.name}}</p></a>
+                </div>
+            </div>
+
+            {{/each}}
+        </div>
     </div>
     {{else}}
     <div>
@@ -93,7 +105,7 @@
                 <div class="card" style="width: 18rem;">
                     <p>{{date order.createdAt}}</p>
                     <p>{{order.total}}€</p>
-                        <a href="#" class="btn btn-primary">Corregir</a>
+                    <a href="#" class="btn btn-primary">Corregir</a>
                 </div>
             </div>
             {{/each}}
@@ -107,7 +119,29 @@
 
         <div class="row">
             {{#each wishList}}
-            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4 product-container">
+
+            <div class="product-card mb-5 product-container">
+                <div class="badge-card">{{product.categories.[0]}}</div>
+                <div class="product-tumb" style="background-image: url({{product.image}});">
+                    <div class="container-buttons-card-user">
+                        <div class="card-icon-edit">
+                            <button id="{{this.product.id}}" onclick="addToCart(event)"><img
+                                    src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
+                                    alt="add to cart icon" style="margin: 10px 0 3px 7px;"></button>
+                        </div>
+                        <div class="card-icon-delete">
+                            <button id="{{this.id}}" onclick="deleteFromWishlist(event)"><img
+                                    src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846689/assets/noun_Trash_1294925_copia_et475o.png"
+                                    alt="Trash icon" style="margin: 10px 0 9px 10px;"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-details">
+                    <p class="text-left"><a href="/products/{{product.id}}">{{product.name}}</p></a>
+                </div>
+            </div>
+
+            {{!-- <div class="col-xl-4 col-lg-6 col-sm-12 mb-4 product-container">
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="{{this.product.image}}" alt="{{this.product.name}}">
                     <div class="card-body">
@@ -129,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         {{/each}}
     </div>

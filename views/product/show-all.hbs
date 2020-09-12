@@ -3,11 +3,12 @@
         <input value="{{search}}" name="search" class="form-control mr-sm-2" type="search" placeholder="Search by name"
             class="text-center">
     </form>
-    <i class="fa fa-search-plus mx-2" aria-hidden="true"></i>
+    <span class="badge mx-0 p-2" style="font-size:40px; color: #50a6ac"><i class="fa fa-search-plus mx-2"
+            aria-hidden="true"></i></span>
 </div>
 
 
-<h2 class="text-center"> All Products</h2>
+<h2 class="text-center pt-5"> All Products</h2>
 {{#if message}}
 <div class="alert alert-primary" role="alert">
     {{mesage}}
@@ -23,67 +24,44 @@
                     <div class="product-card">
                         <div class="badge-card">{{this.categories.[0]}}</div>
                         <div class="product-tumb" style="background-image: url({{this.image}});">
+                            <div class="container-buttons-card-all">
+                                <div class="card-icon-heart">
+                                    <button id="{{this.id}}" onclick="addToWishlist(event)"><img
+                                            src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
+                                            alt="heart icon"></button>
+                                </div>
+                                <div class="card-icon-cart">
+                                    <button id="{{this.id}}" onclick="addToCart(event)"><img
+                                            src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
+                                            alt="cart icon"></button>
+                                </div>
+                            </div>
                         </div>
                         <div class="product-details">
-                            <p><a href="products/{{this.id}}">{{this.name}}</p></a>
+                            <p><a href="/products/{{this.id}}">{{this.name}}</p></a>
                             <div class="product-bottom-details">
                                 <span>{{this.price}} €</span>
-                                <span class="card-rate">{{this.averageRate}} / 5 <i class="fa fa-star"
-                                        aria-hidden="true"></i></span>
-                                <div class="container-buttons-card-all">
-                                    <div class="card-icon-heart">
-                                        <button id="{{this.id}}" onclick="addToWishlist(event)"><img
-                                                src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
-                                                alt="heart icon"></button>
-                                    </div>
-                                    <div class="card-icon-cart">
-                                        <button id="{{this.id}}" onclick="addToCart(event)"><img
-                                                src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
-                                                alt="cart icon"></button>
-                                    </div>
+                                <a href="/producer-profile/{{this.producer.id}}"><img src="{{this.producer.logo}}"
+                                        alt="{{this.producer.name}} logo" class="card-logo"></a>
+                            </div>
+                        </div>
+                    </div>
+                    {{else}}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599772744/laBuenaVida/web-img/buscar_xdpwo4.png"
+                                    alt="no matches found" class="img-fluid py-4">
+                                <h4 class="text-center py-3">Sorry, no matches found by "{{search}}"</h4>
+                                <div class="d-flex justify-content-center">
+                                    <a href="/products"><button
+                                            class="home-sign-in d-flex justify-content-center mb-5">All
+                                            products</button></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {{/each}}
-
-
-
-                    {{!-- 
-            {{#each products}}
-            <div class="card m-3" style="width: 18rem;">
-                <a href="products/{{this.id}}">
-                    <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.name}}</h5>
-                        <ul>
-                            {{#each category as |type|}}
-                            <li>{{type}}</li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </a>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Price: {{this.price}}€</li>
-                    <li class="list-group-item">Company: <a
-                            href="/producer-profile/{{this.producer.id}}">{{this.producer.companyName}}</a></li>
-                    <li class="list-group-item"><a href="/producer-profile/{{this.producer.id}}">See other products of
-                            the company</a></li>
-                </ul>
-                <div class="card-body d-flex justify-content-center">
-                    <div>
-                        <button class="btn btn-sm m-2 btn-outline-info" id="{{this.id}}" onclick="addToWishlist(event)">
-                            <i class="fa fa-heart">Wishlist</i>
-                        </button>
-                    </div>
-                    <div>
-                        <button class="btn btn-sm m-2 btn-outline-success " id="{{this.id}}" onclick="addToCart(event)">
-                            <i class="fa fa-cart-arrow-down">Add to Cart</i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            {{/each}} --}}
                 </div>
         </div>
 </section>

@@ -97,7 +97,8 @@ button:focus {
     color: var(--secondary-white);
     font-size: var(--p-mob);
     margin: 32px 16px;
-    padding: 10px 113px;
+    padding: 10px 0;
+    min-width: 330px;
 
 }
 
@@ -223,8 +224,8 @@ button:focus {
 .container-buttons-card-all {
     position: relative;
     float: right;
-    bottom: 89px;
-    left: 49px;
+    bottom: -105px;
+    left: 128px;
 }
 
 .container-buttons-card button {
@@ -243,6 +244,197 @@ button:focus {
     background-color: transparent;
 }
 
+.card-logo {
+    width: 60px;
+    float: right;
+    position: relative;
+    left: 20px;
+    bottom: 10px;
+}
+
+/* End of Home Cards */
+
+.show-product-text h3,
+p {
+    display: inline;
+}
+
+.show-product-text {
+    padding: 20px 0;
+}
+
+.show-product-text h3 {
+    font-family: var(--p-font);
+    font-weight: bold;
+}
+
+.show-product-description h4 {
+    font-family: var(--p-font);
+    font-weight: bold;
+}
+
+.show-product-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.show-product-bottom img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.show-product-bottom input {
+    margin: 20px 0;
+    background-color: var(--primary-blue);
+    color: var(--secondary-white);
+    text-align: center;
+}
+
+.show-product-bottom label {
+    padding-left: 20px;
+    margin: 0 0;
+}
+
+.container-product-comment input[type=text] {
+    border-radius: 8px;
+    padding: 10px;
+    text-align: left;
+    border: var(--primary-dark-green);
+    background-color: var(--secondary-light-blue);
+}
+
+.container-product-comment input[type=number] {
+    border-radius: 8px;
+    padding: 10px 15px;
+    background-color: var(--secondary-light-blue);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px 6px 16px;
+    cursor: pointer;
+    background-color: var(--primary-dark-green);
+    color: var(--secondary-white);
+    border-radius: 8px;
+}
+
+.container-product-comment label {
+    padding-left: 1px;
+}
+
+.profile-producer-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-producer-header img {
+    width: 100px;
+}
+
+.producer-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.producer-img img {
+    width: 300px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.23);
+    border-radius: 8px;
+}
+
+.card-icon-edit {
+    background-color: var(--primary-yelow);
+    display: inline-flex;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 16px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.26);
+}
+
+.card-icon-edit img {
+    width: 31px;
+    margin: 9px 0 3px 10px;
+}
+
+.card-icon-edit button {
+    background-color: transparent;
+}
+
+.card-icon-delete {
+    background-color: tomato;
+    display: inline-flex;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 16px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.26);
+}
+
+.card-icon-delete img {
+    width: 31px;
+    margin: 10px 0 3px 10px;
+}
+
+.card-icon-delete button {
+    background-color: transparent;
+}
+
+.container-buttons-card-user {
+    position: relative;
+    float: right;
+    bottom: -105px;
+    left: 128px;
+    display: flex;
+}
+
+.container-upload-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.container-upload-logo img {
+    width: 150px;
+    margin: 20px 20px;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.26);
+}
+
+
+.container-form-edit-user label {
+    color: #50A6AC;
+    font-size: 14px;
+    padding-bottom: 5px;
+}
+
+.container-form-edit-user input {
+    border-color: var(--secondary-light-blue);
+  
+}
+
+.container-form-new-product label {
+    color: #50A6AC;
+    font-size: 14px;
+    padding-bottom: 5px;
+}
+
+.container-form-new-product input {
+    border-color: var(--secondary-light-blue);
+}
+
+
 .search-products-container {
     display: flex;
     flex-direction: row;
@@ -250,7 +442,21 @@ button:focus {
     justify-content: center;
 }
 
-/* End of Home Cards */
+.search-products-container input {
+    color: var(--primary-blue);
+    display: block;
+    text-align: start;
+    appearance: textfield;
+    background-color: transparent;
+    -webkit-rtl-ordering: logical;
+    margin: auto;
+    width: 100%;
+    font-size: 14px;
+    padding: 23px 14px 23px 14px;
+    border: solid 1px #50a6ac;
+    border-width: 2px;
+    border-radius: 4px;
+}
 
 .newsletter-container {
     background-color: rgba(34, 97, 98, 0.7);
@@ -296,7 +502,6 @@ button:focus {
     font-size: 14px;
     padding: 23px 14px 23px 14px;
     border: solid 1px #50a6ac;
-    ;
     border-width: 2px;
     border-radius: 4px;
 }
@@ -332,6 +537,27 @@ button:focus {
     min-width: 350px;
     text-align: center;
     text-decoration: none;
+}
+
+.remove-from-cart {
+    background-color: tomato;
+    position: relative;
+    width: 50px;
+    
+}
+
+.remove-from-cart i {
+    color: var(--secondary-white);
+    
+}
+
+.remove-from-cart button {
+    background-color: transparent;
+}
+
+.logout {
+    background-color: transparent;
+    color: tomato;
 }
 
 /* Footer */
@@ -538,7 +764,6 @@ button:focus {
 }
 
 .all-products {
-    padding-left: 5%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

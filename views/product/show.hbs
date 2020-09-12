@@ -1,5 +1,103 @@
 <section id="products" class="container">
-    <div class="card w-20 m-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="py-2">{{product.name}}</h2>
+                <div class="row">
+                    <img src="{{product.image}}" alt="{{product.name}} photo" class="img-fluid">
+                </div>
+                <div class="show-product-text">
+                    <h3 class="py-4"> {{product.price}} € </h3>
+                    <p class="pl-3 pr-5">IVA incluido</p>
+                    <p class="pl-2">{{#if product.averageRate}}{{product.averageRate}} / 5<i class="fa fa-star"
+                            aria-hidden="true"></i>{{else}} No rates yet{{/if}}</p>
+                </div>
+                <div class="show-product-description">
+                    <h4>Description</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <hr>
+                    <p class="py-4">Product Categories:</p>
+                    <ul>
+                        {{#each product.categories}}
+                        <li>
+                            <small>{{this}}</small>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    <p class="py-2">Stock: {{product.stock}}</p>
+                    <hr>
+                </div>
+                <div class="show-product-bottom">
+                    <img src="{{product.producer.logo}}" alt="{{producer.name}} logo">
+                    <form action="/product/{{product.id}}/cart" method="POST">
+                        <label for="quantity" class="text-center">Units: </label>
+                        <input type="number" min="1" max="{{product.stock}}" name="quantity" value="1">
+                        <button class="home-sign-in d-flex justify-content-center">
+                            Add to Cart
+                        </button>
+                        <button class="home-sign-in d-flex justify-content-center" id="{{product.id}}"
+                            onclick="addToWishlist(event)" style="background-color: #f9a826;">
+                            Wishlist
+                        </button>
+                    </form>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card container-product-comment">
+                                    <div class="card-body">
+                                        <div id="form" class="">
+                                            <p>Add a new comment:</p>
+                                            <form action="/new-comment/{{product.id}}" method="POST"
+                                                enctype="multipart/form-data">
+                                                <input type="text" id="input-content" name="text"
+                                                    placeholder="Leave a comment" class="w-100">
+                                                <label class="custom-file-upload">
+                                                    <input type="file" name="photo"
+                                                        style="background-color: rgba(155, 251, 242, 0.53);" />
+                                                    <i class="fa fa-cloud-upload pl-1"></i>Upload poto
+                                                </label>
+                                                <label for="rate">Rate this product (1-5)</label>
+                                                <input type="number" name="rate" min="1" max="5">
+
+
+                                                <button type="submit" class="btn  mt-1 mb-4" style="background-color: #226162; color: white;">Add
+                                                    comment</button>
+
+                                                {{#if errorMessage}}
+                                                <p class="error">{{errorMessage}}</p>
+                                                {{/if}}
+                                            </form>
+                                        </div>
+                                        <div>
+                                            {{#each product.comments as |com|}}
+                                            <div class="card p-2 w-100">
+                                                <div>
+                                                    <p><b>{{com.user.name}}</b> said:</p>
+                                                </div>
+                                                <div>
+                                                    <small>{{com.text}}</small>
+                                                </div>
+                                                <div>
+                                                    <p>{{com.rate}} / 5 <span><img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599812013/laBuenaVida/web-img/star-orange_wddvzt.png" alt="orange star rate" style="width: 20px; padding-bottom: 3px;" ></span></p>
+                                                </div>
+                                                {{#if com.photo}}
+                                                <div>
+                                                    <img src="{{com.photo}}" alt="Comment photo">
+                                                </div>
+                                                {{/if}}
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{!-- <div class="card w-20 m-3">
         <div class="m-3 card-body d-flex flex-column align-items-center">
             <p class="card-subtitle mb-2 text-muted">{{product.createdAt}}</p>
 
@@ -85,7 +183,7 @@
                 {{/if}}
             </div>
             {{/each}}
-        </div>
+        </div> 
 
-    </div>
+    </div> --}}
 </section>
