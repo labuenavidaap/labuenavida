@@ -6,13 +6,15 @@
         <div class="col-12">
             <form action="/users/{{user._id}}/edit" method="POST" enctype="multipart/form-data">
 
-                {{#if (orCond user)}}
+                {{#if (orCond user tryProducer)}}
 
 
                 <div class="container">
                     <div class="row">
                         <div class="col-12 container-upload-logo">
+                            {{#if user.logo}}
                             <img src="{{user.logo}}" alt="{{user.logo}} logo">
+                            {{/if}}
                             <label class="custom-file-upload">
                                 <input type="file" name="logo" style="background-color: rgba(155, 251, 242, 0.53);" />
                                 <i class="fa fa-cloud-upload pl-1"></i> Upload logo
@@ -94,7 +96,7 @@
                         {{/if}}
                     </div>
 
-                    {{#if (orCond user)}}
+                    {{#if (orCond user tryProducer)}}
 
                     <div class="form-group">
                         <label for="Cname">Company Name</label>
@@ -112,7 +114,6 @@
                         <label for="Caddress">Company Address</label>
                         <input type="text" class="form-control {{#if error.companyName }}is-invalid{{/if}}"
                             name="compAddress" id="cName" value="{{user.compAddress}}"></input>
-
                         {{#if error.compAddress}}
                         <div class="invalid-feedback">
                             {{error.compAddress.message}}
@@ -197,15 +198,23 @@
                         </div>
                     </div>
                 </div>
+                {{#unless user.producer}}
+                
                 <div class="container-form-edit-user flex-row">
-                    <div class="form">
-                        <label for="politic"> <input type="checkbox" id="politic" name="politic" value="politic">
+                    <div class="form-group">
+                        <input type="checkbox" id="politic" name="politic" value="true" class="{{#if error.politic}}is-invalid{{/if}}">
+                        <label for="politic"> 
                             Agree with our <a href="">Terms and
                                 Conditions</a>
-                        </label></span>
+                        </label>
+                        {{#if error.politic}}
+                        <div class="invalid-feedback alert alert-danger" role="alert">
+                            {{error.politic.message}}
+                        </div>
+                        {{/if}}
                     </div>
                 </div>
-
+                {{/unless}}
         </div>
 
 

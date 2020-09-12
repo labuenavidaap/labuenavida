@@ -176,20 +176,8 @@ module.exports.renderProfile = (req, res, next) => {
 module.exports.becomeProducer = (req, res, next) => {
   User.findOneAndUpdate({ _id: req.params.id }, { runValidators: true, new: true })
     .then(user => {
-      if (user) {
-        res.render('user/edit', { user })
-      }
-      return user
-    })
-    .then(user => {
-      user.tryProducer = true
-      user.save()
-        .then(user => {
-          setTimeout(() => {
-            user.tryProducer = false
-            user.save()
-          }, 10000)
-        })
+      const tryProducer = true
+      res.render('user/edit', { user, tryProducer })
     })
     .catch(err => console.log(err))
 }
@@ -212,12 +200,20 @@ module.exports.renderEditUser = (req, res, next) => {
 }
 
 module.exports.editUser = (req, res, next) => {
-  console.log('Editing user');
-  
   const body = req.body
+  body.producer = true
 
-  if (req.body.companyName) {
-     body.producer = true
+  if (!req.currentUser.producer && !req.body.politic) {
+    const tryProducer = true
+    return res.render('user/edit', {
+      user: req.currentUser,
+      tryProducer,
+      error: {
+        politic: {
+          message: 'To Become a producer you must accept our Terms and conditions'
+        }
+      }
+    })
   }
 
   if ((req.files.logo && req.files.pictures) && req.currentUser.producer) {
@@ -230,9 +226,10 @@ module.exports.editUser = (req, res, next) => {
       res.redirect(`/users/${req.params.id}`)
     })
     .catch(err => {
-      console.log(err)
-      console.log('Error aqui');
-      res.render('user/edit', { user: req.currentUser, 
+      const tryProducer = true
+      res.render('user/edit', {
+        user: req.currentUser,
+        tryProducer,
         error: err.errors
       })
     })

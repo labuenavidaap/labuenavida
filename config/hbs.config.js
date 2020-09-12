@@ -13,9 +13,9 @@ hbs.registerHelper('cartPrice', (cart) => {
   return (Number(cart.product.price) * cart.quantity).toFixed(2)
 })
 
-hbs.registerHelper('orCond', (user) => {
-  if (user.producer || user.tryProducer) {
+hbs.registerHelper('orCond', (user, tryProducer) => {
+  if (user.producer || tryProducer) {
     return true
   }
   else false
-});
+})

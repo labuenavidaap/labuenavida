@@ -58,15 +58,3 @@ function deleteFromCart(event) {
 $(window).on('load', function () {
     $('#myModal').modal('show')
 })
-
-
-// const btnProducer = document.getElementById('producer')
-// const cbPolitic = document.getElementById('politic')
-
-// if (cbPolitic.checked) {
-//     btnProducer.submit()
-// } else {
-//    btnProducer.submit(function (e) {
-//         e.preventDefault();
-//     })
-// }
