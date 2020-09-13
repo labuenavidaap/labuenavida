@@ -1,14 +1,16 @@
 <h1 class="text-center py-3">New user</h1>
 
 <article class="container form-xl">
-<img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599925746/laBuenaVida/web-img/undraw_welcome_cats_thqn_iecsoc.png" alt="welcome illustration" class="img-fluid pb-4">
+  <img
+    src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599925746/laBuenaVida/web-img/undraw_welcome_cats_thqn_iecsoc.png"
+    alt="welcome illustration" class="img-fluid pb-4">
 
   <form action="/signup" method="POST">
     <div class="container-form-new-product">
       <div class="form-group">
         <label for="name">Name</label>
-        <input name="name" type="text"  class="form-control {{#if error.name }}is-invalid{{/if}}"
-          id="name" value="{{user.name}}">
+        <input name="name" type="text" class="form-control {{#if error.name }}is-invalid{{/if}}" id="name"
+          value="{{user.name}}">
 
         {{#if error.name}}
         <div class="invalid-feedback">
@@ -65,12 +67,13 @@
         {{/if}}
       </div>
     </div>
-     <div class="container">
-        <div class="row">
-            <div class="col-12 container-upload-logo">
-                <button type="submit" id="producer" class="home-sign-in  btn-hover d-flex justify-content-center">Submit</button>
-            </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 container-upload-logo">
+          <button type="submit" id="producer"
+            class="home-sign-in  btn-hover d-flex justify-content-center">Submit</button>
         </div>
+      </div>
     </div>
   </form>
 </article>

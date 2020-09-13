@@ -21,13 +21,15 @@
             <div class="badge-card">{{this.categories.[0]}}</div>
             <div class="product-tumb" style="background-image: url({{this.image}});">
                 <div class="container-buttons-card-all">
-                    <div class="card-icon-heart btn-bottom-animation-1" >
-                        <button id="{{this.id}}" onclick="addToWishlist(event)" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><img
+                    <div class="card-icon-heart btn-bottom-animation-1">
+                        <button id="{{this.id}}" onclick="addToWishlist(event)" data-toggle="tooltip"
+                            data-placement="top" title="Add to Wishlist"><img
                                 src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
                                 alt="heart icon"></button>
                     </div>
                     <div class="card-icon-cart btn-bottom-animation-1">
-                        <button id="{{this.id}}" onclick="addToCart(event)" data-toggle="tooltip" data-placement="top" title="Add to cart"><img
+                        <button id="{{this.id}}" onclick="addToCart(event)" data-toggle="tooltip" data-placement="top"
+                            title="Add to cart"><img
                                 src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
                                 alt="cart icon"></button>
                     </div>
@@ -50,7 +52,8 @@
                         alt="no matches found" class="img-fluid py-4">
                     <h4 class="text-center py-3">Sorry, no matches found by "{{search}}"</h4>
                     <div class="d-flex justify-content-center">
-                        <a href="/products"><button class="home-sign-in btn-hover d-flex justify-content-center mb-5">All
+                        <a href="/products"><button
+                                class="home-sign-in btn-hover d-flex justify-content-center mb-5">All
                                 products</button></a>
                     </div>
                 </div>
