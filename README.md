@@ -1,14 +1,12 @@
-## LA BUENA VIDA APP
-
-[See the website deployed](https://la-buena-vida.herokuapp.com/home)
-
-### Webpage developed with Express and MongoDB
+# LA BUENA VIDA APP
+## Webpage developed with Express and MongoDB
 
 - [Installation and use](#installation-and-use)
 - [Technologies used](#tools)
-- [Life application](#live-demo)
+- [See the webpage](#live-demo)
+- [Team](#developed-by)
 
-### Installation and use:
+## Installation and use:
 - Once you have cloned the repository and move to the folder install the dependencies:
 ```
 npm install
@@ -30,7 +28,7 @@ npm run dev
 ```
 This will execute "dev": "nodemon -e hbs,js,css app.js" so you won't need to stop and run the app everytime you change anything in hbs or css.
 
-### Tools:
+## Tools:
 - Express - 4.17.1
 - MongoDB (Mongoose - ^5.10.0)
 - HBS - ^4.1.1
@@ -50,8 +48,11 @@ This will execute "dev": "nodemon -e hbs,js,css app.js" so you won't need to sto
     - passport - ^0.4.1
     - passport-google-oauth20 - ^2.0.0"
 
-### Developed by:
-[Fernando Marín](https://github.com/fermarinsanchez)
-[Miguel Valle](https://github.com/MiguelValle94)
+## Live demo:
+[See the website deployed](https://la-buena-vida.herokuapp.com/home)
+
+## Developed by:
+- [Fernando Marín](https://github.com/fermarinsanchez)
+- [Miguel Valle](https://github.com/MiguelValle94)
 
 ![La Buena Vida App](https://res.cloudinary.com/difhe4gl3/image/upload/v1599598714/laBuenaVida/web-img/VERSION_MOBILE_eycumk.png)
