@@ -265,7 +265,7 @@ module.exports.sendValidationEmail = ({ id, email, activationToken, name }) => {
                                                                 <td align="center" bgcolor="#F1E648"  role="presentation"
                                                                     style="border:none;border-radius:24px;cursor:auto;mso-padding-alt:15px; background-color: #226162                                                          background-color: #226162;"
                                                                     valign="middle">
-                                                                    <a href="http://localhost:3000/users/${id}/activate/${activationToken}"
+                                                                    <a href="https://la-buena-vida.herokuapp.com/users/${id}/activate/${activationToken}"
                                                                         style="display:inline-block;background-color: #226162; border-radius:24px;color:white;font-family: 'Montserrat', sans-serif;;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:15px 30px;mso-padding-alt:0px;border-radius:2px;"
                                                                         target="_blank">
                                                                         Activate your account
@@ -573,7 +573,7 @@ module.exports.sendOrder = ({ id, email, name, order }) => {
                                                                 <td align="center" bgcolor="#F1E648"  role="presentation"
                                                                     style="border:none;border-radius:24px;cursor:auto;mso-padding-alt:15px; background-color: #226162                                                          background-color: #226162;"
                                                                     valign="middle">
-                                                                    <a href="http://localhost:3000/users/${id}"
+                                                                    <a href="https://la-buena-vida.herokuapp.com/users/${id}"
                                                                         style="display:inline-block;background-color: #226162; border-radius:24px;color:white;font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;padding:15px 30px;mso-padding-alt:0px;border-radius:2px;"
                                                                         target="_blank">
                                                                         Check your orders

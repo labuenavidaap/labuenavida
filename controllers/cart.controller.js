@@ -143,7 +143,7 @@ module.exports.stripe = (req, res, next) => {
                 },
               ],
               mode: 'payment',
-              success_url: `http://localhost:3000/thank-you/${req.currentUser.id}`,
+              success_url: `https://la-buena-vida.herokuapp.com/thank-you/${req.currentUser.id}`,
               cancel_url: 'https://example.com/cancel',
             })
               .then(session => {
