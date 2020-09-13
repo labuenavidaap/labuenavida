@@ -101,7 +101,6 @@ const userSchema = new mongoose.Schema(
             type: Boolean,
             validate: {
                 validator: function (value) {
-                    console.log('Running validation')
                     return !this.producer || value
                 },
                 message: 'To become a producer you must accept our Terms & Conditions'
