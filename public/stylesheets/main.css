@@ -109,6 +109,7 @@ button:focus {
     margin: 32px 16px;
     padding: 10px 0;
     min-width: 330px;
+    transition: all .5s;
 }
 
 .group-buttons {
@@ -226,35 +227,40 @@ button:focus {
 .card-icon-heart {
     background-color: var(--primary-yelow);
     display: inline-flex;
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
     margin-right: 16px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.26);
+    transition: all .5s;
 }
 
 .card-icon-heart img {
-    width: 16px;
-    margin: 3px 0 3px 7px;
+    width: 31px;
+    margin: 0px 0px 0px 9px;
 }
 
 .card-icon-cart {
     background-color: var(--primary-dark-green);
     display: inline-flex;
-    height: 30px;
-    width: 30px;
+    height: 50px;
+    width: 50px;
     border-radius: 50%;
+    margin-right: 16px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.26);
+    transition: all .5s;
 
 }
 
 .card-icon-cart img {
-    width: 16px;
-    margin: 3px 0 3px 6px;
+    width: 31px;
+    margin: 0px 0px 0px 8px;
 }
 
 .container-buttons-card {
     position: relative;
     float: right;
-    bottom: 89px;
+    bottom: 113px;
     left: 89px;
 }
 
@@ -273,6 +279,79 @@ button:focus {
     background-color: transparent;
 }
 
+/* buttons card animation */
+
+.card-icon-edit:hover {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    background-color: orange;
+    transform: translateY(-3px);
+}
+
+.card-icon-edit:active {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.card-icon-delete:hover {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    background-color: red;
+    transform: translateY(-3px);
+}
+
+.card-icon-delete:active {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.card-icon-heart:hover {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    background-color: tomato;
+    transform: translateY(-3px);
+}
+
+.card-icon-heart:active {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.card-icon-cart:hover {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    background-color: lightseagreen;
+    transform: translateY(-3px);
+}
+
+.card-icon-cart:active {
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-bottom-animation-1 {
+    animation: comeFromBottom 1s ease-out .8s;
+}
+
+.btn-animation-1:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-hover:hover {
+    opacity: 0.7;
+}
+
+@keyframes comeFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* end of buttons card animation */
+
 .container-buttons-card-all button {
     font-size: 100%;
     font-family: inherit;
@@ -286,6 +365,14 @@ button:focus {
     float: right;
     position: relative;
     left: 20px;
+    bottom: 10px;
+    border-radius: 50%;
+}
+
+.card-logo-one {
+    width: 60px;
+    float: right;
+    position: relative;
     bottom: 10px;
     border-radius: 50%;
 }
@@ -398,6 +485,7 @@ input[type="file"] {
     border-radius: 50%;
     margin-right: 16px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.26);
+    transition: all .5s;
 }
 
 .card-icon-edit img {
@@ -417,6 +505,7 @@ input[type="file"] {
     border-radius: 50%;
     margin-right: 16px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.26);
+    transition: all .5s;
 }
 
 .card-icon-delete img {
@@ -568,6 +657,7 @@ input[type="file"] {
     font-size: var(--p-mob);
     padding: 10px 0;
     min-width: 350px;
+    transition: all .5s;
 }
 
 .login-buttons a {
@@ -579,11 +669,10 @@ input[type="file"] {
     min-width: 350px;
     text-align: center;
     text-decoration: none;
+    transition: all .5s;
 }
 
 .container-cart div {
-    display: flex;
-    justify-content: center;
     border-radius: 50%;
 }
 
@@ -603,7 +692,7 @@ input[type="file"] {
 .remove-from-cart i {
     color: var(--secondary-white);
     font-size: 20px;
-    margin: 4px 0 1px 0;
+    margin: 4px 0px 0px 7px;
 }
 
 .remove-from-cart button {
@@ -931,11 +1020,15 @@ input[type="file"] {
     .width-all-products {
         width: 85%;
     }
- 
+
     .comment-panel-xl {
         display: flex;
         align-items: baseline;
         justify-content: space-between;
+    }
+    .remove-from-cart {
+        top: 0px;
+       
     }
 }
 

@@ -20,20 +20,20 @@
                 <div class="row">
                     <div class="col-12">
                         <ul class="p-4 text-left">
-                            <li class="">Email: {{user.email}}</li>
+                            <li>Email: {{user.email}}</li>
                             <hr>
-                            <li class="">Address: {{user.address}}</li>
+                            <li>Address: {{user.address}}</li>
                             <hr>
-                            <li class="">Phone: {{user.phone}}</li>
+                            <li>Phone: {{user.phone}}</li>
                             <hr>
                             {{#if user.producer}}
-                            <li class=""><b>Producer Data</b> <i class="fa fa-arrow-down" aria-hidden="true"></i></li>
+                            <li><b>Producer Data</b> <i class="fa fa-arrow-down" aria-hidden="true"></i></li>
                             <hr>
-                            <li class="">Bio:<br>{{user.bio}}</li>
+                            <li>Bio:<br>{{user.bio}}</li>
                             <hr>
-                            <li class="">Address: {{user.compAddress}}</li>
+                            <li>Address: {{user.compAddress}}</li>
                             <hr>
-                            <li class=""><small>Phone: <a href="tel:{{user.compPhone}}"></a>{{user.compPhone}} | Email:
+                            <li><small>Phone: <a href="tel:{{user.compPhone}}"></a>{{user.compPhone}} | Email:
                                     <a href="mailto:{{user.compMail}}"></a>{{user.compMail}} </small></li>
                             <hr>
                             <li> {{#if user.producer}}
@@ -46,16 +46,16 @@
                     </div>
                 </div>
                 <div class="form-xl d-flex flex-column align-items-center">
-                    <a href="/users/{{currentUser._id}}/edit"><button class="group-buttons">
+                    <a href="/users/{{currentUser._id}}/edit"><button class="group-buttons btn-hover">
                             Edit profile </button>
                     </a>
                     <form action="/users/{{currentUser.id}}/delete" method="POST">
-                        <button type="submit" class="group-buttons" style="background-color: tomato;">
+                        <button type="submit" class="group-buttons btn-hover" style="background-color: tomato;">
                             Remove account
                         </button>
                     </form>
                     {{#if user.producer}}
-                    <a href="/new-product"><button class="group-buttons" style="background-color: #50A6AC;"> New
+                    <a href="/new-product"><button class="group-buttons btn-hover" style="background-color: #50A6AC;"> New
                             Product</button></a>
                     {{/if}}
                 </div>
@@ -76,12 +76,12 @@
                     <div class="badge-card">{{product.categories.[0]}}</div>
                     <div class="product-tumb" style="background-image: url({{product.image}});">
                         <div class="container-buttons-card-user">
-                            <div class="card-icon-edit">
-                                <a href="/products/{{product.id}}/edit"><button><img
+                            <div class="card-icon-edit btn-animation-1">
+                                <a href="/products/{{product.id}}/edit" data-toggle="tooltip" data-placement="top" title="Edit product"><button><img
                                             src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846428/assets/noun_edit_3020483_copia_m1nfb7.png"
                                             alt="pencil edit icon"></button></a>
                             </div>
-                            <div class="card-icon-delete">
+                            <div class="card-icon-delete btn-animation-1" data-toggle="tooltip" data-placement="top" title="Delete product">
                                 <form action="/delete/{{product.id}}" method="POST">
                                     <button><img
                                             src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846689/assets/noun_Trash_1294925_copia_et475o.png"
@@ -110,7 +110,7 @@
                 <p>Date: {{date order.createdAt}}</p>
                 <p>Total purchase: {{order.total}} €</p>
                 <div class="col-12 container-upload-logo">
-                    <button type="submit" id="producer" class="home-sign-in d-flex justify-content-center">See
+                    <button type="submit" id="producer" class="home-sign-in btn-hover d-flex justify-content-center">See
                         Details</button>
                 </div>
             </div>
@@ -128,13 +128,13 @@
                 <div class="badge-card">{{product.categories.[0]}}</div>
                 <div class="product-tumb" style="background-image: url({{product.image}});">
                     <div class="container-buttons-card-user">
-                        <div class="card-icon-edit">
-                            <button id="{{this.product.id}}" onclick="addToCart(event)"><img
+                        <div class="card-icon-edit btn-hover">
+                            <button id="{{this.product.id}}" onclick="addToCart(event)" data-toggle="tooltip" data-placement="top" title="Add to cart"><img
                                     src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
                                     alt="add to cart icon" style="margin: 10px 0 3px 7px;"></button>
                         </div>
-                        <div class="card-icon-delete">
-                            <button id="{{this.id}}" onclick="deleteFromWishlist(event)"><img
+                        <div class="card-icon-delete btn-hover">
+                            <button id="{{this.id}}" onclick="deleteFromWishlist(event)" data-toggle="tooltip" data-placement="top" title="Delete from Wihslist"><img
                                     src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846689/assets/noun_Trash_1294925_copia_et475o.png"
                                     alt="Trash icon" style="margin: 10px 0 9px 10px;"></button>
                         </div>

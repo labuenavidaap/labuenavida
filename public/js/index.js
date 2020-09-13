@@ -58,3 +58,7 @@ function deleteFromCart(event) {
 $(window).on('load', function () {
     $('#myModal').modal('show')
 })
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })

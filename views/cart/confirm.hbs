@@ -16,8 +16,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 container-upload-logo">
-                            <a href="/users/{{user.id}}/edit"
-                                class="home-sign-in d-flex justify-content-center">Update
+                            <a href="/users/{{user.id}}/edit" class="home-sign-in btn-hover d-flex justify-content-center">Update
                                 profile</a>
                         </div>
                     </div>
@@ -27,8 +26,7 @@
     </div>
 </div>
 {{/unless}}
-
-<h3 class="text-center py-5">Check your data and order, {{user.name}}:</h3>
+<h3 class="text-center py-3">Check your data and order, {{user.name}}:</h3>
 <div class="container">
     <div class="row">
         <div class="col-12">
@@ -42,73 +40,59 @@
                 <p>Phone: {{user.phone}}</p>
                 <hr>
                 <div class="d-flex justify-content-center">
-                    <a href="/users/{{user.id}}/edit"> <button class="home-sign-in d-flex
+                    <a href="/users/{{user.id}}/edit"> <button class="home-sign-in btn-hover d-flex
                             justify-content-center" style="text-decoration: none;">Change your data</button></a>
                 </div>
-                {{!-- <a href="/users/{{user.id}}/edit" class="btn btn-primary m-5">Change your Data</a> --}}
             </div>
         </div>
     </div>
-
 </div>
 
-<div>
-    
-    <div class="container">
+<div class="container">
     <div class="row">
         <div class="col-12">
-            <h5><b>Check your order:</b></h5>
             <ul class="list-group">
                 <div class="container-cart">
                     {{#each cart}}
-                    <li class="list-group-item cart-container" style="padding-bottom: 35px">
-                        <span class="px-2"><img src="{{this.product.image }}" alt="{{this.product.name }}" /></span>
-                        <ul>
-                            <li class=""> Product: {{this.product.name }}</li>
-                            <li class="">Quantity: {{this.quantity}} units.</li>
-                            <li class="">Price: {{this.product.price}} €</li>
+                    <li class="list-group-item cart-container">
+
+                        <ul class="comment-panel-xl ">
+                            <li> <span class="px-2"><img src="{{this.product.image }}"
+                                        alt="{{this.product.name }}" /></span></li>
+                            <li class="text-left">
+                                <div class="text-left" style="width: 200px;">
+                                    Product: {{this.product.name }}
+                                </div>
+                            </li>
+                            <li>Quantity: {{this.quantity}} units.</li>
+                            <li>Price: {{this.product.price}} €</li>
                             <li class="float-right">Total: {{cartPrice this}} €</li>
+                            <li>
+                                <div class="remove-from-cart" style="opacity: 0;">
+                                    <form action="">
+                                        <button id="">
+                                            <i class="fa fa-times delete-icon" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
                         </ul>
                     </li>
-
                     {{/each}}
                 </div>
-                
                 <li>
                     <span class="cart-final-price">Final Price: {{finalCartPrice}} €</span>
                 </li>
                 <li>
-
                     <div class="d-flex justify-content-center">
-                         <button class="home-sign-in d-flex
-                            justify-content-center"
-                            style="text-decoration: none;" id="checkout-button">Confirm Payment</button>
+                         <button class="home-sign-in btn-hover d-flex
+                            justify-content-center" id="checkout-button">Confirm Payment</button>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 </div>
-    {{!-- <ul class="list-group">
-        {{#each cart}}
-        <li class="list-group-item cart-container">
-            <span class="px-2"><img src="{{this.product.image }}" alt="{{this.product.name }}"
-                    style="width: 50px;" /></span>
-            <span class="pl-5"> Product: {{this.product.name }}</span>
-            <span class="pl-5">Quantity: {{this.quantity}}</span>
-            <span class="pl-5">Price: {{this.product.price}} €</span>
-            <span class="float-right">Total: {{cartPrice this}} €</span>
-        </li>
 
-        {{/each}}
-        <li class="text-center">
-            <span class="p-5 bg-danger text-white">Final Price: <b>{{finalCartPrice}} €</b></span>
-        </li>
-        <li>
-            <button class="btn btn-success mx-5" id="checkout-button">Confirm Payment</button>
-        </li>
-    </ul> --}}
-
-</div>
 <script src="https://js.stripe.com/v3/"></script>
 <script src="/js/stripe.js"></script>

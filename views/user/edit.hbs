@@ -1,8 +1,8 @@
 
 {{#if tryProducer}}
-<h1 class="text-center py-5">Become a producer</h1>
+<h1 class="text-center py-3">Become a producer</h1>
 {{else}}
-<h1 class="text-center py-5">Edit user</h1>
+<h1 class="text-center py-3">Edit user</h1>
 {{/if}}
 <article class="container">
     <div class="row">
@@ -213,7 +213,7 @@
                             <input type="checkbox" id="politic" name="politic" value="true"
                                 class="{{#if error.politic}}is-invalid{{/if}}">
                             <label for="politic">
-                                Agree with our <a href="">Terms and
+                                Agree with our <a href="" class="btn-hover">Terms and
                                     Conditions</a>
                             </label>
                             {{#if error.politic}}
@@ -230,7 +230,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 container-upload-logo">
-                    <button type="submit" id="producer" class="home-sign-in d-flex justify-content-center">Update
+                    <button type="submit" id="producer" class="home-sign-in btn-hover d-flex justify-content-center">Update
                         profile</button>
                 </div>
             </div>

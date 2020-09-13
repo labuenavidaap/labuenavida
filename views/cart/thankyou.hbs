@@ -1,4 +1,4 @@
-<h1 class="text-center py-5">
+<h1 class="text-center py-3">
     Thank you {{user.name}}
 </h1>
 <div class="container form-xl">
@@ -6,11 +6,11 @@
         <div class="col-12 container-thanks">
             <img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599906757/laBuenaVida/web-img/exito_gbn6gy.png"
                 alt="Thank you for buying" class="img-fluid">
-            <p>Thank you very much {{user.name}}, for shopping at La Buena Vida . In a few moments you will receive an
+            <p class="text-center">Thank you {{user.name}}, for shopping at La Buena Vida . In a few moments you will receive an
                 email with the details of your purchase. You will receive our products at your home within 24h. Thank
                 you for trusting La Buena Vida.</p>
             <form action="/thank-you/{{user.id}}" method="POST">
-                <button class="home-sign-in">Continue buying</button>
+                <button class="home-sign-in btn-hover">Continue buying</button>
             </form>
         </div>
     </div>

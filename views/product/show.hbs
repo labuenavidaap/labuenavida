@@ -2,14 +2,14 @@
     <div class="container form-xl">
         <div class="row">
             <div class="col-12">
-                <h2 class="py-2">{{product.name}}</h2>
+                <h2 class="py-3">{{product.name}}</h2>
                 <div class="row">
                     <img src="{{product.image}}" alt="{{product.name}} photo" class="img-fluid">
                 </div>
                 <div class="show-product-text d-flex justify-content-between align-items-baseline">
                     <div class="d-flex align-items-baseline">
                         <h3 class="py-4"> {{product.price}} € </h3>
-                        <p class="pl-3 pr-5">IVA incluido</p>
+                        <p class="pl-3 pr-5">VAT included</p>
                     </div>
 
                     <p class="pl-2">{{#if product.averageRate}}{{product.averageRate}} / 5<i class="fa fa-star"
@@ -33,10 +33,10 @@
                             </ul>
                             <p class="py-2">Stock: {{product.stock}}</p>
                         </div>
-                        <a href="/public-profile/{{product.producer.id}}/"
+                        <a href="/producer-profile/{{product.producer.id}}/"
                             style="text-decoration: none; color: #226162;">
                             <div class="d-flex flex-column align-items-center text-center pt-4">
-                                <img src="{{product.producer.logo}}" alt="{{producer.name}} logo" class="card-logo">
+                                <img src="{{product.producer.logo}}" alt="{{producer.name}} logo" class="card-logo-one">
                                 <p>{{product.producer.companyName}}</p>
                             </div>
                         </a>
@@ -48,12 +48,12 @@
                 <div class="show-product-bottom">
 
                     <form action="/product/{{product.id}}/cart" method="POST">
-                        <label for="quantity" class="text-center">How many {{product.name}} do you want?: </label>
+                        <label for="quantity" class="text-center">How many do you want?: </label>
                         <input type="number" min="1" max="{{product.stock}}" name="quantity" value="1">
-                        <button class="home-sign-in d-flex justify-content-center">
+                        <button class="home-sign-in btn-hover d-flex justify-content-center">
                             Add to Cart
                         </button>
-                        <button class="home-sign-in d-flex justify-content-center" id="{{product.id}}"
+                        <button class="home-sign-in btn-hover d-flex justify-content-center" id="{{product.id}}"
                             onclick="addToWishlist(event)" style="background-color: #f9a826;">
                             Wishlist
                         </button>
@@ -79,7 +79,7 @@
                                                         <label for="rate">Rate this product (1-5)</label>
                                                         <input type="number" name="rate" min="1" max="5">
                                                     </div>
-                                                    <button type="submit" class="btn  mt-1 mb-4"
+                                                    <button type="submit" class="btn  mt-1 mb-4 btn-hover"
                                                         style="background-color: #226162; color: white;">Add
                                                         comment</button>
                                                 </div>
@@ -92,8 +92,9 @@
                                         <div>
                                             {{#each product.comments as |com|}}
                                             <div class="card p-2 w-100">
-                                                <div>
+                                                <div class="comment-panel-xl">
                                                     <p><b>{{com.user.name}}</b> said:</p>
+                                                    <p><small class="text-muted">{{date com.createdAt}}</small></p>
                                                 </div>
                                                 <div>
                                                     <small>{{com.text}}</small>
@@ -117,95 +118,4 @@
                             </div>
                         </div>
                     </div>
-
-
-                    {{!-- <div class="card w-20 m-3">
-        <div class="m-3 card-body d-flex flex-column align-items-center">
-            <p class="card-subtitle mb-2 text-muted">{{product.createdAt}}</p>
-
-            <h3 class="card-text">
-                {{product.name}}
-            </h3>
-
-            <p class="card-text">
-                <a href="/producer-profile/{{product.producer.id}}"><b>{{product.producer.companyName}}</b></a>
-            </p>
-            <p class="card-text">
-                {{product.description}}</b>
-            </p>
-            <p class="card-text">
-                Price: {{product.price}}€
-            </p>
-            <p class="card-text">
-                Stock: {{product.stock}}
-            </p>
-            <div>
-                {{#each product.categories}}
-                <div class="btn btn-danger">{{this}}</div>
-                {{/each}}
-            </div>
-
-            <div>
-                Rate: {{#if product.averageRate}}{{product.averageRate}} / 5<i class="fa fa-star" aria-hidden="true">{{else}} No rates yet {{/if}}</i>
-            </div>
-
-            <img class="rounded-sm w-20 mb-1" src="{{product.image}}" style="width: 450px!important;" />
-
-            <div class="card-body d-flex justify-content-center">
-                <div>
-                    <button class="btn btn-sm m-2 btn-outline-info" id="{{product.id}}" onclick="addToWishlist(event)">
-                        <i class="fa fa-heart">Wishlist</i>
-                    </button>
-                </div>
-                <div>
-                    <form action="/product/{{product.id}}/cart" method="POST">
-                        <label for="quantity">Units:</label>
-                        <input type="number" min="1" max="{{product.stock}}" name="quantity" value="1">
-                        <button class="btn btn-sm mb-2 btn-outline-danger">
-                            <i class="fa fa-cart-arrow-down">Add to Cart</i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <div id="form" class="w-100 ">
-            <h5>Add a new comment:</h5>
-            <form action="/new-comment/{{product.id}}" method="POST" enctype="multipart/form-data">
-                <input type="text" id="input-content" name="text" placeholder="Your text" class="w-100">
-
-                <input type="number" name="rate" min="1" max="5" placeholder="Rate">
-
-                <input type="file" name="photo">
-                <label>Choose file</label>
-
-                <button type="submit" class="btn btn-primary mt-3 mb-4">Add comment</button>
-
-                {{#if errorMessage}}
-                <p class="error">{{errorMessage}}</p>
-                {{/if}}
-            </form>
-        </div>
-        <div>
-            {{#each product.comments as |com|}}
-            <div class="card m-3 p-2 w-100">
-                <div>
-                    <b>{{com.user.name}}</b>
-                </div>
-                <div>
-                    {{com.text}}
-                </div>
-                <div>
-                    {{com.rate}}
-                </div>
-                {{#if com.photo}}
-                <div>
-                    <img src="{{com.photo}}" alt="Comment photo">
-                </div>
-                {{/if}}
-            </div>
-            {{/each}}
-        </div> 
-
-    </div> --}}
 </section>

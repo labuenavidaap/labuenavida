@@ -1,36 +1,60 @@
-<div class="row">
-    <p><strong>Company Name:</strong> {{user.companyName}}</p>
-    <p><strong>Comapny Bio:</strong> {{user.bio}}</p>
-
-    <p><strong>Company Address:</strong> {{user.compAddress}}</p>
-    <p><strong>Company email:</strong> {{user.compMail}}</p>
-    <p><strong>Company phone:</strong> {{user.compPhone}}</p>
-    <p><strong>Company url:</strong> {{user.compLink}}</p>
-    <p><strong>Company Politics:</strong> {{user.politic}}</p>
-    <p><strong>Company Certificates:</strong>{{user.certificates}}
-    <p>
-    <p>Pictures of the Company:</p>
-
-    <img src="{{user.pictures}}" alt="user picture" width="300px">
-    </section>
-    <div class="row">
-        {{#each user.products as |product|}}
-        <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-            <div class="col-xl-4 col-lg-6 col-sm-12 mb-4">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="{{product.image}}" alt="{{product.name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{product.name}}</h5>
-                        <p class="card-text">{{product.bio}}</p>
-                        <a href="/products/{{product.id}}">Go to product</a>
-                        <form action="/products/{{product.id}}/cart" method="POST">
-                            <button class="btn btn-sm m-2 btn-outline-success " id="{{product.id}}">
-                                <i class="fa fa-cart-arrow-down">Add to Cart</i>
-                            </button>
-                        </form>
-                    </div>
-                </div>
+<div class="container">
+    <div class="row py-2" style="margin-top: 9px;">
+        <div class="col-12">
+            <div class="text-center profile-headers">
+                <img src="{{user.logo}}" alt="{{user.companyName}}" class="rounded-circle">
+                <h3 class="text-center py-3">{{user.companyName}}</h3>
             </div>
         </div>
-        {{/each}}
+        <div class="row form-xl">
+            <div class="col-12">
+                <ul class="p-4 text-left">
+                    <li>Bio:<br>{{user.bio}}</li>
+                    <hr>
+                    <li>Address: {{user.compAddress}}</li>
+                    <hr>
+                    <li>WebSite: {{user.compLink}}</li>
+                    <hr>
+                    <li><small>Phone: <a href="tel:{{user.compPhone}}"></a>{{user.compPhone}} | Email:
+                            <a href="mailto:{{user.compMail}}"></a>{{user.compMail}} </small></li>
+                    <li>
+                        <div class="producer-img">
+                            <p>Pictures of {{user.companyName}}:</p>
+                            <img src="{{user.pictures}}" alt="user picture">
+                        </div>
+                    </li>
+                    <hr>
+                </ul>
+            </div>
+        </div>
+        <section id="products" class="container-fluid d-flex justify-content-center">
+            <div class="row d-flex justify-content-center width-all-products">
+                {{#each user.products as |product|}}
+                <div class="product-card">
+                    <div class="badge-card">{{product.categories.[0]}}</div>
+                    <div class="product-tumb" style="background-image: url({{product.image}});">
+                        <div class="container-buttons-card-all">
+                            <div class="card-icon-heart btn-animation-1 btn-bottom-animation-1" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
+                                <button id="{{product.id}}" onclick="addToWishlist(event)"><img
+                                        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
+                                        alt="heart icon"></button>
+                            </div>
+                            <div class="card-icon-cart btn-animation-1 btn-bottom-animation-1" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                                <button id="{{product.id}}" onclick="addToCart(event)"><img
+                                        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
+                                        alt="cart icon"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <p><a href="/products/{{product.id}}">{{product.name}}</p></a>
+                        <div class="product-bottom-details">
+                            <span>{{product.price}} €</span>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
 </div>

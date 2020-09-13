@@ -8,7 +8,7 @@
 </div>
 
 
-<h2 class="text-center pt-5"> All Products</h2>
+<h2 class="text-center pt-3"> All Products</h2>
 {{#if message}}
 <div class="alert alert-primary" role="alert">
     {{mesage}}
@@ -21,13 +21,13 @@
             <div class="badge-card">{{this.categories.[0]}}</div>
             <div class="product-tumb" style="background-image: url({{this.image}});">
                 <div class="container-buttons-card-all">
-                    <div class="card-icon-heart">
-                        <button id="{{this.id}}" onclick="addToWishlist(event)"><img
+                    <div class="card-icon-heart btn-bottom-animation-1" >
+                        <button id="{{this.id}}" onclick="addToWishlist(event)" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><img
                                 src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/heart_uqxkon.png"
                                 alt="heart icon"></button>
                     </div>
-                    <div class="card-icon-cart">
-                        <button id="{{this.id}}" onclick="addToCart(event)"><img
+                    <div class="card-icon-cart btn-bottom-animation-1">
+                        <button id="{{this.id}}" onclick="addToCart(event)" data-toggle="tooltip" data-placement="top" title="Add to cart"><img
                                 src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
                                 alt="cart icon"></button>
                     </div>
@@ -37,20 +37,20 @@
                 <p><a href="/products/{{this.id}}">{{this.name}}</p></a>
                 <div class="product-bottom-details">
                     <span>{{this.price}} €</span>
-                    <a href="/public-profile/{{this.producer.id}}"><img src="{{this.producer.logo}}"
+                    <a href="/producer-profile/{{this.producer.id}}"><img src="{{this.producer.logo}}"
                             alt="{{this.producer.name}} logo" class="card-logo"></a>
                 </div>
             </div>
         </div>
         {{else}}
         <div class="container">
-            <div class="row">
+            <div class="row form-xl">
                 <div class="col-12">
                     <img src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599772744/laBuenaVida/web-img/buscar_xdpwo4.png"
                         alt="no matches found" class="img-fluid py-4">
                     <h4 class="text-center py-3">Sorry, no matches found by "{{search}}"</h4>
                     <div class="d-flex justify-content-center">
-                        <a href="/products"><button class="home-sign-in d-flex justify-content-center mb-5">All
+                        <a href="/products"><button class="home-sign-in btn-hover d-flex justify-content-center mb-5">All
                                 products</button></a>
                     </div>
                 </div>
