@@ -1,5 +1,5 @@
-var stripe = Stripe('pk_test_51HO0RHCbVlpVVSMqknO9OGwNJemEptYsSH793Nw2f82Wzz4hX1JrCRhLTozAosgdqz9Ea4EQCdGxaEusZoj8zmEG00P1k5Y8qs');
-var checkoutButton = document.getElementById('checkout-button');
+var stripe = Stripe('pk_test_51HO0RHCbVlpVVSMqknO9OGwNJemEptYsSH793Nw2f82Wzz4hX1JrCRhLTozAosgdqz9Ea4EQCdGxaEusZoj8zmEG00P1k5Y8qs')
+var checkoutButton = document.getElementById('checkout-button')
 
 checkoutButton.addEventListener('click', function () {
   fetch('/create-checkout-session', {
@@ -13,7 +13,7 @@ checkoutButton.addEventListener('click', function () {
     })
     .then(function (result) {
       if (result.error) {
-        alert(result.error.message);
+        alert(result.error.message)
       }
     })
     .catch(function (error) {

@@ -55,7 +55,8 @@
                         </button>
                     </form>
                     {{#if user.producer}}
-                    <a href="/new-product"><button class="group-buttons btn-hover" style="background-color: #50A6AC;"> New
+                    <a href="/new-product"><button class="group-buttons btn-hover" style="background-color: #50A6AC;">
+                            New
                             Product</button></a>
                     {{/if}}
                 </div>
@@ -69,33 +70,35 @@
     <div>
         <h2 class="text-center py-3">Products of {{user.companyName}}</h2>
         <div class="row d-flex justify-content-center">
-            
-                {{#each user.products as |product|}}
 
-                <div class="product-card mb-5 product-container">
-                    <div class="badge-card">{{product.categories.[0]}}</div>
-                    <div class="product-tumb" style="background-image: url({{product.image}});">
-                        <div class="container-buttons-card-user">
-                            <div class="card-icon-edit btn-animation-1">
-                                <a href="/products/{{product.id}}/edit" data-toggle="tooltip" data-placement="top" title="Edit product"><button><img
-                                            src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846428/assets/noun_edit_3020483_copia_m1nfb7.png"
-                                            alt="pencil edit icon"></button></a>
-                            </div>
-                            <div class="card-icon-delete btn-animation-1" data-toggle="tooltip" data-placement="top" title="Delete product">
-                                <form action="/delete/{{product.id}}" method="POST">
-                                    <button><img
-                                            src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846689/assets/noun_Trash_1294925_copia_et475o.png"
-                                            alt="Trash icon"></button>
-                                </form>
-                            </div>
+            {{#each user.products as |product|}}
+
+            <div class="product-card mb-5 product-container">
+                <div class="badge-card">{{product.categories.[0]}}</div>
+                <div class="product-tumb" style="background-image: url({{product.image}});">
+                    <div class="container-buttons-card-user">
+                        <div class="card-icon-edit btn-animation-1">
+                            <a href="/products/{{product.id}}/edit" data-toggle="tooltip" data-placement="top"
+                                title="Edit product"><button><img
+                                        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846428/assets/noun_edit_3020483_copia_m1nfb7.png"
+                                        alt="pencil edit icon"></button></a>
+                        </div>
+                        <div class="card-icon-delete btn-animation-1" data-toggle="tooltip" data-placement="top"
+                            title="Delete product">
+                            <form action="/delete/{{product.id}}" method="POST">
+                                <button><img
+                                        src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846689/assets/noun_Trash_1294925_copia_et475o.png"
+                                        alt="Trash icon"></button>
+                            </form>
                         </div>
                     </div>
-                    <div class="product-details">
-                        <p class="text-left"><a href="/products/{{product.id}}">{{product.name}}</p></a>
-                    </div>
                 </div>
+                <div class="product-details">
+                    <p class="text-left"><a href="/products/{{product.id}}">{{product.name}}</p></a>
+                </div>
+            </div>
 
-                {{/each}}
+            {{/each}}
         </div>
     </div>
 
@@ -129,12 +132,14 @@
                 <div class="product-tumb" style="background-image: url({{product.image}});">
                     <div class="container-buttons-card-user">
                         <div class="card-icon-edit btn-hover">
-                            <button id="{{this.product.id}}" onclick="addToCart(event)" data-toggle="tooltip" data-placement="top" title="Add to cart"><img
+                            <button id="{{this.product.id}}" onclick="addToCart(event)" data-toggle="tooltip"
+                                data-placement="top" title="Add to cart"><img
                                     src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599678678/laBuenaVida/web-img/carrito_cwdrzn.png"
                                     alt="add to cart icon" style="margin: 10px 0 3px 7px;"></button>
                         </div>
                         <div class="card-icon-delete btn-hover">
-                            <button id="{{this.id}}" onclick="deleteFromWishlist(event)" data-toggle="tooltip" data-placement="top" title="Delete from Wihslist"><img
+                            <button id="{{this.id}}" onclick="deleteFromWishlist(event)" data-toggle="tooltip"
+                                data-placement="top" title="Delete from Wihslist"><img
                                     src="https://res.cloudinary.com/difhe4gl3/image/upload/v1599846689/assets/noun_Trash_1294925_copia_et475o.png"
                                     alt="Trash icon" style="margin: 10px 0 9px 10px;"></button>
                         </div>
