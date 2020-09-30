@@ -51,6 +51,7 @@ const userSchema = new mongoose.Schema(
         },
         address: {
             type: String,
+            minlength: [2, 'Address is required'],
         },
         activation: {
             active: {

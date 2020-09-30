@@ -21,6 +21,15 @@ module.exports.googleCallback = (req, res, next) => {
   const googleCallback = passport.authenticate('google', (error, user) => {
     if (error) {
       next(error)
+    } else if (error.code === 11000) {
+      res.render('user/new', {
+        user,
+        error: {
+          email: {
+            message: 'User already exists'
+          }
+        }
+      })
     } else {
       req.session.userId = user.id
       User.findById(req.session.userId)
@@ -98,6 +107,7 @@ module.exports.signup = (req, res, next) => {
     .catch((error) => {
       if (error instanceof mongoose.Error.ValidationError) {
         res.render('user/new', { error: error.errors, user })
+        console.log(error.errors.address);
       } else if (error.code === 11000) {
         res.render('user/new', {
           user,
